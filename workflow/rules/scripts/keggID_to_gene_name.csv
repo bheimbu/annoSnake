@@ -1,0 +1,24 @@
+gene_name,keggID,pathway
+amtB,K03320,Ammonia Transport
+argFGH,K00611 K01940 K01755,Arginine Synthesis
+arcC,K00926,Arginine Synthesis
+napAB,K02567 K02568,Dissimilatory Nitrate Reduction
+narGHI,K00370 K00371 K00374,Dissimilatory Nitrate Reduction
+nirBD,K00362 K00363,Dissimilatory Nitrate Reduction
+nrfAB,K03385,Dissimilatory Nitrate Reduction
+gltBD,K00265 K00266,Glutamate Synthesis
+glnA,K01915,Glutamate Synthesis
+nifHDK,K02586 K02591 K02588,Nitrogen fixation
+acsABCDE,K00198 K14138 K00194 K00197 K15023,reductive acetogenesis
+fdhF,K00122,reductive acetogenesis
+metF,K00297,reductive acetogenesis
+pta,K00625,reductive acetogenesis
+ack,K00925,reductive acetogenesis
+folD,K01491,reductive acetogenesis
+fhs,K01938,reductive acetogenesis
+aprAB,K00394 K00395,sulfate reduction
+dsrAB,K11180 K11181,sulfate reduction
+sat,K00958,sulfate reduction
+ureABC,K01428 K01429 K01430,Urea Degradation
+urtABCDE,K11959 K11960 K11961 K11962 K11963,Urea Transport
+mcrABG,K00399 K00401 K00402,Methanogenesis
