@@ -1,0 +1,28 @@
+### adjusted from https://github.com/jdblischak/smk-simple-slurm. Cheers to you @jdblischak!
+cluster:
+  mkdir -p {OUTDIR}/logs/{rule} &&
+  sbatch
+    --partition={resources.partition}
+    --time={resources.time}
+    --cpus-per-task={threads}
+    --mem={resources.mem_mb}
+    --job-name={rule}.{jobid}
+    --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
+    --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
+default-resources:
+  - partition=medium #options are "medium" "fat" (consult your HPC support for specific partition names)
+  - time="1-00:00:00" # max. running time, here 1 day/ 24h
+  - mem_mb=150000
+max-jobs-per-second: 1
+max-status-checks-per-second: 10
+local-cores: 1
+latency-wait: 30
+jobs: 100
+keep-going: True
+rerun-incomplete: True
+printshellcmds: True
+scheduler: greedy
+use-conda: True
+touch: False
+reason: True
+show-failed-logs: True
