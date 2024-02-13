@@ -87,7 +87,8 @@ rule setup_gtdb:
         rm -R *tar.gz
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.csv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
-        sed -i 's/;/_/g' gtdb_vers202_metadata.tsv
+        sed 's/;/_/g' gtdb_vers202.tsv > gtdb_vers202_metadata.tsv
+        rm -R gtdb_vers202.tsv
         git clone https://github.com/nick-youngblut/gtdb_to_taxdump.git
         wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
