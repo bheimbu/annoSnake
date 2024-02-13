@@ -18,7 +18,7 @@ rule blastp1:
     output:
         touch(OUTDIR/ "taxonomy/blastp/{cog}/.{cog}_completed")
     params:
-        db=lambda w, input: os.path.dirname(input[1]),
+        db=lambda wildcards, input: Path(input["gtdb"]).parent,
         evalue=config["blastp_evalue"]
     threads:
         20
@@ -30,7 +30,7 @@ rule blastp1:
         if ! diamond blastp --db {params.db}/gtdb_vers202.dmnd --query {input.faa} --outfmt 102 --out {OUTDIR}/taxonomy/blastp/{wildcards.cog}/{wildcards.cog}.blastp --max-hsps 0 --evalue {params.evalue} --threads {threads}; then
             touch "{OUTDIR}/taxonomy/blastp/{wildcards.cog}/.{wildcards.cog}_completed";
         fi
-		"""
+	"""
 
 rule blastp2:
     input:
