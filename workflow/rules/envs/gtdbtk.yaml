@@ -119,6 +119,3 @@ dependencies:
   - zipp=3.17.0=pyhd8ed1ab_0
   - zlib=1.2.13=hd590300_5
   - zstd=1.4.9=ha95c52a_0
-variables:
-  GTDBTK_DATA_PATH: /home/uni08/bheimbu/mambaforge/envs/gtdbtk/share/gtdbtk-2.3.2/db
-prefix: /home/uni08/bheimbu/mambaforge/envs/gtdbtk
