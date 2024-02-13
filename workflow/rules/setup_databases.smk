@@ -1,4 +1,4 @@
-localrules: setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_fetchmg, setup_metaquast
+localrules: setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_fetchmg, setup_metaquast
 
 rule setup_checkm:
     output:
@@ -68,15 +68,13 @@ rule setup_microbeannotator:
         microbeannotator_db_builder -d . -m diamond -t {threads} --light
         """
 
-rule setup_gtdb:
+rule setup_gtdb1:
     output:
-        touch("databases/gtdb/.setup_done")
+        temp("databases/gtdb/.download_done")
     conda:
         "envs/environment.yaml"
     retries:
         3
-    threads:
-        40
     shell:
         """
         cd databases/gtdb
@@ -95,6 +93,19 @@ rule setup_gtdb:
         tar -xzvf taxdump.tar.gz
         python gtdb_to_taxdump/bin/gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
         python scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.csv gtdb_vers202_lca.csv
+        """
+
+rule setup_gtdb2:
+    input:
+        "databases/gtdb/.download_done"
+    output:
+        touch("databases/gtdb/.setup_done")
+    conda:
+        "envs/environment.yaml"
+    threads:
+        40
+    shell:
+        """
         diamond makedb --in gtdb_vers202/gtdb_all.faa --db gtdb_vers202.dmnd --taxonmap gtdb_vers202/accession2taxid.tsv --taxonnodes gtdb_vers202/nodes.dmp --taxonnames gtdb_vers202/names.dmp --threads {threads}
         """
         
