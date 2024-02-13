@@ -18,7 +18,7 @@ rule blastx1:
         "envs/environment.yaml"
     shell:
         """
-        diamond blastx --db {params.db} --query {params.fna}/{wildcards.sample}.fna --outfmt 102 --out {output} --max-hsps 0 --evalue {params.evalue} --threads {threads}
+        diamond blastx --db {params.db}/gtdb_vers202.dmnd --query {params.fna}/{wildcards.sample}.fna --outfmt 102 --out {output} --max-hsps 0 --evalue {params.evalue} --threads {threads}
         """
 		
 rule blastx2:
