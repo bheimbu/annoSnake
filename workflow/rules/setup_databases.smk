@@ -72,7 +72,7 @@ rule setup_gtdb1:
     output:
         temp("databases/gtdb/.download_done"),
     conda:
-        "envs/environment.yaml"
+        "envs/gtdb_to_taxdump.yaml"
     retries:
         3
     shell:
