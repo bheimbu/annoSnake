@@ -1,4 +1,4 @@
-### adjusted from https://github.com/jdblischak/smk-simple-slurm. Cheers to you @jdblischak!
+### Kudos to @jdblischak! https://github.com/jdblischak/smk-simple-slurm
 cluster:
   mkdir -p {OUTDIR}/logs/{rule} &&
   sbatch
@@ -10,9 +10,9 @@ cluster:
     --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
     --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
 default-resources:
-  - partition=medium #options are "medium" "fat" (consult your HPC support for specific partition names)
-  - time="1-00:00:00" # max. running time, here 1 day/ 24h
-  - mem_mb=150000
+  - partition=medium #options are eg. "medium", "fat" (consult your HPC support for specific partition names)
+  - time="1-00:00:00" # max. wall-clock time, here 1 day / 24h
+  - mem_mb=150000 # memory in MB
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
 local-cores: 1
