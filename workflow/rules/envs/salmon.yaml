@@ -23,4 +23,3 @@ dependencies:
   - tbb=2021.9.0=hf52228f_0
   - xz=5.2.6=h166bdaf_0
   - zstd=1.5.5=hfc55251_0
-prefix: /home/uni08/bheimbu/mambaforge/envs/salmon
