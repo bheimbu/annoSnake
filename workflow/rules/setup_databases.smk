@@ -82,7 +82,9 @@ rule setup_gtdb:
         cd databases/gtdb
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/bac120_metadata_r202.tar.gz
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/ar122_metadata_r202.tar.gz
-        tar xzvf * && rm -R *tar.gz
+        tar xzvf bac120_metadata_r202.tar.gz
+        tar xzvf ar122_metadata_r202.tar.gz
+        rm -R *tar.gz
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.csv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
         sed -i 's/;/_/g' gtdb_vers202_metadata.tsv
