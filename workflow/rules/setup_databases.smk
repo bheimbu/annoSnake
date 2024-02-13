@@ -52,7 +52,7 @@ rule setup_kegg:
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz
         gunzip ko_list.gz
-        tar xzvf profiles.tar.gz --remove-files
+        tar xzvf profiles.tar.gz && rm -R profiles.tar.gz
         """
 
 rule setup_microbeannotator:
