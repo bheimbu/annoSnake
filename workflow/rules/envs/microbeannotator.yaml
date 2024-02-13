@@ -217,4 +217,3 @@ dependencies:
     - tomli==2.0.1
     - xopen==1.7.0
     - zipp==3.15.0
-prefix: /home/uni08/bheimbu/mambaforge/envs/microbeannotator
