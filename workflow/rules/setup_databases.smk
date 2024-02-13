@@ -85,11 +85,10 @@ rule setup_gtdb1:
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.tsv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.tsv
         sed -i 's/;/_/g' gtdb_vers202_metadata.tsv
-        git clone https://github.com/nick-youngblut/gtdb_to_taxdump.git
         wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
         tar -xzvf taxdump.tar.gz
-        python gtdb_to_taxdump/bin/gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
+        gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
         python scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.tsv gtdb_vers202_lca.csv
         """
 
