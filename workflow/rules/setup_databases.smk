@@ -89,7 +89,7 @@ rule setup_gtdb1:
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
         tar -xzvf taxdump.tar.gz
         gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
-        python scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.tsv gtdb_vers202_lca.csv
+        python ../../rules/scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.tsv gtdb_vers202_lca.csv
         """
 
 rule setup_gtdb2:
