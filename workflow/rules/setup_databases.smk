@@ -82,8 +82,8 @@ rule setup_gtdb1:
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/ar122_metadata_r202.tar.gz
         tar xzvf bac120_metadata_r202.tar.gz
         tar xzvf ar122_metadata_r202.tar.gz
-        awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202.csv
-        awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202.csv
+        awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202.tsv
+        awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202.tsv
         sed 's/;/_/g' gtdb_vers202.tsv > gtdb_vers202_metadata.tsv
         git clone https://github.com/nick-youngblut/gtdb_to_taxdump.git
         wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
