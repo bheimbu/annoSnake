@@ -1,4 +1,4 @@
-name: base
+name: gtdb_to_taxdump
 channels:
   - cruizperez
   - ursky
@@ -512,4 +512,3 @@ dependencies:
     - tiktoken==0.3.3
     - urllib3==1.24.3
     - yarl==1.9.2
-prefix: /home/uni08/bheimbu/mambaforge
