@@ -71,9 +71,6 @@ rule setup_microbeannotator:
 rule setup_gtdb1:
     output:
         temp("databases/gtdb/.download_done"),
-        temp("gtdb_vers202.tsv"),
-        temp("bac120_metadata_r202.tar.gz"),
-        temp("ar122_metadata_r202.tar.gz")
     conda:
         "envs/environment.yaml"
     retries:
