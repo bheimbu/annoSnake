@@ -9,10 +9,10 @@ rule setup_checkm:
         3
     shell:
         """
-		cd databases/checkm
+	cd databases/checkm
         wget -nc https://zenodo.org/records/7401545/files/checkm_data_2015_01_16.tar.gz?download=1
-		tar xzvf *
-		checkm data setRoot .
+	tar xzvf *
+	checkm data setRoot .
         """
  
 rule setup_pfam:
