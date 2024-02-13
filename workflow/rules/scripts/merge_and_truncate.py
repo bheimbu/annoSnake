@@ -3,7 +3,7 @@ import pandas as pd
 
 def merge_and_truncate(input_file1, input_file2, output_file):
     # Read the first input file with headers
-    df1 = pd.read_csv(input_file1)
+    df1 = pd.read_csv(input_file1, sep='\t')
 
     # Read the second input file without headers
     with open(input_file2, 'r') as file:
