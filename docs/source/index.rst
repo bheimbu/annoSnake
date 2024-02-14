@@ -14,10 +14,6 @@ Welcome to **annoSnake**: A Snakemake workflow for structural and functional ann
 
 |
 
-Content
--------
-
-
 .. toctree::
    introduction
    for_the_impatient
