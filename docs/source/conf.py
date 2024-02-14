@@ -51,6 +51,8 @@ templates_path = ["_templates"]
 # The suffix of source filenames.
 source_suffix = [".rst", ".md"]
 
+html_favicon = '/_static/light_logo.png'
+
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
 
