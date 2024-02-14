@@ -18,5 +18,6 @@ Content
    for_the_impatient
    installation
    setup_databases
+   output_overview
    workflow_overview
    
