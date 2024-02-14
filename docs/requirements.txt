@@ -5,4 +5,15 @@ sphinx-tabs
 sphinx-copybutton
 furo
 sphinxcontrib-images
-sphinxawesome_theme
+sphinx >=3
+sphinxcontrib-napoleon
+sphinx-argparse
+docutils
+myst-parser
+configargparse
+appdirs
+immutables
+sphinxawesome-theme
+snakemake-interface-common
+snakemake-interface-executor-plugins
+snakemake-interface-storage-plugins
