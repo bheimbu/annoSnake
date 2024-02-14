@@ -24,7 +24,9 @@ rule setup_pfam:
         """
         cd databases/pfam
         wget -nc ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz
-        gunzip Pfam-A.hmm.gz
+        wget -nc https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.dat.gz
+        gunzip *gz
+        hmmpress Pfam-A.hmm
         """
 
 rule setup_cazymes:
