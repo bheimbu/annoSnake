@@ -7,14 +7,15 @@ rule kegg1:
     output:
         temp(OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.detail")
     params:
-        db=lambda wildcards, input: Path(input[1]).parent
+        db=lambda wildcards, input: Path(input[1]).parent,
+        tmp=lambda wildcards, output: Path(output[0]).parent,
     threads:
         20
     conda:
         "envs/environment.yaml"
     shell:
         """
-        exec_annotation -o {output} {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa -p {params.db}/profiles -k {params.db}/ko_list --cpu {threads} -f detail-tsv
+        exec_annotation -o {output} --tmp-dir {params.tmp} -p {params.db}/profiles -k {params.db}/ko_list --cpu {threads} -f detail-tsv {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa
         """
 		
 rule kegg2:
