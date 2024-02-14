@@ -18,6 +18,8 @@ rule setup_checkm:
 rule setup_pfam:
     output:
         touch("databases/pfam/.setup_done")
+    conda:
+        "envs/environment.yaml"
     retries:
         3
     shell:
