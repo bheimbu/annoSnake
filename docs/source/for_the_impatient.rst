@@ -1,3 +1,6 @@
+For the impatient
+=================
+
 Install **Mamba**
 ^^^^^^^^^^^^^
 
