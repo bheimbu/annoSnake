@@ -44,12 +44,12 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
   .. code::
   
-    tmux new -t annosnake #starts a new tmux session with the name annoSnake
+    tmux new -s annosnake #starts a new tmux session with the name annosnake
     snakemake --profile profile/ #starts annoSnake workflow
 
   You can exit the session by pressing **Ctrl + b d**; and may close your terminal while the workflow is running
 
   .. code ::
 
-    tmux attach -s annosnake #to get back to your session
+    tmux attach -t annosnake #get back to your session
 
