@@ -1,8 +1,7 @@
 For the impatient
 =================
 
-Install **Mamba**
------------------
+**Install `Mamba`**
 
 Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ using miniforge as suggested `here <https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html>`_.
 
@@ -15,16 +14,16 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
     bash Miniforge3-$(uname)-$(uname -m).sh
 
 
-Install **Snakemake**
----------------------
+**Install `Snakemake`**
+
 
 .. code::
 
   mamba install snakemake
 
 
-Get **annoSnake**
------------------
+**Get `annoSnake`**
+
 
 .. code::
 
@@ -32,8 +31,7 @@ Get **annoSnake**
 
 
 
-Start with example data
------------------------
+**Start with example data**
 
 .. code::
 
