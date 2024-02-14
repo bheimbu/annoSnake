@@ -61,14 +61,9 @@ project = "annoSnake"
 date = datetime.now()
 copyright = "2024-{year}, Bastian Heimburger".format(year=date.timetuple()[0])
 
-import snakemake
-
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-version = snakemake.__version__
+
 
 if os.environ.get("READTHEDOCS") == "True":
     # Because Read The Docs modifies conf.py, versioneer gives a "dirty"
