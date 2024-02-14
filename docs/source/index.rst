@@ -8,6 +8,9 @@
    ╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═╝  ╚═══╝  ╚═════╝  ╚══════╝ ╚═╝  ╚═══╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚══════╝
 
 
+Welcome to annoSnake: A Snakemake workflow for structural and functional annotation of metagenomes and metagenome-assembled genomes. 
+
+
 Content
 =======
 .. toctree::
