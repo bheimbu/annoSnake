@@ -46,7 +46,7 @@ include: "rules/visualization.smk"
 
 
 onstart:
-    print("######## Starting annoSnake for: ########")
+    print("######## Starting annoSnake for: ########\n")
     print(SAMPLES)
 
 
