@@ -108,7 +108,7 @@ pygments_style = "sphinx"
 html_theme = "sphinxawesome_theme"
 html_theme_options = {
     "logo_light": "annosnake.svg",
-    "logo_dark": "annosnkae.svg",
+    "logo_dark": "annosnake.svg",
     "main_nav_links": {
         "GitHub": "https://github.com/bheimbu/annoSnake",
     },
