@@ -80,17 +80,17 @@ rule setup_gtdb1:
         cd databases/gtdb
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/bac120_metadata_r202.tar.gz
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/ar122_metadata_r202.tar.gz
-        tar xzvf bac120_metadata_r202.tar.gz
-        tar xzvf ar122_metadata_r202.tar.gz
+        tar -xzvf bac120_metadata_r202.tar.gz
+        tar -xzvf ar122_metadata_r202.tar.gz
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.csv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
-        sed -i 's/;/_/g' gtdb_vers202_metadata.csv
-        sed -i 's/\t/,/g' gtdb_vers202_metadata.csv
+        sed -i -e 's/;/_/g' -e 's/\t/,/g' gtdb_vers202_metadata.csv
         wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
         tar -xzvf taxdump.tar.gz
         gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
         python ../../rules/scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.csv gtdb_vers202_lca.csv
+        rm -rf *gz
         """
 
 rule setup_gtdb2:
