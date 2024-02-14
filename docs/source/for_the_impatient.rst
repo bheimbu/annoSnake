@@ -2,7 +2,7 @@ For the impatient
 =================
 
 Install **Mamba**
-^^^^^^^^^^^^^^^^^
+-----------------
 
 Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ using miniforge as suggested `here <https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html>`_.
 
@@ -16,7 +16,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
 
 Install **Snakemake**
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 .. code::
 
@@ -24,7 +24,7 @@ Install **Snakemake**
 
 
 Get **annoSnake**
-^^^^^^^^^^^^^^^^^
+-----------------
 
 .. code::
 
@@ -33,7 +33,7 @@ Get **annoSnake**
 
 
 Start with example data
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 .. code::
 
