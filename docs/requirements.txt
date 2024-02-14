@@ -10,3 +10,7 @@ sphinxawesome-theme
 snakemake-interface-common
 snakemake-interface-executor-plugins
 snakemake-interface-storage-plugins
+sphinxcontrib-youtube
+sphinx-tabs
+sphinx-copybutton
+sphinxcontrib-images
