@@ -5,3 +5,4 @@ sphinx-tabs
 sphinx-copybutton
 furo
 sphinxcontrib-images
+sphinxawesome_theme
