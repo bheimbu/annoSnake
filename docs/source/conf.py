@@ -1,15 +1,15 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
-
-project = 'annoSnake'
-date = datetime.now()
-copyright = "2024-{year}, Bastian Heimburger".format(year=date.timetuple()[0])
-
 import sys
 import os
 from datetime import datetime
 from sphinxawesome_theme.postprocess import Icons
+
+
+project = 'annoSnake'
+date = datetime.now()
+copyright = "2024-{year}, Bastian Heimburger".format(year=date.timetuple()[0])
 
 # -- General configuration
 
