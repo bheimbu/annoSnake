@@ -12,3 +12,7 @@ Content
 =======
 .. toctree::
    introduction
+   for_the_impatient
+   installation
+   setup_databases
+   
