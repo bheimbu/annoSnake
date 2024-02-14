@@ -40,6 +40,7 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     "myst_parser",
     "sphinxawesome_theme.highlighting",
+    'sphinxcontrib.images',
 ]
 
 html_css_files = ["custom.css"]
