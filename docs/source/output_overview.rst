@@ -3,4 +3,4 @@ Output overview
 
 .. raw:: html
 
-    <iframe src="prokaryotic_metabolic_pathways.html"></iframe>
+    <iframe src="/_static/prokaryotic_metabolic_pathways.html"></iframe>
