@@ -12,7 +12,7 @@ Welcome to
 
 |
 
-A Snakemake workflow for structural and functional annotation of metagenomes and metagenome-assembled genomes. 
+A Snakemake workflow for structural and functional annotation of metagenomes and MAGs. 
 
 |
 
