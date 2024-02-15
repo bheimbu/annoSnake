@@ -17,14 +17,14 @@ rule MAG_metabat2:
         "envs/MAGs.yaml"
     shell:
         """
-		bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
+	bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
         bowtie2 -x {params.fna}/{wildcards.sample}.fna -p {threads} --interleaved {INPUTDIR}/{wildcards.sample}.fastq.gz | samtools view -@{threads} -bS -o {params.fna}/{wildcards.sample}.bam
         samtools sort -@{threads} {params.fna}/{wildcards.sample}.bam -o {params.fna}/{wildcards.sample}.sort
         samtools index -@{threads} {params.fna}/{wildcards.sample}.sort
-		runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
+	runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
         mkdir -p {params.dir}
         mv {wildcards.sample}.fna.* {params.dir}
-        if [ -z "$(find {params.dir}/{wildcards.sample}.fna.metabat-bins{params.min_length}" -mindepth 1 -maxdepth 1)" ]; then
+        if [ -z "$(find "{params.dir}/{wildcards.sample}.fna.metabat-bins{params.min_length}" -mindepth 1 -maxdepth 1)" ]; then
             touch {output[0]}
         fi
         """
@@ -48,11 +48,11 @@ rule MAG_metacoag:
         "envs/MAGs.yaml"
      shell:
         """      
-		coverm contig --interleaved {INPUTDIR}/{wildcards.sample}.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
-		sed -i '1d' {output.abundance}
-		megahit_core contig2fastg 141 {params.contigs}/{wildcards.sample}.fna > {output.fastg}
-		fastg2gfa {output.fastg} > {output.gfa}
-		if ! metacoag --assembler megahit --graph {output.gfa} --contigs {params.contigs}/{wildcards.sample}.fna --abundance {output.abundance} --output {output.dir}  --nthreads {threads}; then
+	coverm contig --interleaved {INPUTDIR}/{wildcards.sample}.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
+	sed -i '1d' {output.abundance}
+	megahit_core contig2fastg 141 {params.contigs}/{wildcards.sample}.fna > {output.fastg}
+	fastg2gfa {output.fastg} > {output.gfa}
+	if ! metacoag --assembler megahit --graph {output.gfa} --contigs {params.contigs}/{wildcards.sample}.fna --abundance {output.abundance} --output {output.dir}  --nthreads {threads}; then
             mkdir -p {output.dir}/bins && touch {output[0]}
         fi
         """
