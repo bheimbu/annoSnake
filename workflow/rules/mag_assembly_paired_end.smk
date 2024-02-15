@@ -1,5 +1,4 @@
-localrules:
-    MAG_above_threshold_bins
+localrules: MAG_above_threshold_bins
 
 rule MAG_metabat2:
     input:
