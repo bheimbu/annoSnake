@@ -64,12 +64,13 @@ rule setup_microbeannotator:
         touch("databases/microbeannotator/.setup_done")
     conda:
         "envs/microbeannotator.yaml"
+    params:
+        db=lambda wildcards, output: Path(output[0]).parent
     threads:
         40
     shell:
         """
-        cd databases/microbeannotator
-        microbeannotator_db_builder -d . -m diamond -t {threads} --light
+        microbeannotator_db_builder -d {params.db} -m diamond -t {threads} --light
         """
 
 rule setup_gtdb1:
