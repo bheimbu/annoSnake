@@ -1,12 +1,13 @@
 rule fetchmg:
     input:
-        gtf=OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf",
+        OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf",
         db="databases/.fetchmg_downloaded"
     output:
-        touch(OUTDIR/ "taxonomy/fetchmg/.{sample}_completed")
+        touch(OUTDIR/ "taxonomy/fetchmg/{sample}/.rule_completed")
     params:
-        fetchmg=lambda wildcards, input: Path(input[1]).parent,
-        faa=lambda wildcards, input: Path(input[0]).parent
+        fetchmg=lambda wildcards, input: Path(input["db"]).parent,
+        faa=lambda wildcards, input: Path(input[0]).parent,
+        dir=lambda wildcards, output: Path(output[0]).parent
     shadow:
         "shallow"
     threads:
@@ -15,6 +16,6 @@ rule fetchmg:
         "envs/environment.yaml"
     shell:
         """
-        cd {OUTDIR}/taxonomy/fetchmg
-		{params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {wildcards.sample} -t {threads}
+        mkdir -p {OUTDIR}/taxonomy/fetchmg/{wildcards.sample}
+        {params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {params.out} -t {threads}
         """
