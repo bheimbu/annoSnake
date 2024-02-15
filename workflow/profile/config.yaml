@@ -10,13 +10,13 @@ cluster:
     --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
     --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
 default-resources:
-  - partition=medium #options are eg. "medium", "fat" (consult your HPC support for specific partition names)
-  - time="1-00:00:00" # max. wall-clock time, here 1 day / 24h
-  - mem_mb=150000 # memory in MB
+  - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
+  - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
+  - mem_mb=150000 # required memory per node, here in MB
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
 local-cores: 1
-latency-wait: 30
+latency-wait: 60
 jobs: 100
 keep-going: True
 rerun-incomplete: True
