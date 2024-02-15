@@ -37,7 +37,7 @@ rule MAG_metacoag:
         gfa=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.gfa"),
         abundance=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.abundance.tsv"),
         fastg=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.fastg"),
-        dir=OUTDIR/ "MAGs/metacoag/{sample}"
+        dir=directory(OUTDIR/ "MAGs/metacoag/{sample}")
      shadow:
         "shallow"
      params:
@@ -47,12 +47,12 @@ rule MAG_metacoag:
      conda:
         "envs/MAGs.yaml"
      shell:
-        """      
-	coverm contig -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
-	sed -i '1d' {output.abundance}
-	megahit_core contig2fastg 141 {params.contigs}/{wildcards.sample}.fna > {output.fastg}
-	fastg2gfa {output.fastg} > {output.gfa}
-	if ! metacoag --assembler megahit --graph {output.gfa} --contigs {params.contigs}/{wildcards.sample}.fna --abundance {output.abundance} --output {output.dir}  --nthreads {threads}; then
+        """
+        coverm contig -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
+        sed -i '1d' {output.abundance}
+        megahit_core contig2fastg 141 {params.contigs}/{wildcards.sample}.fna > {output.fastg}
+        fastg2gfa {output.fastg} > {output.gfa}
+        if ! metacoag --assembler megahit --graph {output.gfa} --contigs {params.contigs}/{wildcards.sample}.fna --abundance {output.abundance} --output {output.dir}  --nthreads {threads}; then
             mkdir -p {output.dir}/bins && touch {output[0]}
         fi
         """
