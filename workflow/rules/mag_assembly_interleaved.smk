@@ -37,7 +37,7 @@ rule MAG_metacoag:
         gfa=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.gfa"),
         abundance=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.abundance.tsv"),
         fastg=temp(OUTDIR/ "MAGs/metacoag/{sample}/{sample}.fastg"),
-        dir=OUTDIR/ "MAGs/metacoag/{sample}"
+        dir=directory(OUTDIR/ "MAGs/metacoag/{sample}")
      shadow:
         "shallow"
      params:
