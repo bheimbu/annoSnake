@@ -47,11 +47,12 @@ rule blastp2:
 
 rule blastp3:
     input:
-        input=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches"
+        input=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches",
+		gtdb="databases/gtdb/.setup_done"
     output:
         output=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca"
     params:
-        lca="databases/gtdb/gtdb_vers202_lca.csv",
+        lca=lambda wildcards, input: Path(input["gtdb"]).parent,
         evalue=config["blastp_evalue"]		
     conda:
         "envs/environment.yaml"
