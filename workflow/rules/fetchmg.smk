@@ -17,5 +17,5 @@ rule fetchmg:
     shell:
         """
         mkdir -p {OUTDIR}/taxonomy/fetchmg/{wildcards.sample}
-        {params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {params.out} -t {threads}
+        {params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {params.dir} -t {threads}
         """
