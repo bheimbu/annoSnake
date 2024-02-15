@@ -2,7 +2,7 @@ localrules: cogs, blastp2, blastp3, blastp4, salmon_index_cogs1
 
 rule cogs:
     input:
-        expand(OUTDIR/ "taxonomy/fetchmg/.{sample}_completed", sample=SAMPLES)
+        expand(OUTDIR/ "taxonomy/fetchmg/{sample}/.rule_completed", sample=SAMPLES)
     output:
         OUTDIR/ "taxonomy/cogs/{cog}/{cog}.faa"
     shell:
