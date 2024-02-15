@@ -103,22 +103,22 @@ rule MAG_refinement:
            [ "$(find {params.maxbin2}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ] &&
            [ "$(find {params.metacoag}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ]; then
             if ! metawrap bin_refinement -o {params.dir} -t {threads} -A {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -B {params.maxbin2}/bins -C {params.metacoag}/bins -c {params.completeness} -x {params.contamination}; then
-                {output[0]};
+                touch {output[0]};
             fi    
         elif [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
              [ "$(find {params.maxbin2}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ]; then
             if ! metawrap bin_refinement -o {params.dir} -t {threads} -A {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -B {params.maxbin2}/bins -c {params.completeness} -x {params.contamination}; then
-                {output[0]};
+                touch {output[0]};
             fi    
         elif [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
              [ "$(find {params.metacoag}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ]; then
             if ! metawrap bin_refinement -o {params.dir} -t {threads} -A {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -B {params.metacoag}/bins -c {params.completeness} -x {params.contamination}; then
-                {output[0]};
+                touch {output[0]};
             fi    
         elif [ "$(find {params.maxbin2}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ] &&
              [ "$(find {params.metacoag}/bins -type f -name '*.fasta' | wc -l)" -gt 0 ]; then
             if ! metawrap bin_refinement -o {params.dir} -t {threads} -A {params.maxbin2}/bins -B {params.metacoag}/bins -c {params.completeness} -x {params.contamination}; then
-                {output[0]};
+                touch {output[0]};
             fi    
         else
            touch {output[0]}
