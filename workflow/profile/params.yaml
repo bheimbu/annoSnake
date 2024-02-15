@@ -25,7 +25,7 @@ COG: False
 KEGG: True
 CAZYMES: False
 
-# specify e-values
+# specify cut-off E-values
 blastp_evalue: "1e-24"
 blastx_evalue: "1e-24"
 cog_evalue: "1e-30"
