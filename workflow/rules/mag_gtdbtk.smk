@@ -1,6 +1,7 @@
 rule MAG_gtdbtk:
       input:
-        OUTDIR/ "MAGs/above_threshold_bins/.rule_completed"
+        OUTDIR/ "MAGs/above_threshold_bins/.rule_completed",
+        "databases/gtdb_tk/.setup_done"
       output:
         touch(OUTDIR/ "MAGs/gtdbtk/.rule_completed")
       params:
