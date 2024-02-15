@@ -48,7 +48,7 @@ rule blastp2:
 rule blastp3:
     input:
         input=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches",
-		gtdb="databases/gtdb/.setup_done"
+        gtdb="databases/gtdb/.setup_done"
     output:
         output=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca"
     params:
