@@ -16,6 +16,6 @@ rule fetchmg:
         "envs/environment.yaml"
     shell:
         """
-        mkdir -p {OUTDIR}/taxonomy/fetchmg/{wildcards.sample}
+        mkdir -p {OUTDIR}/taxonomy/fetchmg/
         {params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {params.dir} -t {threads}
         """
