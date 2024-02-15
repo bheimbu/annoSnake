@@ -1,4 +1,4 @@
-localrules: setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_fetchmg, setup_metaquast
+localrules: setup_gtdb_tk, setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_fetchmg, setup_metaquast
 
 rule setup_checkm:
     output:
@@ -14,7 +14,19 @@ rule setup_checkm:
 	tar xzvf *
 	checkm data setRoot .
         """
- 
+
+rule setup_gtdb_tk:
+    output:
+        touch("databases/gtdb_tk/.setup_done")
+    conda:
+        "envs/gtdbtk.yaml"
+    retries:
+        3
+    shell:
+        """
+        download-db.sh
+        """
+
 rule setup_pfam:
     output:
         touch("databases/pfam/.setup_done")
