@@ -47,7 +47,6 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
     snakemake --profile profile/ #starts annoSnake workflow
 
   You can exit the session by pressing **Ctrl + b d**; and may close your terminal while the workflow is running
-  .. code ::
 
     tmux attach -t annosnake #get back to your session
 
