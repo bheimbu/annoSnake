@@ -115,8 +115,8 @@ rule setup_gtdb2:
         "databases/gtdb/gtdb_vers202_metadata.csv",
         "databases/gtdb/.step_one_done"
     output:
-        "databases/gtdb/gtdb_vers202_lca.csv",
-        touch("databases/gtdb/.step_two_done")
+        lca="databases/gtdb/gtdb_vers202_lca.csv",
+        done=touch("databases/gtdb/.step_two_done")
     params:
         taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
@@ -125,7 +125,6 @@ rule setup_gtdb2:
         """
         scripts/merge_and_truncate.py
         """
-
 
 rule setup_gtdb3:
     input:
