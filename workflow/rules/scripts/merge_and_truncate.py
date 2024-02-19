@@ -50,5 +50,5 @@ def merge_and_truncate(input_file1, input_file2, output_file):
             output_lines.append(combined_line)
 
     # Write the output lines to the output file
-    with open(snakemake.output[0], 'w') as file:
+    with open(snakemake.output['lca'], 'w') as file:
         file.write('\n'.join(output_lines))
