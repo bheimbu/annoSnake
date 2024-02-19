@@ -130,7 +130,7 @@ rule setup_gtdb2:
 rule setup_gtdb3:
     input:
         faa="databases/gtdb/gtdb_vers202/gtdb_all.faa",
-        "databases/gtdb/.step_two_done"
+        done="databases/gtdb/.step_two_done"
     output:
         touch("databases/gtdb/.setup_done")
     params:
