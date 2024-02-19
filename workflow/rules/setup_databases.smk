@@ -1,4 +1,4 @@
-localrules: setup_gtdb_tk, setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_fetchmg, setup_metaquast
+localrules: setup_gtdb_tk, setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_gtdb2, setup_fetchmg, setup_metaquast
 
 rule setup_checkm:
     output:
@@ -106,10 +106,27 @@ rule setup_gtdb1:
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
         tar -xzvf taxdump.tar.gz
         gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
-        python ../../rules/scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.csv gtdb_vers202_lca.csv
         """
 
 rule setup_gtdb2:
+    input:
+        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+    output:
+        touch("databases/gtdb/.setup_done")
+    params:
+        gtdb=lambda w, input: Path(input[0]).parent,
+        dmnd=lambda w, output: Path(output[0]).parent
+    conda:
+        "envs/environment.yaml"
+    threads:
+        40
+    shell:
+        """
+        python ../../rules/scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.csv gtdb_vers202_lca.csv
+        """
+
+
+rule setup_gtdb3:
     input:
         "databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
