@@ -87,7 +87,8 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
+        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa"),
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
@@ -110,29 +111,26 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     output:
-        touch("databases/gtdb/.setup_done")
+        "databases/gtdb/gtdb_vers202_lca.csv"
     params:
-        gtdb=lambda w, input: Path(input[0]).parent,
-        dmnd=lambda w, output: Path(output[0]).parent
+        taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
-        "envs/environment.yaml"
-    threads:
-        40
+        "envs/gtdb_to_taxdump.yaml"
     shell:
         """
-        python ../../rules/scripts/merge_and_truncate.py taxdump/taxID_info.csv gtdb_vers202_metadata.csv gtdb_vers202_lca.csv
+        scripts/merge_and_truncate.py
         """
 
 
 rule setup_gtdb3:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
         touch("databases/gtdb/.setup_done")
     params:
-        gtdb=lambda w, input: Path(input[0]).parent,
+        gtdb=lambda w, input: Path(input['faa']).parent,
         dmnd=lambda w, output: Path(output[0]).parent
     conda:
         "envs/environment.yaml"
@@ -140,7 +138,7 @@ rule setup_gtdb3:
         40
     shell:
         """
-        diamond makedb --in {input} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
+        diamond makedb --in {input.faa} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
         rm -rf {params.dmnd}/*gz
         """
         
