@@ -1,13 +1,12 @@
-import argparse
 import pandas as pd
 from tqdm import tqdm
 
 def merge_and_truncate(input_file1, input_file2, output_file):
     # Read the first input file with headers
-    df1 = pd.read_csv(input_file1, sep= '\t')
+    df1 = pd.read_csv(snakemake.params[0], sep= '\t')
 
     # Read the second input file without headers
-    with open(input_file2, 'r') as file:
+    with open(snakemake.input[0], 'r') as file:
         lines = file.readlines()
 
     # Create an empty list to store the lines of the output, including the header
@@ -51,14 +50,5 @@ def merge_and_truncate(input_file1, input_file2, output_file):
             output_lines.append(combined_line)
 
     # Write the output lines to the output file
-    with open(output_file, 'w') as file:
+    with open(snakemake.output[0], 'w') as file:
         file.write('\n'.join(output_lines))
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Merge and truncate taxonomic data")
-    parser.add_argument("input1", help="taxdump/taxID_info.tsv")
-    parser.add_argument("input2", help="gtdb metadata csv file")
-    parser.add_argument("output", help="lca csv file")
-    args = parser.parse_args()
-
-    merge_and_truncate(args.input1, args.input2, args.output)
