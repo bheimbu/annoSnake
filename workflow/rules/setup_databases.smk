@@ -115,7 +115,8 @@ rule setup_gtdb2:
         "databases/gtdb/gtdb_vers202_metadata.csv",
         "databases/gtdb/.step_one_done"
     output:
-        "databases/gtdb/gtdb_vers202_lca.csv"
+        "databases/gtdb/gtdb_vers202_lca.csv",
+        touch("databases/gtdb/.step_two_done")
     params:
         taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
@@ -128,7 +129,8 @@ rule setup_gtdb2:
 
 rule setup_gtdb3:
     input:
-        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa",
+        "databases/gtdb/.step_two_done"
     output:
         touch("databases/gtdb/.setup_done")
     params:
