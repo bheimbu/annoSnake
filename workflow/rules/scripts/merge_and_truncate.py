@@ -6,7 +6,7 @@ def merge_and_truncate(input_file1, input_file2, output_file):
     df1 = pd.read_csv(snakemake.params[0], sep= '\t')
 
     # Read the second input file without headers
-    with open(snakemake.input['lca'], 'r') as file:
+    with open(snakemake.input[0], 'r') as file:
         lines = file.readlines()
 
     # Create an empty list to store the lines of the output, including the header
