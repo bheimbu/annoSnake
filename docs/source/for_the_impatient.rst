@@ -39,6 +39,9 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
 |
 
+.. important::
+  For more information see :ref:`step_by_step`.
+
 .. tip::
   You may start the workflow by using `tmux <https://github.com/tmux/tmux/wiki>`_.
   
