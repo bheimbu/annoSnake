@@ -1,14 +1,19 @@
+library(pbapply)
+
   # Read the first input file with headers
-  df1 <- read.table(snakemake@params[['taxdump']], sep = "\t", header = TRUE)
+  df1 <- read.table(snakemake@input[[1]], sep = "\t", header = TRUE)
 
   # Read the second input file without headers
-  lines <- readLines(snakemake@input[[1]])
+  lines <- readLines(snakemake@params[['taxdump']])
 
   # Create an empty list to store the lines of the output, including the header
   output_lines <- c("taxID,name,rank,lca")
 
-  # Iterate through the rows of the first input file with tqdm progress bar
-  for (i in 1:nrow(df1)) {
+  # Define a progress bar
+  pb <- pbapply::txtProgressBar(min = 0, max = nrow(df1), style = 3)
+
+  # Iterate through the rows of the first input file with progress bar
+  pbapply::pblapply(1:nrow(df1), function(i) {
     row <- df1[i,]
     name_to_match <- row[['name']]
     rank <- row[['rank']]
@@ -45,7 +50,13 @@
       combined_line <- paste(row[['taxID']], row[['name']], row[['rank']], matching_line, sep = ",")
       output_lines <- c(output_lines, combined_line)
     }
-  }
+
+    # Update the progress bar
+    setTxtProgressBar(pb, i)
+  })
+
+  # Close the progress bar
+  close(pb)
 
   # Write the output lines to the output file
   writeLines(output_lines, con = snakemake@output[['lca']])
