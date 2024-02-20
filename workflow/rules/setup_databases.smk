@@ -114,8 +114,7 @@ rule setup_gtdb2:
     output:
         lca="databases/gtdb/gtdb_vers202_lca.csv"
     params:
-        taxdump="databases/gtdb/taxdump/taxID_info.tsv",
-        meta=lambda w, input: Path(input[0]).parent
+        taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     script:
