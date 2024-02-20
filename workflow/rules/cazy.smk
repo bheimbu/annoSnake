@@ -17,7 +17,7 @@ rule cazy1:
     shell:
         """
         hmmscan -E 1.0e-5 --cpu {threads} -o {output.out} --tblout {output.perseq} --domtblout {output.perdomain} {params.db}/dbCAN-fam-HMMs.txt.v11 {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa			
-		"""
+        """
 		
 rule cazy2:
     input:
