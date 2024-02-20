@@ -87,7 +87,7 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-       temp("databases/gtdb/.step1")
+       temp("databases/gtdb/.step1"),
        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
     conda:
         "envs/gtdb_to_taxdump.yaml"
