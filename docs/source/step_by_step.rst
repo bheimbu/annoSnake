@@ -4,8 +4,32 @@ The annoSnake workflow: step by step
 
 For the installation see :ref:`for_the_impatient`. Here, all steps of the annoSnake workflow are described in detail.
 
+Input
+^^^^^
+
+The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified inputdir. There is no need to specify $SAMPLE names as annoSnake reads them autmatically from the inputdir. **There is no need to trim or filter the reads in advance.**
+
+.. code::
+
+  **For paired-end data:**
+  
+  input_paired_end # as specified in the :ref:`_params_yaml`
+  ├── $SAMPLE1_R1.fastq.gz
+  ├── $SAMPLE1_R2.fastq.gz
+  ├── $SAMPLE2_R1.fastq.gz
+  ├── $SAMPLE2_R2.fastq.gz
+  ├── ..._R1.fastq.gz
+  └── ..._R2.fastq.gz
+
+  **For interleaved data:**
+  
+  input_interleaved
+  ├── $SAMPLE1.fastq.gz
+  ├── $SAMPLE2.fastq.gz
+  └── ...fastq.gz
+
 .. _params_yaml:
-The ./profile/params.yaml file
+./profile/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ./profile/params.yaml is the main configuration file.
@@ -51,7 +75,7 @@ The ./profile/params.yaml is the main configuration file.
   KEGG_VISUALIZATION: True
 
 .. _config_yaml:
-The ./profile/config.yaml file
+./profile/config.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ./profile/config.yaml needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like.
@@ -86,5 +110,8 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
   touch: False
   reason: True
   show-failed-logs: True
+
+Metagenome assembly
+^^^^^^^^^^^^^^^^^^^
 
 
