@@ -87,7 +87,8 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
+        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa"),
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
@@ -110,7 +111,7 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     output:
         lca="databases/gtdb/gtdb_vers202_lca.csv"
     params:
