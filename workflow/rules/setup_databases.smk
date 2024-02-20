@@ -123,7 +123,7 @@ rule setup_gtdb2:
         "envs/gtdb_to_taxdump.yaml"
     script:
         """
-        scripts/merge_and_truncate.py
+        scripts/merge_and_truncate.R
         """
 
 rule setup_gtdb3:
