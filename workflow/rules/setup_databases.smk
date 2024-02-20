@@ -122,9 +122,7 @@ rule setup_gtdb2:
     conda:
         "envs/gtdb_to_taxdump.yaml"
     script:
-        """
-        scripts/merge_and_truncate.R
-        """
+        "scripts/merge_and_truncate.R"
 
 rule setup_gtdb3:
     input:
