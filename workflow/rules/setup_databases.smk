@@ -87,7 +87,8 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+       temp("databases/gtdb/.step1")
+       temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
@@ -110,9 +111,10 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        "databases/gtdb/.step1"
     output:
-        lca="databases/gtdb/gtdb_vers202_lca.csv"
+        lca="databases/gtdb/gtdb_vers202_lca.csv",
+        two=touch("databases/gtdb/.step2")
     params:
         taxdump="databases/gtdb/taxdump/taxID_info.tsv",
         meta=lambda w, input: Path(input[0]).parent
@@ -123,7 +125,8 @@ rule setup_gtdb2:
 
 rule setup_gtdb3:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+        two="databases/gtdb/.step2",
+        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
         touch("databases/gtdb/.setup_done")
     params:
@@ -135,7 +138,7 @@ rule setup_gtdb3:
         40
     shell:
         """
-        diamond makedb --in {input} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
+        diamond makedb --in {input.faa} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
         rm -rf {params.dmnd}/*gz
         """
         
