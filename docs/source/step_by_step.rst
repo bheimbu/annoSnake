@@ -215,6 +215,7 @@ The user can choose between different databases for functional annotation of met
   
   Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`setup_databases`).
 
+.. _abundance::
 Abundance calculation of gene families
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -244,14 +245,24 @@ To increase contiguity and completeness of the resulting bins, we implemented `m
 
 .. note::
 
-  Here, the user needs to specify the minimum completeness and maximum contamination of retained MAGs used for downstream analyses in the :ref:`params.yaml`.
+  Here, the user needs to specify the minimum completeness and maximum contamination of retained MAGs used for downstream analyses in the :ref:`params_yaml`.
 
   .. code::
 
-       # if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
+       # if 'mag_assembly: True' specify completeness and contamination of resulting bins
       completeness: 30
       contamination: 10
 
-Quality control of MAGs is performed by CheckM 1.2.2 (Parks et al. 2014); and MAGs are taxonomically classified with GTDB-Tk v2.3.2 (Chaumeil et al. 2022) using the GTDB database ver 202 as a reference (Parks et al. 2021). Gene prediction of MAGs is performed by Prokka 1.14.6, using the ‘--metagenome’ option accounting for highly fragmented metagenomes.
-Predicted protein sequences are annotated with MicrobeAnnotator using the DIAMOND sequence aligner v2.0.9.147 (Buchfink et al. 2021) and KofamScan v1.3.0 (Kanehisa et al. 2016; https://github.com/takaram/kofam_scan) against the KEGG database (Kanehisa & Goto 2000, Kanehisa 2019, Kanehisa et al. 2023).
-For MAGs, pathway completeness is assessed based on presence/absence rather than TPM values, enabling an investigation into the completeness of biological pathways within these genomes; in contrast to CDS in gut metagenomes.
+Quality control of MAGs is performed by `CheckM 1.2.2 <https://github.com/Ecogenomics/CheckM>`_. They are taxonomically classified with `GTDB-Tk v2.3.2 <https://github.com/Ecogenomics/GTDBTk>`_  using the `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_ as a reference.
+
+|
+
+Gene prediction of MAGs is performed by `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_, using the *--metagenome* option.
+
+|
+
+Predicted protein sequences are annotated with `MicrobeAnnotator <https://github.com/cruizperez/MicrobeAnnotator>`_ with *-diamond* search against the `KEGG database <https://www.genome.jp/kegg/pathway.html>`_.
+
+.. note::
+
+  For MAGs, pathway completeness is assessed based on presence/absence not on TPM values, in contrast to CDS in gut metagenomes (see :ref:`abundance`).
