@@ -103,6 +103,7 @@ rule setup_gtdb1:
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
         sed -i -e 's/;/_/g' -e 's/\t/,/g' gtdb_vers202_metadata.csv
         """
+
 rule setup_gtdb2:
     output:
         temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
