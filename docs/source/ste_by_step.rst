@@ -1,0 +1,48 @@
+.. _step_by_step:
+The annoSnake workflow: step by step
+====================================
+
+The ./profile/params.yaml file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ./profile/params.yaml is the main configuration file.
+
+.. code::
+
+  # Workflow configuration
+
+  # specify input data
+  inputdir: "input_paired_end"
+
+  # input files are 'paired-end' or 'interleaved'?
+  library_type: "paired-end"
+
+  # specify output directory
+  outdir: "results_paired_end" 
+
+  # specify minimum length of contigs to output in MEGAHIT
+  min_length: 1500
+
+  # select whether metagenome-assembled genomes (MAGs) shall be assembled or not ('True' or 'False')
+  mag_assembly: False
+
+  # if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
+  completeness: 30
+  contamination: 10
+
+  # select databases to use ('True' or 'False')
+  PFAM: False
+  COG: False
+  KEGG: True
+  CAZYMES: False
+
+  # specify cut-off E-values
+  blastp_evalue: "1e-24"
+  blastx_evalue: "1e-24"
+  cog_evalue: "1e-30"
+  cazy_evalue: "1e-30"
+  pfam_evalue: "1e-30"
+
+  # visualize results ('True' or 'False')
+  COG_VISUALIZATION: False
+  KEGG_VISUALIZATION: True
