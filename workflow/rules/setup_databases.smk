@@ -103,20 +103,19 @@ rule setup_gtdb1:
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
         sed -i -e 's/;/_/g' -e 's/\t/,/g' gtdb_vers202_metadata.csv
         """
+rule setup_gtdb2:
+    output:
+        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
+    conda:
+        "envs/gtdb_to_taxdump.yaml"
+    retries:
+        3
+    shell:
+        """
+        wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
+        gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
+        """
 
-#rule setup_gtdb2:
-#    output:
-#        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
-#    conda:
-#        "envs/gtdb_to_taxdump.yaml"
-#    retries:
-#        3
-#    shell:
-#        """
-#        wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
-#        gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
-#        """
-#
 #rule setup_gtdb3:
 #    input:
 #        "databases/gtdb/.step_by_step"
@@ -130,23 +129,23 @@ rule setup_gtdb1:
 #    script:
 #        "scripts/merge_and_truncate.R"
 #
-#rule setup_gtdb4:
-#    input:
-#        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
-#    output:
-#        touch("databases/gtdb/.setup_done")
-#    params:
-#        gtdb=lambda w, input: Path(input[0]).parent,
-#        dmnd=lambda w, output: Path(output[0]).parent
-#    conda:
-#        "envs/environment.yaml"
-#    threads:
-#        40
-#    shell:
-#        """
-#        diamond makedb --in {input} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
-#        rm -rf {params.dmnd}/*gz
-#        """
+rule setup_gtdb4:
+    input:
+        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
+    output:
+        touch("databases/gtdb/.setup_done")
+    params:
+        gtdb=lambda w, input: Path(input[0]).parent,
+        dmnd=lambda w, output: Path(output[0]).parent
+    conda:
+        "envs/environment.yaml"
+    threads:
+        40
+    shell:
+        """
+        diamond makedb --in {input} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
+        rm -rf {params.dmnd}/*gz
+        """
         
 rule setup_fetchmg:
     output:
