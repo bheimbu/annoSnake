@@ -88,7 +88,8 @@ rule setup_microbeannotator:
 rule setup_gtdb1:
     output:
         temp("databases/gtdb/gtdb_vers202/gtdb_all.faa"),
-        "databases/gtdb/gtdb_vers202_metadata.csv"
+        "databases/gtdb/gtdb_vers202_metadata.csv",
+        temp("databases/gtdb/.gtdb1_done")
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
@@ -111,7 +112,8 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     input:
-        meta="databases/gtdb/gtdb_vers202_metadata.csv"
+        meta="databases/gtdb/gtdb_vers202_metadata.csv",
+        "databases/gtdb/.gtdb1_done"
     output:
         lca="databases/gtdb/gtdb_vers202_lca.csv"
     params:
@@ -141,15 +143,14 @@ rule setup_gtdb3:
         
 rule setup_fetchmg:
     output:
-        touch("databases/.fetchmg_downloaded")
+        touch("databases/fetchMGs/.setup_done")
     conda:
         "envs/environment.yaml"
     retries:
         3
     shell:
         """
-        cd databases
-        git clone https://github.com/motu-tool/fetchMGs.git
+        git clone https://github.com/motu-tool/fetchMGs.git databases/fetchMGs
         """
 
 rule setup_metaquast:
