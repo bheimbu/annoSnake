@@ -1,8 +1,8 @@
   # Read the first input file with headers
-  df1 <- read.table(snakemake@input[[1]], sep = "\t", header = TRUE)
+  df1 <- read.table(snakemake@params[['taxdump']], sep = "\t", header = TRUE)
 
   # Read the second input file without headers
-  lines <- readLines(snakemake@params[['taxdump']])
+  lines <- readLines(snakemake@input[[1]])
 
   # Create an empty list to store the lines of the output, including the header
   output_lines <- c("taxID,name,rank,lca")
