@@ -15,8 +15,8 @@ For the installation see :ref:`getting_started`. Here, all steps of the annoSnak
     ├── workflow/
     │       ├── input_paired_end # includes example data
     │       ├── profile
-    |       |     ├── config.yaml # :ref:`config_yaml`
-    |       |     └── params.yaml # :ref:`params_yaml`
+    |       |     ├── config.yaml 
+    |       |     └── params.yaml 
     │       └── rules
     |             ├── envs/ # conda environment files
     |             ├── scripts/ # Rscripts etc. 
@@ -35,9 +35,9 @@ The user may provide paired-end or interleaved sequencing data (in gzipped forma
 
 .. code::
 
-  **For paired-end data:**
+  For paired-end data:
   
-  input_paired_end # as specified in the :ref:`_params_yaml`
+  input_paired_end
   ├── $SAMPLE1_R1.fastq.gz
   ├── $SAMPLE1_R2.fastq.gz
   ├── $SAMPLE2_R1.fastq.gz
@@ -45,7 +45,7 @@ The user may provide paired-end or interleaved sequencing data (in gzipped forma
   ├── ..._R1.fastq.gz
   └── ..._R2.fastq.gz
 
-  **For interleaved data:**
+  For interleaved data:
   
   input_interleaved
   ├── $SAMPLE1.fastq.gz
