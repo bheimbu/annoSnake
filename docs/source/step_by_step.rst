@@ -4,6 +4,30 @@ The annoSnake workflow: step by step
 
 For the installation see :ref:`getting_started`. Here, all steps of the annoSnake workflow are described in detail.
 
+.. note::
+
+  A fresh install looks like this:
+
+  .. code::
+
+    annoSnake
+    ├── docs/
+    ├── workflow/
+    │       ├── input_paired_end # includes example data
+    │       ├── profile
+    |       |     ├── config.yaml # :ref:`config_yaml`
+    |       |     └── params.yaml # :ref:`params_yaml`
+    │       └── rules
+    |             ├── envs/ # conda environment files
+    |             ├── scripts/ # Rscripts etc. 
+    |             ├── blastx.smk
+    |             ├── cazy.smk
+    |             └── ...
+    ├── .git/
+    ├── LICENSE
+    ├── README.md
+    └── .readthedocs.yaml
+
 Input
 ^^^^^
 
@@ -134,12 +158,12 @@ Under outdir/assemblies/ (outdir as specified in :ref:`params_yaml`), you can fi
 
   results_paired_end/assemblies/
   ├── megahit/
-  │       └── $SAMPLE1
+  │       ├── $SAMPLE1
   │       ├── $SAMPLE2
   │       └── ...
   ├── metaquast/
   └── preprocessed_contigs/
-          └── $SAMPLE1
+          ├── $SAMPLE1
           ├── $SAMPLE2
           └── ...
 
@@ -153,19 +177,19 @@ Taxonomic annotation
 
   results_paired_end/taxonomy/
   ├── prokka/
-  │       └── $SAMPLE1
-  |       |  └── $SAMPLE1.faa
-  |       |  └── $SAMPLE1.fna
+  |       ├── $SAMPLE1
+  |       |  ├── $SAMPLE1.faa
+  |       |  ├── $SAMPLE1.fna
   |       |  └── ...
   │       ├── $SAMPLE2
   |       |  └── ...
   │       └── ...
   ├── blastx/
-  │       └── $SAMPLE1
+  |       ├── $SAMPLE1
   │       ├── $SAMPLE2
   │       └── ...
   └── blastp/
-          └── $SAMPLE1
+          ├── $SAMPLE1
           ├── $SAMPLE2
           └── ...
 
@@ -195,15 +219,15 @@ The user can choose between different databases for functional annotation of met
 
   results_paired_end/annotation/
   ├── kegg/
-  │       └── $SAMPLE1
+  |       ├── $SAMPLE1
   │       ├── $SAMPLE2
   │       └── ...
   ├── cazy/
-  │       └── $SAMPLE1
+  |       ├── $SAMPLE1
   │       ├── $SAMPLE2
   │       └── ...
   └── pfam/
-          └── $SAMPLE1
+          ├── $SAMPLE1
           ├── $SAMPLE2
           └── ...
 
@@ -225,10 +249,10 @@ Abundance is quantified with `Salmon v1.10.2 <https://salmon.readthedocs.io/en/l
 
   results_paired_end/quantification/
   ├── cogs/
-  │       └── cogs.index
+  │       ├── cogs.index
   │       └── cogs.quant
-  └──contigs/
-          └── $SAMPLE1
+  └── contigs/
+          ├── $SAMPLE1
           ├── $SAMPLE2
           └── ...
 
@@ -266,3 +290,39 @@ Predicted protein sequences are annotated with `MicrobeAnnotator <https://github
 .. note::
 
   For MAGs, pathway completeness is assessed based on presence/absence not on TPM values, in contrast to CDS in gut metagenomes (see :ref:`abundance`).
+
+.. code::
+
+  results_paired_end/MAGs/
+  ├── above_threshold_bins/ # bins with minimum completeness and maximum contamination as specified in :ref:`params_yaml`
+  |       ├── $SAMPLE1
+  │       ├── $SAMPLE2
+  │       └── ...
+  ├── bin_refinement/
+  |       ├── $SAMPLE1
+  │       ├── $SAMPLE2
+  │       └── ...
+  ├── checkm/
+  |       ├── $SAMPLE1
+  |       ├── $SAMPLE2
+  |       └── ...
+  ├── gtdbtk/
+  |       ├── $SAMPLE1
+  │       ├── $SAMPLE2
+  │       └── ...
+  ├── maxbin2/
+  |       ├── $SAMPLE1
+  |       ├── $SAMPLE2
+  |       └── ...
+  ├── metabat2/
+  │       ├── $SAMPLE1
+  │       ├── $SAMPLE2
+  │       └── ...
+  ├── metacoag/
+  |       ├── $SAMPLE1
+  |       ├── $SAMPLE2
+  |       └── ...
+  └── prokka/
+          ├── $SAMPLE1
+          ├── $SAMPLE2
+          └── ...
