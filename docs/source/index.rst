@@ -20,6 +20,7 @@ A Snakemake workflow for structural and functional annotation of metagenomes and
    introduction
    for_the_impatient
    installation
+   step_by_step
    setup_databases
    output_overview
    workflow_overview
