@@ -11,7 +11,7 @@ rule setup_checkm:
         """
 	cd databases/checkm
         wget -nc https://zenodo.org/records/7401545/files/checkm_data_2015_01_16.tar.gz?download=1
-	tar xzvf *
+	tar xzf *
 	checkm data setRoot .
         """
 
@@ -68,7 +68,7 @@ rule setup_kegg:
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz
         gunzip ko_list.gz
-        tar xzvf profiles.tar.gz && rm -R profiles.tar.gz
+        tar xzf profiles.tar.gz && rm -R profiles.tar.gz
         """
 
 rule setup_microbeannotator:
@@ -88,8 +88,7 @@ rule setup_microbeannotator:
 rule setup_gtdb1:
     output:
         temp("databases/gtdb/gtdb_vers202/gtdb_all.faa"),
-        "databases/gtdb/gtdb_vers202_metadata.csv",
-        touch("databases/gtdb/.step_one_done")
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
@@ -99,24 +98,22 @@ rule setup_gtdb1:
         cd databases/gtdb
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/bac120_metadata_r202.tar.gz
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/ar122_metadata_r202.tar.gz
-        tar -xzvf bac120_metadata_r202.tar.gz
-        tar -xzvf ar122_metadata_r202.tar.gz
+        tar -xzf bac120_metadata_r202.tar.gz
+        tar -xzf ar122_metadata_r202.tar.gz
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.csv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
         sed -i -e 's/;/_/g' -e 's/\t/,/g' gtdb_vers202_metadata.csv
         wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
         wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
-        tar -xzvf taxdump.tar.gz
+        tar -xzf taxdump.tar.gz
         gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
         """
 
 rule setup_gtdb2:
     input:
-        "databases/gtdb/gtdb_vers202_metadata.csv",
-        "databases/gtdb/.step_one_done"
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     output:
-        lca="databases/gtdb/gtdb_vers202_lca.csv",
-        done=touch("databases/gtdb/.step_two_done")
+        lca="databases/gtdb/gtdb_vers202_lca.csv"
     params:
         taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
@@ -126,8 +123,7 @@ rule setup_gtdb2:
 
 rule setup_gtdb3:
     input:
-        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa",
-        done="databases/gtdb/.step_two_done"
+        faa="databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
         touch("databases/gtdb/.setup_done")
     params:
@@ -158,13 +154,12 @@ rule setup_fetchmg:
 
 rule setup_metaquast:
     output:
-        touch("databases/.quast_downloaded")
+        touch("databases/quast/.setup_done")
     conda:
         "envs/environment.yaml"
     retries:
         3
     shell:
         """
-        cd databases
-        git clone https://github.com/ablab/quast.git
+        git clone https://github.com/ablab/quast.git databases/quast
         """
