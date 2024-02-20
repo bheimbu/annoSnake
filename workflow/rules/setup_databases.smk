@@ -111,7 +111,7 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     input:
-        "databases/gtdb/gtdb_vers202_metadata.csv"
+        meta="databases/gtdb/gtdb_vers202_metadata.csv"
     output:
         lca="databases/gtdb/gtdb_vers202_lca.csv"
     params:
