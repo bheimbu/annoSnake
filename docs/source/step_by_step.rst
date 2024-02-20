@@ -17,12 +17,13 @@ For the installation see :ref:`getting_started`. Here, all steps of the annoSnak
     │       ├── profile
     |       |     ├── config.yaml 
     |       |     └── params.yaml 
-    │       └── rules
-    |             ├── envs/ # conda environment files
-    |             ├── scripts/ # Rscripts etc. 
-    |             ├── blastx.smk
-    |             ├── cazy.smk
-    |             └── ...
+    │       ├── rules
+    |       |     ├── envs/ # conda environment files
+    |       |     ├── scripts/ # Rscripts etc. 
+    |       |     ├── blastx.smk
+    |       |     ├── cazy.smk
+    |       |     └── ...
+    |       └── Snakefile 
     ├── .git/
     ├── LICENSE
     ├── README.md
