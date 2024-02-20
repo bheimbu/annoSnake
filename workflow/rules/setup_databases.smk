@@ -1,4 +1,4 @@
-localrules: setup_gtdb_tk, setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_gtdb2, setup_fetchmg, setup_metaquast
+localrules: setup_gtdb_tk, setup_checkm, setup_pfam, setup_cazymes, setup_kegg, setup_gtdb1, setup_gtdb2, setup_gtdb3, setup_fetchmg, setup_metaquast
 
 rule setup_checkm:
     output:
@@ -68,7 +68,7 @@ rule setup_kegg:
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz
         wget -nc ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz
         gunzip ko_list.gz
-        tar xzf profiles.tar.gz && rm -R profiles.tar.gz
+        tar -xzf profiles.tar.gz && rm -R profiles.tar.gz
         """
 
 rule setup_microbeannotator:
@@ -87,7 +87,6 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-       temp("databases/gtdb/gtdb_vers202/gtdb_all.faa"),
        "databases/gtdb/gtdb_vers202/gtdb_vers202_metadata.csv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
@@ -96,6 +95,8 @@ rule setup_gtdb1:
     shell:
         """
         cd databases/gtdb
+        wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
+        tar -xzf taxdump.tar.gz
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/bac120_metadata_r202.tar.gz
         wget -nc https://data.gtdb.ecogenomic.org/releases/release202/202.0/ar122_metadata_r202.tar.gz
         tar -xzf bac120_metadata_r202.tar.gz
@@ -103,13 +104,22 @@ rule setup_gtdb1:
         awk -F '\t' '{{print $17 "\t" $1}}' bac120_metadata_r202.tsv > gtdb_vers202_metadata.csv
         awk -F '\t' '{{print $17 "\t" $1}}' ar122_metadata_r202.tsv >> gtdb_vers202_metadata.csv
         sed -i -e 's/;/_/g' -e 's/\t/,/g' gtdb_vers202_metadata.csv
-        wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
-        wget -nc http://ftp.tue.mpg.de/ebio/projects/struo2/GTDB_release202/taxdump/taxdump.tar.gz
-        tar -xzf taxdump.tar.gz
-        gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
         """
 
 rule setup_gtdb2:
+    output:
+       temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
+    conda:
+        "envs/gtdb_to_taxdump.yaml"
+    retries:
+        3
+    shell:
+        """
+        wget -nc https://data.ace.uq.edu.au/public/gtdb/data/releases/release202/202.0/genomic_files_reps/gtdb_proteins_aa_reps_r202.tar.gz
+        gtdb_to_diamond.py -o gtdb_vers202 gtdb_proteins_aa_reps_r202.tar.gz taxdump/names.dmp taxdump/nodes.dmp
+        """
+
+rule setup_gtdb3:
     input:
         "databases/gtdb/gtdb_vers202/gtdb_vers202_metadata.csv"
     output:
@@ -122,7 +132,7 @@ rule setup_gtdb2:
     script:
         "scripts/merge_and_truncate.R"
 
-rule setup_gtdb3:
+rule setup_gtdb4:
     input:
         "databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
