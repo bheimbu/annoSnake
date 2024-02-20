@@ -2,12 +2,12 @@
 The annoSnake workflow: step by step
 ====================================
 
-For the installation see :ref:`for_the_impatient`. Here, all steps of the annoSnake workflow are described in detail.
+For the installation see :ref:`getting_started`. Here, all steps of the annoSnake workflow are described in detail.
 
 Input
 ^^^^^
 
-The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified inputdir. There is no need to specify $SAMPLE names as annoSnake reads them autmatically from the inputdir. **There is no need to trim or filter the reads in advance.**
+The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified **inputdir**. There is no need to specify $SAMPLE names as annoSnake reads them autmatically from the **inputdir**. **There is no need to trim or filter the reads in advance.**
 
 .. code::
 
@@ -114,4 +114,4 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-
+Raw reads in the **inputdir** are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs  (default: 1500 bp) in the :ref:`params_yaml`.
