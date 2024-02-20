@@ -123,7 +123,6 @@ rule setup_gtdb2:
 
 rule setup_gtdb3:
     input:
-        "databases/gtdb/gtdb_vers202/gtdb_all.faa",
         "databases/gtdb/gtdb_vers202_lca.csv"
     output:
         touch("databases/gtdb/.setup_done")
@@ -136,7 +135,7 @@ rule setup_gtdb3:
         40
     shell:
         """
-        diamond makedb --in {input} --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
+        diamond makedb --in {params.gtdb}/gtdb_vers202/gtdb_all.faa --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
         rm -rf {params.dmnd}/*gz
         """
         
