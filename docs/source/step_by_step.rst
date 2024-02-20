@@ -114,4 +114,14 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the **inputdir** are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs  (default: 1500 bp) in the :ref:`params_yaml`.
+Raw reads in the **inputdir** are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs  (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the asembly is handled by MEGAHIT, you must change either ./rules/megahit_paired_end.smk or ./rules/megahit_interleaved.smk
+
+.. code::
+
+  For example, if you don't want to run MEGAHIT with `--presets meta-sensitive`, then change...   
+  
+  megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
+  
+  into..
+  
+  megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
