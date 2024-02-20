@@ -1,5 +1,6 @@
 Welcome to
-----------
+^^^^^^^^^
+
 .. code::
 
     █████╗  ███╗   ██╗ ███╗   ██╗  ██████╗  ███████╗ ███╗   ██╗  █████╗  ██╗  ██╗ ███████╗
@@ -15,6 +16,9 @@ Welcome to
 A Snakemake workflow for structural and functional annotation of metagenomes and MAGs. 
 
 |
+
+Content
+^^^^^^^
 
 .. toctree::
    introduction
