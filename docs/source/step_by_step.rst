@@ -146,4 +146,36 @@ Under outdir/assemblies/ (outdir as specified in :ref:`params_yaml`), you can fi
 Taxonomic annotation
 ^^^^^^^^^^^^^^^^^^^^
 
-Taxonomic assignment of metagenome contigs is performed by annoSnake as follows: (a) `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in *--metagenome* mode) is used to identify protein-coding sequences (CDS), rRNAs, and tRNAs, which are used later in various steps of the workflow pipeline. (b) fetchMG v.1.2 (https://github.com/motu-tool/fetchMGs) is used to extract 40 single copy marker genes (Sunagawa et al. 2013), which are present in most organisms across the tree of life. (c) Protein sequences of these 40 single copy marker genes are taxonomically assigned with DIAMOND in ‘blastp’ mode. (d) Other predicted protein-coding sequences (in nucleotide format) are taxonomically assigned with DIAMOND but in ‘blastx’ mode. Both annotations use GTDB database ver 202 as the default reference.
+`Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in *--metagenome* mode) is used to identify protein-coding sequences (CDS), rRNAs, and tRNAs. From the CDS, `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (in protein format), which are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in `blastp` mode. Other predicted protein-coding sequences (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in `blastx` mode. Both annotations use `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_ as the default reference.
+
+.. code::
+
+  
+  results_paired_end/taxonomy/
+  ├── prokka/
+  │       └── $SAMPLE1
+  |          └── $SAMPLE1.faa
+  |          └── $SAMPLE1.fna
+  |          └── ...
+  │       ├── $SAMPLE2
+  |       |  └── ...
+  │       └── ...
+  ├── blastx/
+  │       └── $SAMPLE1
+  │       ├── $SAMPLE2
+  │       └── ...
+  └── blastp/
+          └── $SAMPLE1
+          ├── $SAMPLE2
+          └── ...
+
+Functional annotation
+^^^^^^^^^^^^^^^^^^^^^
+
+The user can choose between different databases for functional annotation of metagenomic contigs (note, only metagenomic contigs assigned either as bacteria or archaea in the previous `blastx` search are annotated):
+
+1. For identifying CDS with carbohydrate metabolising properties, Hidden Markov models (HMM) of CAZy domains deposited in the `dbCAN database release 11 <https://bcb.unl.edu/dbCAN2/download/>`_ are used as default.
+2. To search for hydrogenases, HMM searches against the `Pfam database version 35 <https://www.ebi.ac.uk/interpro/download/Pfam/>`_ are performed. 
+3. `KofamScan v1.3.0 <https://github.com/takaram/kofam_scan>`_ is used to reconstruct prokaryotic metabolic pathways against the `KEGG database <https://www.genome.jp/kegg/pathway.html>`_.
+
+Results are filtered by cut-off E-values (minimum significant hit) that must be specified by the user (see :ref:`params_yaml`).
