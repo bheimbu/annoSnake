@@ -1,7 +1,7 @@
 library(pbapply)
 
   # Read the first input file with headers
-  df1 <- read.table(file.path(snakemake@input[[0]],"gtdb_vers202_metadata.csv"), sep = "\t", header = TRUE)
+  df1 <- read.table(file.path(snakemake@params[['meta']],"gtdb_vers202_metadata.csv"), sep = "\t", header = TRUE)
 
   # Read the second input file without headers
   lines <- readLines(snakemake@params[['taxdump']])
