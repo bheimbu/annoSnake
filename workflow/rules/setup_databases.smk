@@ -87,7 +87,7 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-        touch("databases/gtdb/.step_by_step")
+        directory("databases/gtdb/")
     retries:
         3
     shell:
