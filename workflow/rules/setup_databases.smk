@@ -121,7 +121,7 @@ rule setup_gtdb2:
         taxdump="databases/gtdb/taxdump/taxID_info.tsv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
-    shell:
+    script:
         """
         scripts/merge_and_truncate.py
         """
