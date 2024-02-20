@@ -87,9 +87,7 @@ rule setup_microbeannotator:
 
 rule setup_gtdb1:
     output:
-       touch("databases/gtdb/.step_by_step")
-    conda:
-        "envs/gtdb_to_taxdump.yaml"
+        temp("databases/gtdb/.step_by_step")
     retries:
         3
     shell:
@@ -108,7 +106,7 @@ rule setup_gtdb1:
 
 rule setup_gtdb2:
     output:
-       temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
+        temp("databases/gtdb/gtdb_vers202/gtdb_all.faa")
     conda:
         "envs/gtdb_to_taxdump.yaml"
     retries:
