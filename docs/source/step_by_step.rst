@@ -32,7 +32,7 @@ The user may provide paired-end or interleaved sequencing data (in gzipped forma
 ./profile/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ./profile/params.yaml is the main configuration file.
+The ./profile/params.yaml is the main configuration file sitting in the ./profiles directory. See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the **./profiles** directory.
 
 .. code::
 
@@ -78,7 +78,7 @@ The ./profile/params.yaml is the main configuration file.
 ./profile/config.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ./profile/config.yaml needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like.
+The ./profile/config.yaml needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like. 
 
 .. code::
 
@@ -96,7 +96,7 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
   default-resources:
     - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
     - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
-    - mem_mb=150000 # required memory per node, here in MB
+    - mem_mb=150000 # required memory per node in MB
   max-jobs-per-second: 1
   max-status-checks-per-second: 10
   local-cores: 1
