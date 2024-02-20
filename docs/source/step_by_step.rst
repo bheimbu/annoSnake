@@ -180,7 +180,7 @@ The user can choose between different databases for functional annotation of met
 
 .. note::
 
-  Results are filtered by cut-off E-values (minimum significant hit) that must be specified by the user (see :ref:`params_yaml`). For prokaryotic metabolic pathways (ie., KEGG), KO profile thresholds and an E-value ≤1e-30 are used, if KEGG entries of interest (eg. *K12212*) are present. Otherwise, KEGG entries with the lowest E-value are taken. 
+  Results are filtered by cut-off E-values (minimum significant hit) that must be specified by the user (see :ref:`params_yaml`). 
 
   .. code::
 
@@ -209,6 +209,10 @@ The user can choose between different databases for functional annotation of met
 
 .. attention::
 
+  For prokaryotic metabolic pathways (ie., KEGG), KO profile thresholds and an E-value ≤1e-30 are used, if KEGG entries of interest (eg. *K12212*) are present. Otherwise, KEGG entries with the lowest E-value are taken.
+
+.. hint::
+  
   Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`setup_databases`).
 
 Abundance calculation of gene families
