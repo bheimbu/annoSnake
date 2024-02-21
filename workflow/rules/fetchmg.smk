@@ -17,5 +17,5 @@ rule fetchmg:
     shell:
         """
         rm -rf {params.dir}
-        {params.fetchmg}/fetchMGs/fetchMGs.pl -m extraction -x {params.fetchmg}/fetchMGs/bin {params.faa}/{wildcards.sample}.faa -o {params.dir} -t {threads}
+        {params.fetchmg}/fetchMGs.pl -m extraction -x {params.fetchmg}/bin {params.faa}/{wildcards.sample}.faa -o {params.dir} -t {threads}
         """
