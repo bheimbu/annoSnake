@@ -10,7 +10,7 @@ output_lines <- c("taxID,name,rank,lca")
 # Define the progress bar
 pb <- txtProgressBar(min = 0, max = nrow(df1), style = 3)
 
-# Iterate through the rows of the first input file with tqdm progress bar
+# Iterate through the rows of the first input file
 for (i in 1:nrow(df1)) {
   row <- df1[i,]
   name_to_match <- row[['name']]
