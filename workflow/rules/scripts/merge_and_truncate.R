@@ -1,5 +1,3 @@
-library(pbapply)
-
   # Read the first input file with headers
   df1 <- read.table(snakemake@params[['meta']], sep = "\t", header = TRUE)
 
@@ -9,11 +7,14 @@ library(pbapply)
   # Create an empty list to store the lines of the output, including the header
   output_lines <- c("taxID,name,rank,lca")
 
-  # Define a progress bar
-  pb <- pbapply::txtProgressBar(min = 0, max = nrow(df1), style = 3)
+  # Define the maximum value for the progress bar
+  max_value <- nrow(df1)
+
+  # Initialize the progress bar
+  pb <- txtProgressBar(min = 0, max = max_value, style = 3)
 
   # Iterate through the rows of the first input file with progress bar
-  pbapply::pblapply(1:nrow(df1), function(i) {
+  for (i in 1:max_value) {
     row <- df1[i,]
     name_to_match <- row[['name']]
     rank <- row[['rank']]
@@ -53,7 +54,7 @@ library(pbapply)
 
     # Update the progress bar
     setTxtProgressBar(pb, i)
-  })
+  }
 
   # Close the progress bar
   close(pb)
