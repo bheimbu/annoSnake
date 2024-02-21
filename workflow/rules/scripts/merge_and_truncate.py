@@ -3,10 +3,10 @@ import pandas as pd
 from tqdm import tqdm
 
     # Read the first input file with headers
-    df1 = pd.read_csv(snakemake.params['meta'], sep = '\t')
+    df1 = pd.read_csv(snakemake.params[1], sep = '\t')
 
     # Read the second input file without headers
-    with open(snakemake.params['taxdump'], 'r') as file:
+    with open(snakemake.params[0], 'r') as file:
         lines = file.readlines()
 
     # Create an empty list to store the lines of the output, including the header
@@ -50,5 +50,5 @@ from tqdm import tqdm
             output_lines.append(combined_line)
 
     # Write the output lines to the output file
-    with open(snakemake.output['lca'], 'w') as file:
+    with open(snakemake.output[0], 'w') as file:
         file.write('\n'.join(output_lines))
