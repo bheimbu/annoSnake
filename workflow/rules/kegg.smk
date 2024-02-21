@@ -5,7 +5,7 @@ rule kegg1:
         gtf=OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf",
         db_setup="databases/kegg/.setup_done"
     output:
-        temp(OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.detail")
+        OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.detail"
     params:
         db=lambda wildcards, input: Path(input[1]).parent,
         tmp=lambda wildcards, output: Path(output[0]).parent,
@@ -24,7 +24,7 @@ rule kegg2:
         db_setup="databases/kegg/.setup_done"
     output:
         touch(OUTDIR/ "annotation/kegg/{sample}/.rule_completed"),
-        selected=temp(OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.selected"),
+        selected=OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.selected",
         evalue=OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.evalue"
     params:
         db=lambda wildcards, input: Path(input["db_setup"]).parent
