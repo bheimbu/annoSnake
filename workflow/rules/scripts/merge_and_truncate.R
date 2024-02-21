@@ -7,6 +7,9 @@ lines <- readLines(snakemake@params[['meta']])
 # Create an empty list to store the lines of the output, including the header
 output_lines <- c("taxID,name,rank,lca")
 
+# Define the progress bar
+pb <- txtProgressBar(min = 0, max = nrow(df1), style = 3)
+
 # Iterate through the rows of the first input file with tqdm progress bar
 for (i in 1:nrow(df1)) {
   row <- df1[i,]
@@ -45,7 +48,13 @@ for (i in 1:nrow(df1)) {
     combined_line <- paste(row[['taxID']], row[['name']], row[['rank']], matching_line, sep = ",")
     output_lines <- c(output_lines, combined_line)
   }
+  
+  # Update the progress bar
+  setTxtProgressBar(pb, i)
 }
+
+# Close the progress bar
+close(pb)
 
 # Write the output lines to the output file
 writeLines(output_lines, con = snakemake@output[['lca']])
