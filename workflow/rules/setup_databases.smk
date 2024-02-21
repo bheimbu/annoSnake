@@ -123,19 +123,20 @@ rule setup_gtdb2:
 
 rule setup_gtdb3:
     input:
-        "databases/gtdb/gtdb_vers202_lca.csv"
+        "databases/gtdb/gtdb_vers202_lca.csv",
+        "databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
         touch("databases/gtdb/.setup_done")
     params:
         gtdb=lambda w, input: Path(input[0]).parent,
-        dmnd=lambda w, output: Path(output[0]).parent
+        dmnd=lambda w, input: Path(input[1]).parent
     conda:
         "envs/environment.yaml"
     threads:
         40
     shell:
         """
-        diamond makedb --in {params.gtdb}/gtdb_vers202/gtdb_all.faa --db {params.dmnd}/gtdb_vers202.dmnd --taxonmap {params.gtdb}/accession2taxid.tsv --taxonnodes {params.gtdb}/nodes.dmp --taxonnames {params.gtdb}/names.dmp --threads {threads}
+        diamond makedb --in {input[1]} --db {params.gtdb}/gtdb_vers202.dmnd --taxonmap {params.dmnd}/accession2taxid.tsv --taxonnodes {params.dmnd}/nodes.dmp --taxonnames {params.dmnd}/names.dmp --threads {threads}
         rm -rf {params.dmnd}/*gz
         """
         
