@@ -25,7 +25,7 @@ Content
    for_the_impatient
    installation
    step_by_step
-   setup_databases
+   databases
    output_overview
    workflow_overview
    
