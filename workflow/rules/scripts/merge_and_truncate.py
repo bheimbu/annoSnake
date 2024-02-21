@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # Read the first input file with headers
-df1 = pd.read_csv(snakemake.params[1], sep = '\t')
+df1 = pd.read_csv(snakemake.params[1], sep = '\t', header=True)
 
 # Read the second input file without headers
 with open(snakemake.params[0], 'r') as file:
