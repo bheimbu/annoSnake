@@ -1,7 +1,7 @@
 rule fetchmg:
     input:
         OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf",
-        db="databases/.fetchmg_downloaded"
+        db="databases/fetchMGs/.setup_done"
     output:
         touch(OUTDIR/ "taxonomy/fetchmg/{sample}/.rule_completed")
     params:
