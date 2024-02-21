@@ -112,10 +112,10 @@ rule setup_gtdb2:
     input:
         "databases/gtdb/gtdb_vers202/gtdb_all.faa"
     output:
-        lca="databases/gtdb/gtdb_vers202_lca.csv"
+        "databases/gtdb/gtdb_vers202_lca.csv"
     params:
-        taxdump="databases/gtdb/taxdump/taxID_info.tsv",
-        meta="databases/gtdb/gtdb_vers202_metadata.csv"
+        "databases/gtdb/taxdump/taxID_info.tsv",
+        "databases/gtdb/gtdb_vers202_metadata.csv"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     script:
