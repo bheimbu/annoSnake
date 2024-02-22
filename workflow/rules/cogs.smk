@@ -73,14 +73,15 @@ rule blastp4:
 
 rule salmon_index_cogs1:
     input:
-        OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes.headers"
+        headers=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes.headers",
+        gtf=OUTDIR/ "taxonomy/cogs/cogs.gtf"
     output:
         OUTDIR/ "taxonomy/cogs/cogs.protein_contigs"
     conda:
         "envs/environment.yaml"
     shell:
         """
-        scripts/bed_conversion.sh {input} {OUTDIR}/taxonomy/cogs/cogs.gtf {OUTDIR}/taxonomy/cogs/cogs.bed
+        sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.prokka}/{wildcards.sample}.bed && rm "$filtered_gtf_file"        
         cat {OUTDIR}/taxonomy/prokka/*/*.fsa >> {OUTDIR}/taxonomy/cogs/cogs.fsa
         seqtk subseq {OUTDIR}/taxonomy/cogs/cogs.fsa {OUTDIR}/taxonomy/cogs/cogs.bed > {output}
         """
