@@ -83,7 +83,7 @@ rule salmon_index_cogs1:
         "envs/environment.yaml"
     shell:
         """
-        sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.gtf}/{wildcards.sample}.bed && rm "$filtered_gtf_file"        
+        sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.bed}/{wildcards.sample}.bed && rm "$filtered_gtf_file"        
         cat {OUTDIR}/taxonomy/prokka/*/*.fsa >> {OUTDIR}/taxonomy/cogs/cogs.fsa
         seqtk subseq {OUTDIR}/taxonomy/cogs/cogs.fsa {OUTDIR}/taxonomy/cogs/cogs.bed > {output}
         """
