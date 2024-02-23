@@ -41,9 +41,14 @@ Databases are downloaded automatically. However, the user can choose to use thei
         └── ...
 
 
-.. attention::
+GTDB-TK
+^^^^^^^
 
-  If you experience problems with slow download speeds for **GTDB-TK**, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for following part in the DAG of jobs  
+If you experience problems with slow download speeds for **GTDB-TK**, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database.
+
+.. note::
+
+  Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for following part in the DAG of jobs  
 
   .. code::
 
@@ -59,18 +64,37 @@ Databases are downloaded automatically. However, the user can choose to use thei
         
       Activating conda environment: .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969
 
-  to get the location of the *download-db.sh* file. Here, it can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*. Note, your conda environment will have a different name than mine (*470c2f2e8fcb8ca18fd3a63b874c8969*).
+  to get the location of the *download-db.sh* file. In this example, it can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*.
 
-  Finally, you must change following line in the script *download-db.sh* 
-
-  .. code::
-
-    DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"
-
-  to
+  Finally, you must change the url in the script *download-db.sh* like this (**note, you must adjust the code below to your conda environment**)
 
   .. code::
 
-    DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"
+    cd annoSnake/workflow
+    sed -i 's#DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"#DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"#' .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh 
 
-  Then rerun annoSnake with full download speed.    
+MicrobeAnnotator
+^^^^^^^^^^^^^^^^
+
+During the setup of MicrobeAnnotator, an HTTP error may occur. This is due to the fact that the used url to download the InterPro tables is wrong. Again, have a look into the DAG of jobs
+
+.. code::
+
+  Thu Feb 22 12:00:54 2024]
+  rule setup_microbeannotator:
+      jobid: 99
+      output: databases/microbeannotator/.setup_done
+      conda-env: /scratch1/users/bheimbu/annoSnake/workflow/.snakemake/conda/   6be050a6334173be2297d22f5f22d0eb_
+      shell:
+        
+          microbeannotator_db_builder -d databases/microbeannotator -m diamond -t 40 --light
+
+to get the name of the conda environment, here *6be050a6334173be2297d22f5f22d0eb_*; and change the url like this (**note, you must adjust the code below to your conda environment**)
+
+.. code::
+
+  cd annoSnake/workflow
+  sed -i 's#ftp://ftp\.ebi\.ac\.uk/pub/databases/interpro/current/release/interpro\.xml\.gz#ftp://ftp.ebi.ac.uk/pub/databases/interpro/current_release/interpro.xml.gz#' .snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py
+
+
+  
