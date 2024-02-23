@@ -48,7 +48,7 @@ If you experience problems with slow download speeds for **GTDB-TK** (see https:
 
 .. note::
 
-  Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for following part in the DAG of jobs  
+  Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Have a look at your console  
 
   .. code::
 
@@ -76,7 +76,7 @@ If you experience problems with slow download speeds for **GTDB-TK** (see https:
 MicrobeAnnotator
 ^^^^^^^^^^^^^^^^
 
-During the setup of MicrobeAnnotator, an HTTP error may occur. This is due to the fact that the used url to download the InterPro tables is wrong. Again, have a look into the DAG of jobs
+An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect. Again, look at your console
 
 .. code::
 
