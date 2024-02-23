@@ -43,8 +43,34 @@ Databases are downloaded automatically. However, the user can choose to use thei
 
 .. attention::
 
-  If you experience problems with slow download speeds for GTDB-TK, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake and then you have to found 
+  If you experience problems with slow download speeds for GTDB-TK, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for  
 
   ..code ::
+
+    [Fri Feb 23 08:30:23 2024]
+    localrule setup_gtdb_tk:
+       output: databases/gtdb_tk/.setup_done
+       jobid: 96
+       reason: Missing output files: databases/gtdb_tk/.setup_done
+       resources: mem_mb=150000, disk_mb=1000, tmpdir=/tmp, partition=medium, time=1-00:00:00
+
+
+             download-db.sh
+        
+      Activating conda environment: .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969
+
+  Here, the *download-db.sh* file can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*. Note, your conda environment will have a different name than mine (*470c2f2e8fcb8ca18fd3a63b874c8969*).
+
+  Finally, you must change following line in *download-db.sh* 
+
+  .. code::
+
+    DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"
+
+  to
+
+  .. code::
+
+    DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"
 
     
