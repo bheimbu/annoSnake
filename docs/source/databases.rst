@@ -43,7 +43,7 @@ Databases are downloaded automatically. However, the user can choose to use thei
 
 .. attention::
 
-  If you experience problems with slow download speeds for GTDB-TK, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for  
+  If you experience problems with slow download speeds for **GTDB-TK**, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for following part in the DAG of jobs  
 
   .. code::
 
@@ -59,9 +59,9 @@ Databases are downloaded automatically. However, the user can choose to use thei
         
       Activating conda environment: .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969
 
-  Here, the *download-db.sh* file can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*. Note, your conda environment will have a different name than mine (*470c2f2e8fcb8ca18fd3a63b874c8969*).
+  to get the location of the *download-db.sh* file. Here, it can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*. Note, your conda environment will have a different name than mine (*470c2f2e8fcb8ca18fd3a63b874c8969*).
 
-  Finally, you must change following line in *download-db.sh* 
+  Finally, you must change following line in the script *download-db.sh* 
 
   .. code::
 
@@ -73,4 +73,4 @@ Databases are downloaded automatically. However, the user can choose to use thei
 
     DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"
 
-    
+  Then rerun annoSnake with full download speed.    
