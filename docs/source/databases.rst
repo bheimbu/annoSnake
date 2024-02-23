@@ -44,7 +44,7 @@ Databases are downloaded automatically. However, the user can choose to use thei
 GTDB-TK
 ^^^^^^^
 
-If you experience problems with slow download speeds for **GTDB-TK**, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database.
+If you experience problems with slow download speeds for **GTDB-TK** (see https://github.com/Ecogenomics/GTDBTk/issues/522), you may change the download url in the *download-db.sh* bash script that GTDB-TK uses to download the latest database.
 
 .. note::
 
