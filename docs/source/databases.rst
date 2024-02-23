@@ -45,7 +45,7 @@ Databases are downloaded automatically. However, the user can choose to use thei
 
   If you experience problems with slow download speeds for GTDB-TK, you may change the download url in the `download-db.sh` bash script that GTDB-TK uses to download the latest database. Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Look for  
 
-  ..code ::
+  .. code::
 
     [Fri Feb 23 08:30:23 2024]
     localrule setup_gtdb_tk:
