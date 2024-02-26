@@ -2,7 +2,7 @@ localrules: check_input, preprocess
 
 rule check_input:
     output:
-        touch(INPUTDIR / ".{sample}.ok")
+        temp(INPUTDIR / ".{sample}.ok")
     shell:
         """
         if [ -e {INPUTDIR}/{wildcards.sample}_R1.fastq.gz ] && [ -e {INPUTDIR}/{wildcards.sample}_R2.fastq.gz ]; then
