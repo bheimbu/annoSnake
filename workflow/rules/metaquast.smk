@@ -14,5 +14,5 @@ rule metaquast:
         "envs/MAGs.yaml"
     shell:
         """
-        {params.metaquast}/quast/metaquast.py --threads {threads} -o {params.outdir} {params.contigs} --no-krona
-		"""
+        {params.metaquast}/metaquast.py --threads {threads} -o {params.outdir} {params.contigs} --no-krona
+	"""
