@@ -11,5 +11,5 @@ rule salmon_quant_contigs_interleaved:
         "envs/salmon.yaml"
     shell:
         """
-        scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/{wildcards.sample}.fastq.gz) -o {params.contigs}/{wildcards.sample}.quant --meta -p {threads}
+        rules/scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/{wildcards.sample}.fastq.gz) -o {params.contigs}/{wildcards.sample}.quant --meta -p {threads}
         """
