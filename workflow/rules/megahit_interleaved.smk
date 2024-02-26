@@ -17,6 +17,8 @@ rule check_input:
         """
 
 rule megahit:
+    input:
+        INPUTDIR / ".{sample}.ok"
     output:
         touch(OUTDIR/ "assemblies/megahit/{sample}/.rule_completed")
     params:
