@@ -11,5 +11,5 @@ rule salmon_quant_cogs_interleaved:
         "envs/salmon.yaml"
     shell:
         """
-        scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/*gz) -o {params.cogs}/cogs.quant --meta -p {threads}
+        rules/scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/*gz) -o {params.cogs}/cogs.quant --meta -p {threads}
         """
