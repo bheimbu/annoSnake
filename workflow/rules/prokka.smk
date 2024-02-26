@@ -13,5 +13,5 @@ rule prokka:
     shell:
         """
         prokka --force --cpus {threads} --metagenome --prefix {wildcards.sample} --outdir {OUTDIR}/taxonomy/prokka/{wildcards.sample} {params.contigs}/{wildcards.sample}.fna
-        scripts/prokkagff2gtf.sh {params.gff}/{wildcards.sample}.gff > {output}
+        rules/scripts/prokkagff2gtf.sh {params.gff}/{wildcards.sample}.gff > {output}
         """
