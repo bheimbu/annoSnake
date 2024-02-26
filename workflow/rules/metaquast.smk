@@ -1,13 +1,13 @@
 rule metaquast:
     input:
         contigs=expand(OUTDIR/ "assemblies/preprocessed_contigs/{sample}/.rule_completed", sample=SAMPLES),
-        downloaded="databases/.quast_downloaded"    		
+        done="databases/quast/.setup_done"   		
     output:
         OUTDIR/ "assemblies/metaquast/report.html"
     params:
         contigs=OUTDIR/ "assemblies/preprocessed_contigs/*/*.fna",
         outdir=OUTDIR/ "assemblies/metaquast",
-        metaquast=lambda wildcards, input: Path(input["downloaded"]).parent
+        metaquast=lambda wildcards, input: Path(input["done"]).parent
     threads:
         20
     conda:
