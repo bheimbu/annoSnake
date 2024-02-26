@@ -138,7 +138,7 @@ rule MAG_above_threshold_bins:
         if [ ! -d {OUTDIR}/MAGs/above_threshold_bins ]; then
           mkdir -p {OUTDIR}/MAGs/above_threshold_bins
         fi
-        for dir in {OUTDIR}/MAGs/bin_refinement/*/; do
+        for dir in {OUTDIR}/MAGs/bin_refinement/*; do
           if [ -d "$dir" ]; then
             dir_name=$(basename "$dir")
             bin_dir=$(find "$dir" -maxdepth 1 -type d -name 'metawrap_*_bins' -print -quit)
@@ -146,8 +146,8 @@ rule MAG_above_threshold_bins:
               if [ -f "$file" ]; then
                 base_name=$(basename "$file")
                 new_name="$dir_name"_"$base_name"
-                mkdir -p results_paired_end/MAGs/above_threshold_bins/"$dir_name"/
-				cp "$file" results_paired_end/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
+                mkdir -p {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/
+		cp "$file" {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
               fi
             done
           fi
