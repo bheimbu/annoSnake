@@ -59,9 +59,9 @@ GTDB-TK
 
 Sometimes, the download speed of the **GTDB-TK** database decreases dramatically (see https://github.com/Ecogenomics/GTDBTk/issues/522). If this is the case for you too, you can change the download URL in the bash script :file:`download-db.sh` as follows.
 
-1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/``once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
+1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
-2. Then, ``find . -type f -name "download-db.sh". In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
+2. Then, ``find . -type f -name "download-db.sh"``. In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
 
 3. Now, you must change the URL in the script :file:`download-db.sh` like this (**note, you must adjust the code below to the name of your conda environment**)
 
