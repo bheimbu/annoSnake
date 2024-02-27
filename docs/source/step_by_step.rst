@@ -30,7 +30,7 @@ For the installation see :ref:`getting_started`. Here, all steps of the annoSnak
 Input
 ^^^^^
 
-The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`/{inputdir}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the **inputdir**. **There is no need to trim or filter the reads in advance.**
+The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`{inputdir}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{inputdir}/`. **There is no need to trim or filter the reads in advance.**
 
 .. code::
 
@@ -55,7 +55,7 @@ The user may provide paired-end or interleaved sequencing data (in gzipped forma
 ./profile/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ./profile/params.yaml is the main configuration file sitting in the ./profiles directory. See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the **./profiles** directory.
+The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the :file:`./profile/` directory.
 
 .. code::
 
@@ -101,11 +101,12 @@ The ./profile/params.yaml is the main configuration file sitting in the ./profil
 ./profile/config.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ./profile/config.yaml needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like. 
+The :file:`./profile/config.yaml` needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like. 
 
 .. code::
 
   ### Kudos to @jdblischak! https://github.com/jdblischak/smk-simple-slurm
+  
   cluster:
     mkdir -p {OUTDIR}/logs/{rule} &&
     sbatch
@@ -116,10 +117,12 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
       --job-name={rule}.{jobid}
       --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
       --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
+  
   default-resources:
     - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
     - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
     - mem_mb=150000 # required memory per node in MB
+  
   max-jobs-per-second: 1
   max-status-checks-per-second: 10
   local-cores: 1
@@ -137,21 +140,18 @@ The ./profile/config.yaml needs to be modified to accommodate the user’s speci
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the **inputdir** are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs  (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the asembly is handled by MEGAHIT, you must change either **./rules/megahit_paired_end.smk** or **./rules/megahit_interleaved.smk**.
+Raw reads in the :file:`{inputdir}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`./rules/megahit_paired_end.smk` or :file:`./rules/megahit_interleaved.smk`.
 
 For example, if you don't want to run MEGAHIT with `--presets meta-sensitive`, then change...   
 
-.. code::
+.. code-block:: bash
+   :emphasize-removed: 1
+   :emphasize-added: 2
 
   megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
-  
-into...
-
-.. code::
-  
   megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
 
-Under outdir/assemblies/ (outdir as specified in :ref:`params_yaml`), you can find the output of MEGAHIT, `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as the preprocessed contigs (with modified Fasta headers to include the sample name). 
+Under :file:`outdir/assemblies/` (:samp:`{outdir}` as specified in :ref:`params_yaml`), you can find the output of MEGAHIT, `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as the preprocessed contigs (with modified Fasta headers to include the sample name). 
 
 .. code::
 
