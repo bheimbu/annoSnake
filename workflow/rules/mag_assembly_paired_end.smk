@@ -21,11 +21,9 @@ rule MAG_metabat2:
         bowtie2 -x {params.fna}/{wildcards.sample}.fna -p {threads} -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz | samtools view -@{threads} -bS -o {params.fna}/{wildcards.sample}.bam
         samtools sort -@{threads} {params.fna}/{wildcards.sample}.bam -o {params.fna}/{wildcards.sample}.sort
         samtools index -@{threads} {params.fna}/{wildcards.sample}.sort
-        cd {params.dir} 
-        runMetaBat.sh -m {params.min_length} ../../../../{params.fna}/{wildcards.sample}.fna ../../../../{params.fna}/{wildcards.sample}.sort
-        if [ -z "$(find "{wildcards.sample}.fna.metabat-bins{params.min_length}" -mindepth 1 -maxdepth 1)" ]; then
-            touch {output[0]}
-        fi
+	runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
+        mkdir -p {params.dir}
+        mv {wildcards.sample}.fna.* {params.dir}
         """
 
 rule MAG_metacoag:
