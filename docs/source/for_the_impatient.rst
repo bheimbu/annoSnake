@@ -43,17 +43,16 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 .. important::
   For more information see :ref:`step_by_step`.
 
-.. tip::
-  You may start the workflow by using `tmux <https://github.com/tmux/tmux/wiki>`_.
+.. admonition:: You may start the workflow by using `tmux <https://github.com/tmux/tmux/wiki>`_.
   
-  .. code::
+   .. code::
 
     tmux new -s annosnake #starts a new tmux session with the name annosnake
     snakemake --profile profile/ #starts annoSnake workflow
 
-  You can exit the session by pressing :kbd:`Ctrl+b d`; and may close your terminal while the workflow is running.
+   You can exit the session by pressing :kbd:`Ctrl+b d`; and may close your terminal while the workflow is running.
   
-  .. code::
+   .. code::
 
     tmux attach -t annosnake #get back to your session
 
