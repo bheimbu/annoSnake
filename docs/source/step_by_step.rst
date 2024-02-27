@@ -221,7 +221,7 @@ The user can choose between different databases for functional annotation of met
   
   Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`databases`).
 
-.. _abundance::
+.. _abundance:
 Abundance calculation of gene families
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
