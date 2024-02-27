@@ -10,8 +10,8 @@ The annoSnake workflow: step by step
    :local:
    :backlinks: none
 
-Input
-^^^^^
+Input data
+^^^^^^^^^^
 
 The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`{inputdir}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{inputdir}/`. **There is no need to trim or filter the reads in advance.**
 
