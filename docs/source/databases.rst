@@ -59,27 +59,11 @@ GTDB-TK
 
 Sometimes, the download speed of the **GTDB-TK** database decreases dramatically (see https://github.com/Ecogenomics/GTDBTk/issues/522). If this is the case for you too, you can change the download URL in the bash script :file:`download-db.sh` as follows.
 
-1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake.
+1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/``once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
-2. Then, have a look at your console...  
+2. Then, ``find . -type f -name "download-db.sh". In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
 
-.. code::
-
-    [Fri Feb 23 08:30:23 2024]
-    localrule setup_gtdb_tk:
-       output: databases/gtdb_tk/.setup_done
-       jobid: 96
-       reason: Missing output files: databases/gtdb_tk/.setup_done
-       resources: mem_mb=150000, disk_mb=1000, tmpdir=/tmp, partition=medium, time=1-00:00:00
-
-
-             download-db.sh
-        
-      Activating conda environment: .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969
-
-In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
-
-3. You must change the URL in the script :file:`download-db.sh` like this (**note, you must adjust the code below to the name of your conda environment**)
+3. Now, you must change the URL in the script :file:`download-db.sh` like this (**note, you must adjust the code below to the name of your conda environment**)
 
 .. code::
 
@@ -89,20 +73,13 @@ In this example, :file:`download-db.sh` can be found under :file:`annoSnake/work
 MicrobeAnnotator
 ^^^^^^^^^^^^^^^^
 
-An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect. Again, look at your console...
+An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect.
 
-.. code::
+1. The *microbeannotator* conda environment (based on :file:`annoSnake/rules/envs/microbeannotator.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/``once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
-  Thu Feb 22 12:00:54 2024]
-  rule setup_microbeannotator:
-      jobid: 99
-      output: databases/microbeannotator/.setup_done
-      conda-env: /scratch1/users/bheimbu/annoSnake/workflow/.snakemake/conda/   6be050a6334173be2297d22f5f22d0eb_
-      shell:
-        
-          microbeannotator_db_builder -d databases/microbeannotator -m diamond -t 40 --light
+2. Then, ``find . -type f -name "conversion_database_creator.py". In this example, :file:`conversion_database_creator.py` can be found under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`.
 
-to get the name of the conda environment, here :file:`6be050a6334173be2297d22f5f22d0eb_`; and change the URL like this (**note, you must adjust the code below to the name of your conda environment**)
+3. Now change the URL like this (**note, you must adjust the code below to the name of your conda environment**)
 
 .. code::
 
