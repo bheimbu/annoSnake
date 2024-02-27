@@ -123,7 +123,7 @@ The :file:`./profile/config.yaml` needs to be modified to accommodate the userâ€
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`./rules/megahit_paired_end.smk` or :file:`./rules/megahit_interleaved.smk`.
+Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow//rules/megahit_paired_end.smk` or :file:`annoSnake/workflow//rules/megahit_interleaved.smk`.
 
 For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
 
@@ -134,7 +134,7 @@ For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``,
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
 
-Under :file:`{outdir}/assemblies/` (:samp:`{outdir}` as specified in :ref:`params_yaml`), you can find the output of MEGAHIT, `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as the preprocessed contigs (with modified Fasta headers to include the sample name). 
+Under :file:`{OUTDIR}/assemblies/` (:samp:`{OUTDIR}` as specified in :ref:`params_yaml`), you can find the output of MEGAHIT, `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as the preprocessed contigs (with modified Fasta headers to include the sample name). 
 
 .. code::
 
