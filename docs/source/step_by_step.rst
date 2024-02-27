@@ -247,11 +247,11 @@ Metagenome contigs are binned into MAGs with three different binning algorithms 
 2. `MetaCoAG v1.1.1 <https://github.com/metagentools/MetaCoAG>`_
 3. `MaxBin 2.2.7 <https://sourceforge.net/projects/maxbin/files/>`_
 
-To increase contiguity and completeness of the resulting bins, we implemented `metaWRAP‘s *bin_refinement* <https://github.com/bxlab/metaWRAP/blob/master/Module_descriptions.md>`_ module, which combines the obtained bins from the three different binning algorithms to produce a consolidated, improved bin set. 
+To increase contiguity and completeness of the resulting bins, we implemented `metaWRAP‘s bin_refinement <https://github.com/bxlab/metaWRAP/blob/master/Module_descriptions.md>`_ module, which combines the obtained bins from the three different binning algorithms to produce a consolidated, improved bin set. 
 
 .. note::
 
-  Here, the user needs to specify the minimum completeness and maximum contamination of retained MAGs used for downstream analyses in the :ref:`params_yaml`.
+  Here, the user needs to specify the **minimum completeness** and **maximum contamination** of retained MAGs used for downstream analyses in the :ref:`params_yaml`.
 
   .. code::
 
