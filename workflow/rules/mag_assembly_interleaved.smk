@@ -24,9 +24,6 @@ rule MAG_metabat2:
 	runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
         mkdir -p {params.dir}
         mv {wildcards.sample}.fna.* {params.dir}
-        if [ -z "$(find "{params.dir}/{wildcards.sample}.fna.metabat-bins{params.min_length}" -mindepth 1 -maxdepth 1)" ]; then
-            touch {output[0]}
-        fi
         """
 		
 rule MAG_metacoag:
