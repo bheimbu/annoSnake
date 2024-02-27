@@ -30,7 +30,7 @@ For the installation see :ref:`getting_started`. Here, all steps of the annoSnak
 Input
 ^^^^^
 
-The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified **inputdir**. There is no need to specify $SAMPLE names as annoSnake reads them autmatically from the **inputdir**. **There is no need to trim or filter the reads in advance.**
+The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`/{inputdir}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the **inputdir**. **There is no need to trim or filter the reads in advance.**
 
 .. code::
 
