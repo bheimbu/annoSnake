@@ -2,7 +2,13 @@
 The annoSnake workflow: step by step
 ====================================
 
-For the installation see :ref:`getting_started`. Here, all steps of the annoSnake workflow are described in detail.
+.. note::
+  
+  For installation see :ref:`getting_started`.
+
+.. contents:: Here, all steps of the annoSnake workflow are described in detail.
+   :local:
+   :backlinks: none
 
 .. admonition:: A fresh install looks like this:
 
@@ -142,7 +148,7 @@ Metagenome assembly
 
 Raw reads in the :file:`{inputdir}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`./rules/megahit_paired_end.smk` or :file:`./rules/megahit_interleaved.smk`.
 
-For example, if you don't want to run MEGAHIT with `--presets meta-sensitive`, then change...   
+For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
 
 .. code-block:: bash
    :emphasize-removed: 1
@@ -155,7 +161,7 @@ Under :file:`{outdir}/assemblies/` (:samp:`{outdir}` as specified in :ref:`param
 
 .. code::
 
-  results_paired_end/assemblies/
+  {OUTDIR}/assemblies/
   ├── megahit/
   │       ├── $SAMPLE1
   │       ├── $SAMPLE2
@@ -174,7 +180,7 @@ Taxonomic annotation
 
 .. code::
 
-  results_paired_end/taxonomy/
+  {OUTDIR}/taxonomy/
   ├── prokka/
   |       ├── $SAMPLE1
   |       |  ├── $SAMPLE1.faa
@@ -201,7 +207,7 @@ The user can choose between different databases for functional annotation of met
 2. To search for hydrogenases, HMM searches against the `Pfam database version 35 <https://www.ebi.ac.uk/interpro/download/Pfam/>`_ are performed. 
 3. `KofamScan v1.3.0 <https://github.com/takaram/kofam_scan>`_ is used to reconstruct prokaryotic metabolic pathways against the `KEGG database <https://www.genome.jp/kegg/pathway.html>`_.
 
-.. note::
+.. attention::
 
   Results are filtered by cut-off E-values (minimum significant hit) that must be specified by the user (see :ref:`params_yaml`). 
 
@@ -216,7 +222,7 @@ The user can choose between different databases for functional annotation of met
 
 .. code::
 
-  results_paired_end/annotation/
+  {OUTDIR}/annotation/
   ├── kegg/
   |       ├── $SAMPLE1
   │       ├── $SAMPLE2
@@ -246,7 +252,7 @@ Abundance is quantified with `Salmon v1.10.2 <https://salmon.readthedocs.io/en/l
 
 .. code::
 
-  results_paired_end/quantification/
+  {OUTDIR}/quantification/
   ├── cogs/
   │       ├── cogs.index
   │       └── cogs.quant
@@ -280,20 +286,20 @@ Quality control of MAGs is performed by `CheckM 1.2.2 <https://github.com/Ecogen
 
 |
 
-Gene prediction of MAGs is performed by `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_, using the *--metagenome* option.
+Gene prediction of MAGs is performed by `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_, using the ``--metagenome`` option.
 
 |
 
-Predicted protein sequences are annotated with `MicrobeAnnotator <https://github.com/cruizperez/MicrobeAnnotator>`_ with *-diamond* search against the `KEGG database <https://www.genome.jp/kegg/pathway.html>`_.
+Predicted protein sequences are annotated with `MicrobeAnnotator <https://github.com/cruizperez/MicrobeAnnotator>`_ with ``-diamond`` search against the `KEGG database <https://www.genome.jp/kegg/pathway.html>`_.
 
 .. note::
 
-  For MAGs, pathway completeness is assessed based on presence/absence not on TPM values, in contrast to CDS in gut metagenomes (see :ref:`abundance`).
+  For MAGs, pathway completeness is assessed based on presence/absence not on TPM values (see :ref:`abundance`).
 
 .. code::
 
-  results_paired_end/MAGs/
-  ├── above_threshold_bins/ # bins with minimum completeness and maximum contamination as specified in :ref:`params_yaml`
+  {OUTDIR}/MAGs/
+  ├── above_threshold_bins/ # bins with minimum completeness and maximum contamination as specified (see above)
   |       ├── $SAMPLE1
   │       ├── $SAMPLE2
   │       └── ...
