@@ -17,9 +17,6 @@ A Snakemake workflow for structural and functional annotation of metagenomes and
 
 |
 
-Content
-^^^^^^^
-
 .. toctree::
    introduction
    for_the_impatient
