@@ -123,7 +123,7 @@ The :file:`./profile/config.yaml` needs to be modified to accommodate the userâ€
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow//rules/megahit_paired_end.smk` or :file:`annoSnake/workflow//rules/megahit_interleaved.smk`.
+Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow/rules/megahit_paired_end.smk` or :file:`annoSnake/workflow/rules/megahit_interleaved.smk`.
 
 For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
 
