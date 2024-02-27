@@ -144,13 +144,13 @@ Under :file:`{OUTDIR}/assemblies/` (:samp:`{OUTDIR}` as specified in :ref:`param
 
   {OUTDIR}/assemblies/
   ├── megahit/
-  │       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  │       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── metaquast/
   └── preprocessed_contigs/
-          ├── $SAMPLE1
-          ├── $SAMPLE2
+          ├── $SAMPLE1/
+          ├── $SAMPLE2/
           └── ...
 
 .. _taxonomic_annotation:
@@ -163,20 +163,20 @@ Taxonomic annotation
 
   {OUTDIR}/taxonomy/
   ├── prokka/
-  |       ├── $SAMPLE1
+  |       ├── $SAMPLE1/
   |       |  ├── $SAMPLE1.faa
   |       |  ├── $SAMPLE1.fna
   |       |  └── ...
-  │       ├── $SAMPLE2
+  │       ├── $SAMPLE2/
   |       |  └── ...
   │       └── ...
   ├── blastx/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   └── blastp/
-          ├── $SAMPLE1
-          ├── $SAMPLE2
+          ├── $SAMPLE1/
+          ├── $SAMPLE2/
           └── ...
 
 Functional annotation
@@ -205,16 +205,16 @@ The user can choose between different databases for functional annotation of met
 
   {OUTDIR}/annotation/
   ├── kegg/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── cazy/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   └── pfam/
-          ├── $SAMPLE1
-          ├── $SAMPLE2
+          ├── $SAMPLE1/
+          ├── $SAMPLE2/
           └── ...
 
 .. attention::
@@ -238,8 +238,8 @@ Abundance is quantified with `Salmon v1.10.2 <https://salmon.readthedocs.io/en/l
   │       ├── cogs.index
   │       └── cogs.quant
   └── contigs/
-          ├── $SAMPLE1
-          ├── $SAMPLE2
+          ├── $SAMPLE1/
+          ├── $SAMPLE2/
           └── ...
 
 Metagenome-assembled genomes (MAGs)
@@ -281,36 +281,36 @@ Predicted protein sequences are annotated with `MicrobeAnnotator <https://github
 
   {OUTDIR}/MAGs/
   ├── above_threshold_bins/ # bins with minimum completeness and maximum contamination as specified (see above)
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── bin_refinement/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── checkm/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  |       ├── $SAMPLE2/
   |       └── ...
   ├── gtdbtk/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── maxbin2/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  |       ├── $SAMPLE2/
   |       └── ...
   ├── metabat2/
-  │       ├── $SAMPLE1
-  │       ├── $SAMPLE2
+  │       ├── $SAMPLE1/
+  │       ├── $SAMPLE2/
   │       └── ...
   ├── metacoag/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
+  |       ├── $SAMPLE1/
+  |       ├── $SAMPLE2/
   |       └── ...
   └── prokka/
-          ├── $SAMPLE1
-          ├── $SAMPLE2
+          ├── $SAMPLE1/
+          ├── $SAMPLE2/
           └── ...
 
 Fresh Install
