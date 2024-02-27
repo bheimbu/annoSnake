@@ -7,5 +7,5 @@ annoSnake, a Snakemake workflow that streamlines structural and functional annot
 |
 .. admonition:: If in doubt, reach out!
 
-   If you have any questions or issues to report, please go to the `GitHub page <https://github.com/bheimbu/annoSnake>`_ and open a :guilabel:`New issue`.
+   If you have any questions or issues to report, please go to `GitHub <https://github.com/bheimbu/annoSnake>`_ and open a :guilabel:`New issue`.
 
