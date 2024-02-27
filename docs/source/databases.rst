@@ -61,7 +61,7 @@ Sometimes, the download speed of the **GTDB-TK** database decreases dramatically
 
 1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
-2. Then, ``find . -type f -name "download-db.sh"``. In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
+2. Then, ``find annoSnake/workflow/ -type f -name "download-db.sh"``. In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
 
 3. Now, you must change the URL in the script :file:`download-db.sh` like this (**note, you must adjust the code below to the name of your conda environment**)
 
@@ -77,7 +77,7 @@ An HTTP error may occur during MicrobeAnnotator setup. This is because the URL u
 
 1. The *microbeannotator* conda environment (based on :file:`annoSnake/rules/envs/microbeannotator.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
-2. Then, ``find . -type f -name "conversion_database_creator.py"``. In this example, :file:`conversion_database_creator.py` can be found under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`.
+2. Then, ``find annoSnake/workflow/ -type f -name "conversion_database_creator.py"``. In this example, :file:`conversion_database_creator.py` can be found under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`.
 
 3. Now change the URL like this (**note, you must adjust the code below to the name of your conda environment**)
 
