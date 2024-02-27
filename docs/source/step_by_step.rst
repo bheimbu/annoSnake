@@ -10,29 +10,6 @@ The annoSnake workflow: step by step
    :local:
    :backlinks: none
 
-.. admonition:: A fresh install looks like this:
-
-  .. code::
-
-    annoSnake
-    ├── docs/
-    ├── workflow/
-    │       ├── input_paired_end # includes example data
-    │       ├── profile
-    |       |     ├── config.yaml 
-    |       |     └── params.yaml 
-    │       ├── rules
-    |       |     ├── envs/ # conda environment files
-    |       |     ├── scripts/ # Rscripts etc. 
-    |       |     ├── blastx.smk
-    |       |     ├── cazy.smk
-    |       |     └── ...
-    |       └── Snakefile 
-    ├── .git/
-    ├── LICENSE
-    ├── README.md
-    └── .readthedocs.yaml
-
 Input
 ^^^^^
 
@@ -242,7 +219,7 @@ The user can choose between different databases for functional annotation of met
 
 .. hint::
   
-  Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`setup_databases`).
+  Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`databases`).
 
 .. _abundance::
 Abundance calculation of gene families
@@ -331,3 +308,29 @@ Predicted protein sequences are annotated with `MicrobeAnnotator <https://github
           ├── $SAMPLE1
           ├── $SAMPLE2
           └── ...
+
+Fresh Install
+^^^^^^^^^^^^^
+
+.. admonition:: A fresh install should look like this:
+
+  .. code::
+
+    annoSnake
+    ├── docs/
+    ├── workflow/
+    │       ├── input_paired_end # includes example data
+    │       ├── profile
+    |       |     ├── config.yaml 
+    |       |     └── params.yaml 
+    │       ├── rules
+    |       |     ├── envs/ # conda environment files
+    |       |     ├── scripts/ # Rscripts etc. 
+    |       |     ├── blastx.smk
+    |       |     ├── cazy.smk
+    |       |     └── ...
+    |       └── Snakefile 
+    ├── .git/
+    ├── LICENSE
+    ├── README.md
+    └── .readthedocs.yaml
