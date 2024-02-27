@@ -14,34 +14,37 @@ Databases are downloaded automatically. However, the user can choose to use thei
   │       ├── dbCAN-fam-HMMs.txt.v11.h3m
   │       ├── dbCAN-fam-HMMs.txt.v11.h3p
   │       └── .setup_done
-  ├── kegg/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
-  │       └── ...
-  ├── microbeannotator/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
-  |       └── ...
-  ├── gtdbtk/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
-  │       └── ...
-  ├── fetchMGs/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
-  |       └── ...
   ├── checkm/
-  │       ├── $SAMPLE1
-  │       ├── $SAMPLE2
-  │       └── ...
-  ├── cazymes/
-  |       ├── $SAMPLE1
-  |       ├── $SAMPLE2
-  |       └── ...
+  |       ├── distributions
+  │       ├── ...
+  │       └── .setup_done
+  ├── fetchMGs/
+  |       ├── bin
+  |       ├── ...
+  |       └── .setup_done
+  ├── gtdb/
+  |       ├── gtdb_vers202_metadata.csv
+  │       ├── gtdb_vers202
+  |       ├── ...
+  │       └── .setup_done
+  ├── gtdb_tk/
+  |       └── .setup_done
+  ├── kegg/
+  │       ├── ko_list
+  │       ├── profiles
+  │       └── .setup_done
+  ├── microbeannotator/
+  |       ├── conversion.db
+  |       ├── ...
+  |       └── .setup_done
+  ├── pfam/
+  |       ├── Pfam-A.hmm
+  |       ├── ...
+  |       └── .setup_done
   └── quast/
-        ├── $SAMPLE1
-        ├── $SAMPLE2
-        └── ...
+        ├── metaquast.py
+        ├── ...
+        └── .setup_done
 
 
 GTDB-TK
