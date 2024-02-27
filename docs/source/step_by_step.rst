@@ -4,9 +4,7 @@ The annoSnake workflow: step by step
 
 For the installation see :ref:`getting_started`. Here, all steps of the annoSnake workflow are described in detail.
 
-.. note::
-
-  A fresh install looks like this:
+.. admonition:: A fresh install looks like this:
 
   .. code::
 
