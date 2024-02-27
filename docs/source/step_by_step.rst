@@ -153,7 +153,7 @@ Under :file:`{outdir}/assemblies/` (:samp:`{outdir}` as specified in :ref:`param
 Taxonomic annotation
 ^^^^^^^^^^^^^^^^^^^^
 
-`Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in *--metagenome* mode) is used to identify protein-coding sequences (CDS), rRNAs, and tRNAs. From the CDS, `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format), which are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in `blastp` mode. Other predicted protein-coding sequences (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in `blastx` mode. Both annotations use `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_ as the default reference.
+`Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) is used to identify protein-coding sequences (CDS), rRNAs, and tRNAs. From the CDS, `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format), which are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations use `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_ as the default reference.
 
 .. code::
 
@@ -178,7 +178,7 @@ Taxonomic annotation
 Functional annotation
 ^^^^^^^^^^^^^^^^^^^^^
 
-The user can choose between different databases for functional annotation of metagenomic contigs (note, only metagenomic contigs assigned either as bacteria or archaea in the previous `blastx` search are annotated):
+The user can choose between different databases for functional annotation of metagenomic contigs (note, only metagenomic contigs assigned either as bacteria or archaea in the previous ``blastx`` search are annotated):
 
 1. For identifying CDS with carbohydrate metabolising properties, Hidden Markov models (HMM) of CAZy domains deposited in the `dbCAN database release 11 <https://bcb.unl.edu/dbCAN2/download/>`_ are used as default.
 2. To search for hydrogenases, HMM searches against the `Pfam database version 35 <https://www.ebi.ac.uk/interpro/download/Pfam/>`_ are performed. 
