@@ -13,13 +13,13 @@ The annoSnake workflow: step by step
 Input data
 ^^^^^^^^^^
 
-The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`{inputdir}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{inputdir}/`. **There is no need to trim or filter the reads in advance.**
+The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`{INPUTDIR}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. **There is no need to trim or filter the reads in advance.**
 
 .. code::
 
   For paired-end data:
   
-  input_paired_end
+  {INPUTDIR}
   ├── $SAMPLE1_R1.fastq.gz
   ├── $SAMPLE1_R2.fastq.gz
   ├── $SAMPLE2_R1.fastq.gz
@@ -29,7 +29,7 @@ The user may provide paired-end or interleaved sequencing data (in gzipped forma
 
   For interleaved data:
   
-  input_interleaved
+  {INPUTDIR}
   ├── $SAMPLE1.fastq.gz
   ├── $SAMPLE2.fastq.gz
   └── ...fastq.gz
@@ -123,7 +123,7 @@ The :file:`./profile/config.yaml` needs to be modified to accommodate the user�
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the :file:`{inputdir}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`./rules/megahit_paired_end.smk` or :file:`./rules/megahit_interleaved.smk`.
+Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`./rules/megahit_paired_end.smk` or :file:`./rules/megahit_interleaved.smk`.
 
 For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
 
