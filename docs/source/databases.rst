@@ -2,15 +2,18 @@
 Databases
 =========
 
-Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see below).
+Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see below). The empty file *.setup_done* in each database subdirectory is important in order to run the workflow correctly. So if you want to use your own databases, make sure you create one (``touch .setup_done``) 
 
 .. code::
 
   workflow/databases/
-  ├── gtdb/
-  |       ├── $SAMPLE1
-  │       ├── $SAMPLE2
-  │       └── ...
+  ├── cazymes/
+  |       ├── dbCAN-fam-HMMs.txt.v11
+  │       ├── dbCAN-fam-HMMs.txt.v11.h3f
+  │       ├── dbCAN-fam-HMMs.txt.v11.h3i
+  │       ├── dbCAN-fam-HMMs.txt.v11.h3m
+  │       ├── dbCAN-fam-HMMs.txt.v11.h3p
+  │       └── .setup_done
   ├── kegg/
   |       ├── $SAMPLE1
   │       ├── $SAMPLE2
@@ -44,13 +47,13 @@ Databases are downloaded automatically. However, the user can choose to use thei
 GTDB-TK
 ^^^^^^^
 
-If you experience problems with slow download speeds for **GTDB-TK** (see https://github.com/Ecogenomics/GTDBTk/issues/522), you may change the download url in the *download-db.sh* bash script that GTDB-TK uses to download the latest database.
+Sometimes, the download speed of the **GTDB-TK** database decreases dramatically (see https://github.com/Ecogenomics/GTDBTk/issues/522). If this is the case for you too, you can change the download URL in the bash script *download-db.sh* as follows.
 
-.. note::
+1. The *gtdbtk* conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created first by annoSnake.
 
-  Before you can do this, a conda environment (based on *./rules/envs/gtdbtk.yaml*) has to be created by annoSnake. Have a look at your console  
+2. Then, have a look at your console...  
 
-  .. code::
+.. code::
 
     [Fri Feb 23 08:30:23 2024]
     localrule setup_gtdb_tk:
@@ -64,19 +67,19 @@ If you experience problems with slow download speeds for **GTDB-TK** (see https:
         
       Activating conda environment: .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969
 
-  to get the location of the *download-db.sh* file. In this example, it can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*.
+In this example, *download-db.sh* can be found under *annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh*.
 
-  Finally, you must change the url in the script *download-db.sh* like this (**note, you must adjust the code below to your conda environment**)
+3. You must change the URL in the script *download-db.sh* like this (**note, you must adjust the code below to the name of your conda environment**)
 
-  .. code::
+.. code::
 
-    cd annoSnake/workflow
-    sed -i 's#DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"#DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"#' .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh 
+  cd annoSnake/workflow
+  sed -i 's#DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"#DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"#' .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh 
 
 MicrobeAnnotator
 ^^^^^^^^^^^^^^^^
 
-An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect. Again, look at your console
+An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect. Again, look at your console...
 
 .. code::
 
@@ -89,7 +92,7 @@ An HTTP error may occur during MicrobeAnnotator setup. This is because the URL u
         
           microbeannotator_db_builder -d databases/microbeannotator -m diamond -t 40 --light
 
-to get the name of the conda environment, here *6be050a6334173be2297d22f5f22d0eb_*; and change the url like this (**note, you must adjust the code below to your conda environment**)
+to get the name of the conda environment, here *6be050a6334173be2297d22f5f22d0eb_*; and change the URL like this (**note, you must adjust the code below to the name of your conda environment**)
 
 .. code::
 
