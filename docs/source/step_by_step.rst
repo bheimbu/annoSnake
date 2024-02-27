@@ -144,13 +144,9 @@ Raw reads in the :file:`{inputdir}/` are assembled with `MEGAHIT v1.2.9 <https:/
 
 For example, if you don't want to run MEGAHIT with `--presets meta-sensitive`, then change...   
 
-.. code-block:: python
+.. code-block:: bash
    :emphasize-removed: 1
    :emphasize-added: 2
-
-   print("red")
-   print("green")
-   print("regular highlighting is applied")
 
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
