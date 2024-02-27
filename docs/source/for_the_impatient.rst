@@ -6,8 +6,7 @@ Getting started
 
 Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ using `miniforge <https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html>`_.
 
-.. note::
-  **For Unix-like platforms (Mac OS & Linux)**
+.. admonition:: For Unix-like platforms (Mac OS & Linux)
   
   .. code::
     
