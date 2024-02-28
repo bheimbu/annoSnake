@@ -6,7 +6,7 @@ The annoSnake workflow: step by step
   
   For installation see :ref:`getting_started`.
 
-.. contents:: Here, all steps of the annoSnake workflow are described in detail.
+.. contents::
    :local:
    :backlinks: none
 
