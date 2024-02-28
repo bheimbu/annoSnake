@@ -169,7 +169,7 @@ Quality control of assembled contigs is done by `metaQuast <https://quast.source
 Taxonomic annotation
 ^^^^^^^^^^^^^^^^^^^^
 
-annoSnake uses `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) to identify protein-coding sequences (CDS), rRNAs, and tRNAs. `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format) from the found CDS, which are then taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations make use of `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_.
+annoSnake uses `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) to identify protein-coding sequences (CDS), rRNAs, and tRNAs. `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format) from the predicted CDS, which are then taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations make use of `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_.
 
 .. code::
 
