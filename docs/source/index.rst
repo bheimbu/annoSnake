@@ -22,7 +22,6 @@ annoSnake, a Snakemake workflow that streamlines structural and functional annot
 |
 
 .. toctree::
-   introduction
    for_the_impatient
    installation
    step_by_step
