@@ -169,7 +169,7 @@ Quality control of assembled contigs is done by `metaQuast <https://quast.source
 Taxonomic annotation
 ^^^^^^^^^^^^^^^^^^^^
 
-`Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) is used to identify protein-coding sequences (CDS), rRNAs, and tRNAs. From the CDS, `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format), which are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations use `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_ as the default reference.
+annSnake uses `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) to identify protein-coding sequences (CDS), rRNAs, and tRNAs. `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format) from the found CDS, which are then taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations make use of `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_.
 
 .. code::
 
@@ -194,7 +194,7 @@ Taxonomic annotation
 Functional annotation
 ^^^^^^^^^^^^^^^^^^^^^
 
-The user can choose between different databases for functional annotation of metagenomic contigs (note, only metagenomic contigs assigned either as bacteria or archaea in the previous ``blastx`` search are annotated):
+You can choose between different protein databases for functional annotation of metagenomic contigs. However, only metagenomic contigs assigned either as **bacteria** or **archaea** in the previous ``blastx`` search are annotated):
 
 1. For identifying CDS with carbohydrate metabolising properties, Hidden Markov models (HMM) of CAZy domains deposited in the `dbCAN database release 11 <https://bcb.unl.edu/dbCAN2/download/>`_ are used as default.
 2. To search for hydrogenases, HMM searches against the `Pfam database version 35 <https://www.ebi.ac.uk/interpro/download/Pfam/>`_ are performed. 
@@ -202,7 +202,7 @@ The user can choose between different databases for functional annotation of met
 
 .. attention::
 
-  Results are filtered by cut-off E-values (minimum significant hit) that must be specified by the user (see :ref:`params_yaml`). 
+  Results are filtered by cut-off E-values (minimum significant hit) that must be specified by you (see :ref:`params_yaml`). 
 
   .. code::
 
@@ -235,13 +235,13 @@ The user can choose between different databases for functional annotation of met
 
 .. hint::
   
-  Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see :ref:`databases`).
+  Databases are downloaded automatically. You can choose to download them by yourself, however, you have to make sure that they apply to the correct format (see :ref:`databases` for more details).
 
 .. _abundance:
 Abundance calculation of gene families
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Abundance is quantified with `Salmon v1.10.2 <https://salmon.readthedocs.io/en/latest/>`_, which aligns raw sequencing reads to the bacterial and archaeal contigs and to the COGs (see :ref:`taxonomic_annotation`). `Salmon <https://salmon.readthedocs.io/en/latest/>`_ adjusts for biases such as GC-content and differences in gene length, producing Transcripts per Million (TPM) values to represent CDS abundance. For visualisation purposes, TPM values >1 are kept and subsequently log-transformed. Normalisation of TPM counts is performed via centered log-ratio (clr) transformation. The transformation is executed in the R package `propr <https://github.com/tpq/propr>`_ with a pseudo count of 0.65 to handle zero values appropriately.
+annoSnake makes use of `Salmon v1.10.2 <https://salmon.readthedocs.io/en/latest/>`_ to calculate abundances. `Salmon <https://salmon.readthedocs.io/en/latest/>`_ aligns raw reads to the bacterial and archaeal contigs and to the COGs (see :ref:`taxonomic_annotation`). `Salmon <https://salmon.readthedocs.io/en/latest/>`_ adjusts for biases such as GC-content and differences in gene length, and produces Transcripts per Million (TPM) values to represent CDS abundance. For visualisation purposes, TPM values >1 are kept and subsequently log-transformed. Normalisation of TPM counts is performed via centered log-ratio (clr) transformation; executed in the R package `propr <https://github.com/tpq/propr>`_ with a pseudo count of 0.65 to handle zero values appropriately.
 
 .. code::
 
