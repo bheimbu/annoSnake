@@ -1,5 +1,5 @@
-Welcome to
-^^^^^^^^^
+Welcome to...
+-------------
 
 .. code::
 
@@ -13,14 +13,17 @@ Welcome to
 
 |
 
-annoSnake, a Snakemake workflow that streamlines structural and functional annotation of metagenomes and MAGs, starting from raw sequencing reads to fully annotated metagenomes and MAGs. The user can choose between different types of input read formats (paired-end or interleaved), annotation databases (eg. Pfam, KEGG, CAZy), and output visualisations. 
+...a Snakemake workflow streamlining structural and functional annotation of metagenomes and MAGs. It takes raw sequencing reads, assembles and annotates contigs, and outputs colorful graphics and rich tables. You can choose between different types of input read formats (paired-end or interleaved), annotation databases (eg. Pfam, KEGG, CAZy), and more. 
 
 |
 .. admonition:: If in doubt, reach out!
 
    If you have any questions or issues to report, please go to `GitHub <https://github.com/bheimbu/annoSnake>`_ and open a :guilabel:`New issue`.
+
 |
 
+Content
+-------
 .. toctree::
    for_the_impatient
    installation
