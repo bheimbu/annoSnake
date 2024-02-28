@@ -13,7 +13,7 @@ The annoSnake workflow: step by step
 Input data
 ^^^^^^^^^^
 
-The user may provide paired-end or interleaved sequencing data (in gzipped format) in the specified :file:`{INPUTDIR}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
+annoSnake takes either paired-end or interleaved reads (in gzipped format) as input. Reads must sit in the :file:`{{INPUTDIR}}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
 
 .. attention::
   
