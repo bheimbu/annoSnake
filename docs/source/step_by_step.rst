@@ -94,46 +94,52 @@ The :file:`./profile/params.yaml` is the main configuration file sitting in the 
 ./profile/config.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :file:`./profile/config.yaml` needs to be modified to accommodate the user’s specific cluster environment settings, you can change the file as you like. 
+The :file:`./profile/config.yaml` sets up the parameters for SLURM job submission on the HPC; you can change the file as you like. 
 
-.. code::
+.. admonition:: The :ref:`config_yaml`
 
-  ### Kudos to @jdblischak! https://github.com/jdblischak/smk-simple-slurm
+  .. code::
+
+    ### Kudos to @jdblischak! https://github.com/jdblischak/smk-simple-slurm
   
-  cluster:
-    mkdir -p {OUTDIR}/logs/{rule} &&
-    sbatch
-      --partition={resources.partition}
-      --time={resources.time}
-      --cpus-per-task={threads}
-      --mem={resources.mem_mb}
-      --job-name={rule}.{jobid}
-      --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
-      --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
+    cluster:
+      mkdir -p {OUTDIR}/logs/{rule} &&
+      sbatch
+        --partition={resources.partition}
+        --time={resources.time}
+        --cpus-per-task={threads}
+        --mem={resources.mem_mb}
+        --job-name={rule}.{jobid}
+        --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
+        --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
   
-  default-resources:
-    - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
-    - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
-    - mem_mb=150000 # required memory per node in MB
+    default-resources:
+      - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
+      - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
+      - mem_mb=150000 # required memory per node in MB
   
-  max-jobs-per-second: 1
-  max-status-checks-per-second: 10
-  local-cores: 1
-  latency-wait: 60
-  jobs: 100
-  keep-going: True
-  rerun-incomplete: True
-  printshellcmds: True
-  scheduler: greedy
-  use-conda: True
-  touch: False
-  reason: True
-  show-failed-logs: True
+    max-jobs-per-second: 1
+    max-status-checks-per-second: 10
+    local-cores: 1
+    latency-wait: 60
+    jobs: 100
+    keep-going: True
+    rerun-incomplete: True
+    printshellcmds: True
+    scheduler: greedy
+    use-conda: True
+    touch: False
+    reason: True
+    show-failed-logs: True
 
 Metagenome assembly
 ^^^^^^^^^^^^^^^^^^^
 
-Raw reads in the :file:`{INPUTDIR}/` are assembled with `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_, which is optimised for metagenome assemblies. The user must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`. If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow/rules/megahit_paired_end.smk` or :file:`annoSnake/workflow/rules/megahit_interleaved.smk`.
+annoSnake uses `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_ to assemble reads into contigs. You must specify the minimum length of contigs (default: 1500 bp) in the :ref:`params_yaml`.
+
+|
+
+If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow/rules/megahit_paired_end.smk` or :file:`annoSnake/workflow/rules/megahit_interleaved.smk`.
 
 For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
 
@@ -144,7 +150,7 @@ For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``,
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
 
-Under :file:`{OUTDIR}/assemblies/` (:samp:`{OUTDIR}` as specified in :ref:`params_yaml`), you can find the output of MEGAHIT, `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as the preprocessed contigs (with modified Fasta headers to include the sample name). 
+You can find the ouput under :file:`{OUTDIR}/assemblies/` (:samp:`{OUTDIR}` as specified in :ref:`params_yaml`), including the assemblies of MEGAHIT, quality control by `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as preprocessed contigs (with modified Fasta headers to include the :file:`{SAMPLE}`). 
 
 .. code::
 
