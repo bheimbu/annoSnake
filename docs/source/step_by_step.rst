@@ -13,7 +13,7 @@ The annoSnake workflow: step by step
 Input data
 ^^^^^^^^^^
 
-annoSnake takes either paired-end or interleaved reads (in gzipped format) as input. Reads must sit in the :file:`{{INPUTDIR}}/`. There is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
+annoSnake takes either paired-end or interleaved reads (in gzipped format) as input. Reads must sit in the :file:`{INPUTDIR}/`, there is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
 
 .. attention::
   
@@ -42,47 +42,53 @@ annoSnake takes either paired-end or interleaved reads (in gzipped format) as in
 ./profile/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the :file:`./profile/` directory.
+The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. You can specify the name of the :file:`{INPUTDIR}`, :file:`{OUTPUTDIR}`, type of reads, and more.
 
-.. code::
+.. tip::
 
-  # Workflow configuration
+  See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the :file:`./profile/` directory.
 
-  # specify input data
-  inputdir: "input_paired_end"
+.. admonition:: The :ref:`params_yaml`
 
-  # input files are 'paired-end' or 'interleaved'?
-  library_type: "paired-end"
+  .. code::
 
-  # specify output directory
-  outdir: "results_paired_end" 
+    # Workflow configuration
 
-  # specify minimum length of contigs to output in MEGAHIT
-  min_length: 1500
+    # specify input data
+    inputdir: "input_paired_end"
 
-  # select whether metagenome-assembled genomes (MAGs) shall be assembled or not ('True' or 'False')
-  mag_assembly: False
+    # input files are 'paired-end' or 'interleaved'?
+    library_type: "paired-end"
 
-  # if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
-  completeness: 30
-  contamination: 10
+    # specify output directory
+    outdir: "results_paired_end" 
 
-  # select databases to use ('True' or 'False')
-  PFAM: False
-  COG: False
-  KEGG: True
-  CAZYMES: False
+    # specify minimum length of contigs to output in MEGAHIT
+    min_length: 1500
 
-  # specify cut-off E-values
-  blastp_evalue: "1e-24"
-  blastx_evalue: "1e-24"
-  cog_evalue: "1e-30"
-  cazy_evalue: "1e-30"
-  pfam_evalue: "1e-30"
+    # select whether metagenome-assembled genomes (MAGs) shall be assembled or not ('True' or 'False')
+    mag_assembly: False
 
-  # visualize results ('True' or 'False')
-  COG_VISUALIZATION: False
-  KEGG_VISUALIZATION: True
+    # if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
+    completeness: 30
+    contamination: 10
+
+    # select databases to use ('True' or 'False')
+    PFAM: False
+    COG: False
+    KEGG: True
+    CAZYMES: False
+
+    # specify cut-off E-values
+    blastp_evalue: "1e-24"
+    blastx_evalue: "1e-24"
+    cog_evalue: "1e-30"
+    cazy_evalue: "1e-30"
+    pfam_evalue: "1e-30"
+
+    # visualize results ('True' or 'False')
+    COG_VISUALIZATION: False
+    KEGG_VISUALIZATION: True
 
 .. _config_yaml:
 ./profile/config.yaml file
