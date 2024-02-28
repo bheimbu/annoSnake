@@ -150,7 +150,7 @@ For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``,
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
 
-You can find the ouput under :file:`{OUTDIR}/assemblies/` (:samp:`{OUTDIR}` as specified in :ref:`params_yaml`), including the assemblies of MEGAHIT, quality control by `metaQuast <https://quast.sourceforge.net/metaquast>`_ as well as preprocessed contigs (with modified Fasta headers to include the :file:`{SAMPLE}`). 
+Quality control of assembled contigs is done by `metaQuast <https://quast.sourceforge.net/metaquast>`_ and contigs with modified Fasta headers (including the :file:`{SAMPLE}`) can be found under :file:`{OUTDIR}/assemblies/preprocessed_contigs. 
 
 .. code::
 
