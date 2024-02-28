@@ -241,7 +241,7 @@ You can choose between different protein databases for functional annotation of 
 Abundance calculation of gene families
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-annoSnake makes use of `Salmon v1.10.2 <https://salmon.readthedocs.io/en/latest/>`_ to calculate abundances. `Salmon <https://salmon.readthedocs.io/en/latest/>`_ aligns raw reads to the bacterial and archaeal contigs and to the COGs (see :ref:`taxonomic_annotation`). `Salmon <https://salmon.readthedocs.io/en/latest/>`_ adjusts for biases such as GC-content and differences in gene length, and produces Transcripts per Million (TPM) values to represent CDS abundance. For visualisation purposes, TPM values >1 are kept and subsequently log-transformed. Normalisation of TPM counts is performed via centered log-ratio (clr) transformation; executed in the R package `propr <https://github.com/tpq/propr>`_ with a pseudo count of 0.65 to handle zero values appropriately.
+annoSnake makes use of `Salmon v1.10.2 <https://salmon.readthedocs.io/en/latest/>`_ to calculate abundances. `Salmon <https://salmon.readthedocs.io/en/latest/>`_ aligns raw reads to the contigs that were assigned to bacteria or archaea in the step before as well as to the COGs (see :ref:`taxonomic_annotation`). `Salmon <https://salmon.readthedocs.io/en/latest/>`_ adjusts for biases such as GC-content and differences in gene length, and produces Transcripts per Million (TPM) values to represent CDS abundance. For visualisation purposes, TPM values >1 are kept and subsequently log-transformed. Normalisation of TPM counts is performed via centered log-ratio (clr) transformation; executed in the R package `propr <https://github.com/tpq/propr>`_ with a pseudo count of 0.65 to handle zero values appropriately.
 
 .. code::
 
