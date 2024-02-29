@@ -31,7 +31,7 @@ rule visualization_methanogenesis:
         OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
         KO_list="rules/scripts/methanogenesis_KO_list.txt",
-        kofam_results=lambda wildcards, input: Path(input['kofam']).parent
+        kofam_results=lambda wildcards, input: Path(input[0]).parent
     output:
         pdf=OUTDIR/ "visualization/methanogenesis.pdf"
     conda:
