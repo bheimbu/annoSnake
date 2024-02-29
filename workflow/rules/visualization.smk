@@ -33,12 +33,16 @@ rule visualization_methanogenesis1:
         KO_list="rules/scripts/methanogenesis_KO_list.txt",
         kofam_results=lambda wildcards, output: Path(output[0]).parent
     output:
-        OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt"
+        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt",
+        bins=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_bins.txt"
     conda:
         "envs/visualization.yaml"
     shell:
         """
-        grep -E -f {params.KO_list} {params.kofam_results} | awk -F'\t' '{{sub(/\.faa.*/, ".faa", $1); print $1, $3}}' > {output}
+        grep -E -f {params.KO_list} {params.kofam_results} > {output.bins}
+        sed -i 's|kofam_results/||g' {output.bins}
+        awk -F'\t' '{{sub(/\.faa.*/, ".faa", $1); print $1, $3}}' {output.bins} > {output.hits}
+        sed -i 's|.faa||g' {output.hits}
         """
 
 rule visualization_methanogenesis2:
@@ -46,10 +50,9 @@ rule visualization_methanogenesis2:
         hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt",
         summaries=OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
-        KO_list="rules/scripts/methanogenesis_KO_list.txt",
-        kofam_results=lambda wildcards, input: Path(input[0]).parent
+        pathway="rules/scripts/methanogenesis_keggid_genes_pathway.csv"
     output:
-        pdf=OUTDIR/ "visualization/methanogenesis.pdf"
+        pdf=OUTDIR/ "visualization/MAG_methanogenesis.pdf"
     conda:
         "envs/visualization.yaml"
     script:
