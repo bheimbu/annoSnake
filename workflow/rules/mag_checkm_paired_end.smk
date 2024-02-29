@@ -1,4 +1,6 @@
-rule MAG_checkm_paired:
+localrules: MAG_checkm_paired2
+
+rule MAG_checkm_paired1:
       input:
         OUTDIR/ "MAGs/above_threshold_bins/.rule_completed"
       output:
@@ -16,4 +18,16 @@ rule MAG_checkm_paired:
         else
             touch "{OUTDIR}/MAGs/checkm/{wildcards.sample}/.rule_completed"
         fi
+        """
+
+rule MAG_checkm_paired2:
+      input:
+        expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
+      output:
+        directory(OUTDIR/ "MAGs/checkm/checkm_summaries")
+      params:
+        summary=lambda wildcards, input: Path(input[0]).parent
+	  shell:
+        """
+        cp -a {params.summary} {output}
         """
