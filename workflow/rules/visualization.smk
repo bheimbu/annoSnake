@@ -25,3 +25,17 @@ rule visualization_kegg:
         "envs/visualization.yaml"
     script:
         "scripts/kegg_visualize.R"
+
+rule visualization_methanogenesis:
+    input:
+        kofam=OUTDIR/ "MAGs/microbeannotator/.rule_completed"
+
+    params:
+        KO_list="rules/scripts/methanogenesis_KO_list.txt",
+        kofam_results=lambda wildcards, input: Path(input['kofam']).parent
+    output:
+
+    conda:
+        "envs/visualization.yaml"
+    script:
+        "scripts/methanogensis_visualize.R"
