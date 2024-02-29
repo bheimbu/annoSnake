@@ -1,4 +1,4 @@
-localrules: visualization_cogs, visualization_kegg
+localrules: visualization_cogs, visualization_kegg, visualization_methanogenesis1, visualization_methanogenesis2
 
 rule visualization_cogs:
     input:
@@ -26,7 +26,22 @@ rule visualization_kegg:
     script:
         "scripts/kegg_visualize.R"
 
-rule visualization_methanogenesis:
+rule visualization_methanogenesis1:
+    input:
+        OUTDIR/ "MAGs/microbeannotator/.rule_completed"
+    params:
+        KO_list="rules/scripts/methanogenesis_KO_list.txt",
+        kofam_results=lambda wildcards, output: Path(output[0]).parent
+    output:
+        OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt"
+    conda:
+        "envs/visualization.yaml"
+    shell:
+        """
+        grep -E -f {params.KO_list} {params.kofam_results} | awk -F'\t' '{sub(/\.faa.*/, ".faa", $1); print $1, $3}' > {output}
+        ""
+
+rule visualization_methanogenesis2:
     input:
         OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
