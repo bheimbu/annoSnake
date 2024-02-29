@@ -28,8 +28,7 @@ rule visualization_kegg:
 
 rule visualization_methanogenesis:
     input:
-        kofam=OUTDIR/ "MAGs/microbeannotator/.rule_completed"
-
+        OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
         KO_list="rules/scripts/methanogenesis_KO_list.txt",
         kofam_results=lambda wildcards, input: Path(input['kofam']).parent
