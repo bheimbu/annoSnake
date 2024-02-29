@@ -38,12 +38,13 @@ rule visualization_methanogenesis1:
         "envs/visualization.yaml"
     shell:
         """
-        grep -E -f {params.KO_list} {params.kofam_results} | awk -F'\t' '{sub(/\.faa.*/, ".faa", $1); print $1, $3}' > {output}
+        grep -E -f {params.KO_list} {params.kofam_results} | awk -F'\t' '{{sub(/\.faa.*/, ".faa", $1); print $1, $3}}' > {output}
         """
 
 rule visualization_methanogenesis2:
     input:
-        OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt"
+        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt",
+        summaries=OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
         KO_list="rules/scripts/methanogenesis_KO_list.txt",
         kofam_results=lambda wildcards, input: Path(input[0]).parent
