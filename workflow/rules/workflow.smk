@@ -38,3 +38,4 @@ if config["COG_VISUALIZATION"] == True and config["COG"] == True:
 if config["KEGG_VISUALIZATION"] == True and config["KEGG"] == True:
     output.append(OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html")
     output.append(OUTDIR/ "combine/contigs_combine.gtf")
+	output.append(OUTDIR/ "visualization/methanogenesis.pdf")
