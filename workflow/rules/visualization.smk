@@ -1,4 +1,4 @@
-localrules: visualization_cogs, visualization_kegg, visualization_methanogenesis1, visualization_methanogenesis2
+localrules: visualization_cogs, visualization_kegg, visualization_mags1, visualization_mags2
 
 rule visualization_cogs:
     input:
@@ -26,15 +26,15 @@ rule visualization_kegg:
     script:
         "scripts/kegg_visualize.R"
 
-rule visualization_methanogenesis1:
+rule visualization_mags1:
     input:
         OUTDIR/ "MAGs/microbeannotator/.rule_completed"
     params:
-        KO_list="rules/scripts/methanogenesis_KO_list.txt",
+        KO_list="rules/scripts/KO_list.txt",
         kofam_results=lambda wildcards, output: Path(output[0]).parent
     output:
-        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt",
-        bins=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_bins.txt"
+        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.hits",
+        bins=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.bins"
     conda:
         "envs/visualization.yaml"
     shell:
@@ -45,15 +45,15 @@ rule visualization_methanogenesis1:
         sed -i 's|.faa||g' {output.hits}
         """
 
-rule visualization_methanogenesis2:
+rule visualization_mags2:
     input:
-        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/methanogenesis_hits.txt",
-        summaries=OUTDIR/ "MAGs/checkm/checkm_summaries"
+        hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.hits",
+        checkm=OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
-        pathway="rules/scripts/methanogenesis_keggid_genes_pathway.csv"
+        pathway="rules/scripts/keggid_genes_pathway.csv"
     output:
-        pdf=OUTDIR/ "visualization/MAG_methanogenesis.pdf"
+        pdf=OUTDIR/ "visualization/MAG_metabolic_pathways.pdf"
     conda:
         "envs/visualization.yaml"
     script:
-        "scripts/methanogensis_visualize.R"
+        "scripts/mags_visualize.R"
