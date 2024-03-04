@@ -17,3 +17,15 @@ rule MAG_checkm_interleaved:
             touch "{OUTDIR}/MAGs/checkm/{wildcards.sample}/.rule_completed"
         fi
         """
+
+rule MAG_checkm_paired2:
+      input:
+        expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
+      output:
+        directory(OUTDIR/ "MAGs/checkm/checkm_summaries")
+      params:
+        summary=lambda wildcards, input: Path(input[0]).parent
+	  shell:
+        """
+        cp -a {params.summary} {output}
+        """
