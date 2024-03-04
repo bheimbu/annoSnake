@@ -87,7 +87,7 @@ aggregated_data <- aggregated_data %>%
 clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
 
 # Perform CLR transformation
-clr <- as_tibble(decostand(clr_data_subset, method = "clr", pseudocount = 1))
+clr <- as_tibble(decostand(clr_data_subset, method = "clr", pseudocount = 0.65))
 
 # Add the "sample" column back to the transformed data
 clr_result <- cbind(sample = aggregated_data$sample, clr)
