@@ -23,6 +23,7 @@ if config["mag_assembly"] == True:
     output.append(OUTDIR/ "MAGs/microbeannotator/.rule_completed")
     output.append(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed")
     output.append("databases/checkm/.setup_done")
+    output.append(OUTDIR/ "visualization/MAG_metabolic_pathways.pdf")
 if config["KEGG"] == True:
     output.append(OUTDIR/ "combine/kegg_combine.txt")	
 if config["CAZYMES"] == True:
@@ -38,4 +39,3 @@ if config["COG_VISUALIZATION"] == True and config["COG"] == True:
 if config["KEGG_VISUALIZATION"] == True and config["KEGG"] == True:
     output.append(OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html")
     output.append(OUTDIR/ "combine/contigs_combine.gtf")
-    output.append(OUTDIR/ "visualization/MAG_metabolic_pathways.pdf")
