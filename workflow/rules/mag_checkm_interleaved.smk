@@ -1,4 +1,6 @@
-rule MAG_checkm_interleaved:
+localrules: MAG_checkm_interleaved2
+
+rule MAG_checkm_interleaved1:
       input:
         OUTDIR/ "MAGs/above_threshold_bins/.rule_completed"
       output:
@@ -18,7 +20,7 @@ rule MAG_checkm_interleaved:
         fi
         """
 
-rule MAG_checkm_paired2:
+rule MAG_checkm_interleaved2:
       input:
         expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
       output:
