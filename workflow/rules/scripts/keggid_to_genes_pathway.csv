@@ -1,0 +1,107 @@
+category,pathway,keggid,gene
+Methanogenesis,Coenzyme_M_reduction_to_methane,K00399,mcrA
+Methanogenesis,Coenzyme_M_reduction_to_methane,K00401,mcrB
+Methanogenesis,Coenzyme_M_reduction_to_methane,K00402,mcrG
+Methanogenesis,Coenzyme_M_reduction_to_methane,K03421,mcrC
+Methanogenesis,Coenzyme_M_reduction_to_methane,K03422,mcrD
+Methanogenesis,Methanogenesis_via_acetate,K00193,cdhC
+Methanogenesis,Methanogenesis_via_acetate,K00194,cdhD
+Methanogenesis,Methanogenesis_via_acetate,K00197,cdhE
+Methanogenesis,Methanogenesis_via_acetate,K00925,ack
+Methanogenesis,Methanogenesis_via_acetate,K01895,acs
+Methanogenesis,Methanogenesis_via_acetate,K13788,pta
+Methanogenesis,Methanogenesis_via_CO2,K00200,fmdA
+Methanogenesis,Methanogenesis_via_CO2,K00201,fmdB
+Methanogenesis,Methanogenesis_via_CO2,K00202,fmdC
+Methanogenesis,Methanogenesis_via_CO2,K00203,fmdD
+Methanogenesis,Methanogenesis_via_CO2,K11261,fmdE
+Methanogenesis,Methanogenesis_via_CO2,K00205,fmdF
+Methanogenesis,Methanogenesis_via_CO2,K11260,fmdG
+Methanogenesis,Methanogenesis_via_CO2,K00204,fmdH
+Methanogenesis,Methanogenesis_via_CO2,K00672,ftr
+Methanogenesis,Methanogenesis_via_CO2,K01499,mch
+Methanogenesis,Methanogenesis_via_CO2,K00319,mtd
+Methanogenesis,Methanogenesis_via_CO2,K13942,hmd
+Methanogenesis,Methanogenesis_via_CO2,K00320,mer
+Methanogenesis,Methanogenesis_via_CO2,K00577,mtrA
+Methanogenesis,Methanogenesis_via_CO2,K00578,mtrB
+Methanogenesis,Methanogenesis_via_CO2,K00579,mtrC
+Methanogenesis,Methanogenesis_via_CO2,K00580,mtrD
+Methanogenesis,Methanogenesis_via_CO2,K00581,mtrE
+Methanogenesis,Methanogenesis_via_CO2,K00582,mtrF
+Methanogenesis,Methanogenesis_via_CO2,K00583,mtrG
+Methanogenesis,Methanogenesis_via_CO2,K00584,mtrH
+Methanogenesis,Methanogenesis_via_CO2,K00192,cdhA
+Methanogenesis,Methanogenesis_via_CO2,K00195,cdhB
+Methanogenesis,Methanogenesis_via_CO2,K13812,fae-hps
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K14082,mtbA
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K16176,mtmB
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K16177,mtmC
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K16178,mtbB
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K16179,mtbC
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K14083,mttB
+Methanogenesis,Methanogenesis_via_Monomethylamine/Dimethylamine/Trimethylamine,K14084,mttC
+Methanogenesis,Methanogenesis_via_Methanol,K14080,mtaA
+Methanogenesis,Methanogenesis_via_Methanol,K04480,mtaB
+Methanogenesis,Methanogenesis_via_Methanol,K14081,mtaC
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14086,echA
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14087,echB
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14088,echC
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14089,echD
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14090,echE
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14091,echF
+Methanogenesis,Hydrogenases associated with Methanogenesis,K00440,frhA
+Methanogenesis,Hydrogenases associated with Methanogenesis,K00441,frhB
+Methanogenesis,Hydrogenases associated with Methanogenesis,K00443,frhC
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14126,mvhA
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14127,mvhD
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14128,mvhG
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14068,vhtA
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14069,vhtC
+Methanogenesis,Hydrogenases associated with Methanogenesis,K14070,vhtG
+Methanogenesis,hdr flavoprotein analogs,K03388,hdrA2
+Methanogenesis,hdr flavoprotein analogs,K03389,hdrB2
+Methanogenesis,hdr flavoprotein analogs,K03390,hdrC2
+Methanogenesis,hdr flavoprotein analogs,K22480,hdrA1
+Methanogenesis,hdr flavoprotein analogs,K22481,hdrB1
+Methanogenesis,hdr flavoprotein analogs,K22482,hdrC1
+Methanogenesis,fdhAB,K00125,fhdB
+Methanogenesis,fdhAB,K22516,fdhA
+Methanogenesis,rnf  complex,K03617,rnfA
+Methanogenesis,rnf  complex,K03614,rnfD
+Methanogenesis,rnf  complex,K03615,rnfC
+Methanogenesis,rnf  complex,K03616,rnfB
+Methanogenesis,rnf  complex,K03613,rnfE
+Methanogenesis,rnf  complex,K03612,rnfG
+Reductive acetogenesis,Formate-tetrahydrofolate ligase FTHFS,K01938,fhs
+Reductive acetogenesis,Methylenetetrahydrofolate dehydrogenase (NADP+) / methenyltetrahydrofolate cyclohydrolase FolD,K01491,folD
+Reductive acetogenesis,"510-Methylenetetrahydrofolate reductase (ferredoxin)",K00297,metF
+Reductive acetogenesis,Formate dehydrogenase H,K00122,fdhF1
+Reductive acetogenesis,Ni-dependent carbon monoxide dehydrogenase (CODH) catalytic subunit,K00198,acsA
+Reductive acetogenesis,Acetyl-CoA synthase (ACS) catalytic subunit,K14138,acsB
+Reductive acetogenesis,Acetyl-CoA decarbonylase/synthase delta subunit (corrinoid iron-sulfur protein),K00194,acsD
+Reductive acetogenesis,CO-methylating acetyl-CoA synthase corrinoid iron-sulfur protein large subunit precursor,K00197,acsC
+Reductive acetogenesis,5-Methyltetrahydrofolate:corrinoid/iron-sulfur protein Co-methyltransferase,K15023,acsE
+Reductive acetogenesis,Phosphate acetyltransferase,K00625,pta
+Reductive acetogenesis,Acetate kinase,K00925,ack
+Reductive acetogenesis,NADP-reducing hydrogenase subunit HndA,K18330,hndA
+Reductive acetogenesis,NADP-reducing hydrogenase subunit HndB,K17992,hndB
+Reductive acetogenesis,NADP-reducing hydrogenase subunit HndC,K18331,hndC
+Reductive acetogenesis,NADP-reducing hydrogenase subunit HndD,K18332,hndD
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit A,K03617,rnfA
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit D,K03614,rnfD
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit C,K03615,rnfC
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit B,K03616,rnfB
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit E,K03613,rnfE
+Reductive acetogenesis,Na+-translocating ferredoxin:NAD+ oxidoreductase subunit G,K03612,rnfG
+Reductive acetogenesis,F-type H+/Na+-transporting ATPase subunit alpha,K02111,atpA
+Reductive acetogenesis,F-type H+/Na+-transporting ATPase subunit beta,K02112,atpB
+Sulfate reduction,adenylylsulfate reductase subunit A,K00394,AprA
+Sulfate reduction,adenylylsulfate reductase subunit B,K00395,AprB
+Sulfate reduction,sulfate adenylyltransferase,K00958,SAT
+Sulfate reduction,dissimilatory sulfite reductase alpha subunit,K11180,DsrA
+Sulfate reduction,dissimilatory sulfite reductase beta subunit,K11181,DsrB
+Sulfate reduction,tRNA 2-thiouridine synthesizing protein E,K11179,DsrC
+Sulfate reduction,tRNA 2-thiouridine synthesizing protein D ,K07235,DsrE
+Sulfate reduction,tRNA 2-thiouridine synthesizing protein C,K07236,DsrF
+Sulfate reduction,tRNA 2-thiouridine synthesizing protein B,K07237,DsrH
