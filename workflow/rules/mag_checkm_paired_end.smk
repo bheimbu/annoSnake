@@ -29,5 +29,5 @@ rule MAG_checkm_paired2:
         summary=lambda wildcards, output: Path(output[0]).parent
       shell:
         """
-        cp -a {params.summary}/*/*summary {output}
+        mkdir -p {output} && cp -a {params.summary}/*/*summary {output}
         """
