@@ -13,7 +13,7 @@ outdir: "results_paired_end"
 min_length: 1500
 
 # select whether metagenome-assembled genomes (MAGs) shall be assembled or not ('True' or 'False')
-mag_assembly: False
+mag_assembly: True
 
 #if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
 completeness: 30
@@ -22,7 +22,7 @@ contamination: 10
 # select databases to use ('True' or 'False')
 PFAM: False
 COG: False
-KEGG: True
+KEGG: False
 CAZYMES: False
 
 # specify cut-off E-values
