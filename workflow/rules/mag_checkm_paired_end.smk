@@ -29,9 +29,9 @@ rule MAG_checkm_paired2:
         summary=lambda wildcards, input: Path(input[0]).parent
       shell:
         """
-        if [ -e {params.summary}/*summary ]; then
-           cp -a {params.summary}/*summary OUTDIR/ "MAGs/checkm/checkm_summaries"
+        if [ -f {params.summary}/*summary ]; then
+           cp -a {params.summary}/*summary {output}
         else
-           touch {output[0]}
+           exit 0
         fi
         """
