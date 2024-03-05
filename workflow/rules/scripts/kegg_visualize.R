@@ -103,19 +103,29 @@ heatmap_data <- clr_result_long %>%
   left_join(keggID_to_gene_name, by = c("gene_name" = "gene_name"), suffix = c("_clr_result", "_keggID"))
 
 heatmap_data$gene_name <- factor(heatmap_data$gene_name, levels = unique(heatmap_data$gene_name[order(heatmap_data$pathway)]))
-
-# Order the rows by the pathway column
+                
 heatmap_data <- heatmap_data %>%
   arrange(pathway)
 
-p <- plot_ly(data =heatmap_data, 
-             x = ~sample, 
-             y = ~gene_name, 
-             z = ~clr_value, 
-             type = "heatmap",
-             colorscale = "viridis",
-             colorbar = list(title = "log(TPM+1)"),
-             hoverinfo = "text") %>% layout(yaxis = list(showticklabels = T, autorange="reversed", title = 'prokaryotic metabolic pathways'), 
-                                            xaxis = list(title = ''))
-# Save as HTML
+heatmap <- ggplot(heatmap_data, aes(x = sample, y = gene_name, fill = clr_value)) +
+  geom_tile(color = "white", size = 0.1) +
+  scale_fill_viridis_c(option="D", direction = 1, name = "log(TPM+1)") +
+  theme_minimal() +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
+        axis.text.y = element_text(face = "bold"),
+        legend.text = element_text(face = "bold"),
+        legend.title = element_text(face = "bold"))
+
+                
+#save as pdf####
+pdf(NULL)
+pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
+heatmap
+dev.off()
+                
+#save as html####
+p <- ggplotly(heatmap) %>%
+layout(xaxis = list(ticktext = paste0("<b>", levels(factor(heatmap_data$sample)), "</b>")))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
