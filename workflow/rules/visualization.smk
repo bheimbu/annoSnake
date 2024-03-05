@@ -50,7 +50,7 @@ rule visualization_mags2:
         hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.hits",
         checkm=OUTDIR/ "MAGs/checkm/checkm_summaries"
     params:
-        pathway="rules/scripts/keggid_genes_pathway.csv"
+        pathway="rules/scripts/keggid_to_genes_pathway.csv"
     output:
         pdf=OUTDIR/ "visualization/MAG_metabolic_pathways.pdf"
     conda:
