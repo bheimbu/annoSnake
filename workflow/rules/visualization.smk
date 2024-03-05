@@ -40,7 +40,7 @@ rule visualization_mags1:
     shell:
         """
         grep -E -f {params.KO_list} {params.kofam_results}/*filt > {output.bins}
-        sed -i 's|kofam_results/||g' {output.bins}
+        sed -i 's|{params.kofam_results}||g' {output.bins}
         awk -F'\t' '{{sub(/\.faa.*/, ".faa", $1); print $1, $3}}' {output.bins} > {output.hits}
         sed -i 's|.faa||g' {output.hits}
         """
