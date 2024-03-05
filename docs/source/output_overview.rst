@@ -14,4 +14,4 @@ Figures
 
 .. raw:: html
 
-   :file: prokaryotic_metabolic_pathways.html
+   :file: /_static/prokaryotic_metabolic_pathways.html
