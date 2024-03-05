@@ -71,6 +71,7 @@ heatmap <- ggplot(mags, aes(x = gene, y = bin, fill = binary)) +
         strip.text = element_text(face = "bold"))
 
 #saving to pdf####
+pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
 heatmap %>% insert_left(checkm_contamination_plot, width = 0.05) %>% insert_left(checkm_completeness_plot, width = 0.05)
 dev.off()
