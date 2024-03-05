@@ -12,8 +12,4 @@ Tables
 Figures
 ^^^^^^
 
-.. thumbnail:: MAG_metabolic_pathways.pdf
-
-.. raw:: html
-
-  <iframe src="prokaryotic_metabolic_pathways.html" width="100%" height="600px"></iframe>
+.. thumbnail:: _static/MAG_metabolic_pathways.pdf
