@@ -95,32 +95,28 @@ clr_result_long <- gather(clr_result_df, bacteria, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$bacteria <- as.factor(clr_result_long$bacteria)
 
-clr_long_df_separated <- as_tibble(clr_result_long) %>%
-  extract(bacteria,
-          into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
-          regex = "^d__([^_]+)(?:_p__([^_]+))?(?:_c__([^_]+))?(?:_o__([^_]+))?(?:_f__([^_]+))?(?:_g__([^_]+))?(?:_s__(.*))?",
-          remove = FALSE) %>%
-  mutate(across(domain:species, ~if_else(is.na(.), "Unknown", .)))  # Replace NA with "Unknown"
+heatmap <- ggplot(data = clr_result_long, aes(x = sample, y = bacteria, fill = clr_value)) +
+  geom_tile() +
+  geom_tile(fill = NA, color = "black", linewidth = 0.1) +
+  scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
+  theme_minimal() +
+  scale_y_discrete(limits=rev) +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
+        axis.text.y = element_blank(),
+        legend.text = element_text(face = "bold"),
+        legend.title = element_text(face = "bold"))
 
-# Create the plotly heatmap
-p <- plot_ly(data = clr_long_df_separated, 
-             x = ~sample, 
-             y = ~bacteria, 
-             z = ~clr_value, 
-             type = "heatmap",
-             colorscale = "viridis",
-             colorbar = list(title = "log(TPM+1)"),
-             text = ~paste("Domain:", domain,
-                           "<br>Phylum:", phylum,
-                           "<br>Class:", class,
-                           "<br>Order:", order,
-                           "<br>Family:", family,
-                           "<br>Genus:", genus,
-                           "<br>Species:", species),
-             hoverinfo = "text") %>% layout(yaxis = list(showticklabels = FALSE, autorange="reversed", title = ''), 
-                  xaxis = list(title = ''))
-
-# Save as HTML
+#save as pdf####
+pdf(NULL)
+pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
+heatmap
+dev.off()
+                
+#save as html####
+p <- ggplotly(heatmap) %>%
+layout(xaxis = list(ticktext = paste0("<b>", levels(factor(clr_result_long$sample)), "</b>")))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
 
 
