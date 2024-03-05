@@ -8,7 +8,7 @@ library(aplot)
 library(ape)
 library(vegan)
 
-#hits##############################################################
+#hits####
 meth_hits <- read.table(snakemake@input[['hits']])
 colnames(meth_hits) <- c("bin", "KO")
 meth_hits$binary <- rep(1, nrow(meth_hits))
@@ -25,6 +25,7 @@ mags <- as_tibble(mags)
 mags <- mags %>%
   mutate(binary = ifelse(binary == 1, "present", "absent"))
 
+#checkm_summaries####
 checkm_summaries <- list.files(snakemake@input[['checkm']], pattern = "\\.summary$", full.names = TRUE)
 checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   df <- read.table(file, header=TRUE, fill=TRUE, comment.char = "-")
@@ -33,6 +34,7 @@ checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   return(subset_df)
 }))
 
+#plotting####
 checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "Completeness", y = bin, fill = Completeness)) +
   geom_tile(color = "black", size = 0.1) +
   scale_fill_viridis_c(option="D", direction = 1, name = "Completeness in %") +
@@ -68,6 +70,7 @@ heatmap <- ggplot(mags, aes(x = gene, y = bin, fill = binary)) +
         legend.title = element_blank(),
         strip.text = element_text(face = "bold"))
 
+#saving to pdf####
+pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
 heatmap %>% insert_left(checkm_contamination_plot, width = 0.05) %>% insert_left(checkm_completeness_plot, width = 0.05)
-
-ggsave(snakemake@output[['pdf']], width = 30, height = 15, units = "cm")
+dev.off()
