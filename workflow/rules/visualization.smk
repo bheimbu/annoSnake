@@ -48,7 +48,7 @@ rule visualization_mags1:
 rule visualization_mags2:
     input:
         hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.hits",
-        checkm=OUTDIR/ "MAGs/checkm/checkm_summaries"
+        checkm=OUTDIR/ "MAGs/checkm/summaries"
     params:
         pathway="rules/scripts/keggid_to_genes_pathway.csv"
     output:
