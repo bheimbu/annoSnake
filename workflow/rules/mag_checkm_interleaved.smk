@@ -24,10 +24,10 @@ rule MAG_checkm_interleaved2:
       input:
         expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
       output:
-        directory(OUTDIR/ "MAGs/checkm/checkm_summaries")
+        directory(OUTDIR/ "MAGs/checkm/summaries")
       params:
-        summary=lambda wildcards, input: Path(input[0]).parent
-	  shell:
+        summary=lambda wildcards, output: Path(output[0]).parent
+      shell:
         """
-        cp -a {params.summary} {output}
+        mkdir -p {output} && cp -a {params.summary}/*/*summary {output}
         """
