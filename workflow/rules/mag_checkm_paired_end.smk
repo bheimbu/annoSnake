@@ -24,14 +24,10 @@ rule MAG_checkm_paired2:
       input:
         expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
       output:
-        directory(OUTDIR/ "MAGs/checkm/checkm_summaries")
+        directory(OUTDIR/ "MAGs/checkm/summaries")
       params:
-        summary=lambda wildcards, input: Path(input[0]).parent
+        summary=lambda wildcards, output: Path(output[0]).parent
       shell:
         """
-        if [ -f {params.summary}/*summary ]; then
-           cp -a {params.summary}/*summary {output}
-        else
-           exit 0
-        fi
+        cp -a {params.summary}/*/*summary {output}
         """
