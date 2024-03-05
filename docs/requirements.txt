@@ -1,4 +1,4 @@
-sphinx >=3.12
+sphinx >=3
 sphinxcontrib-napoleon
 sphinx-argparse
 docutils
@@ -14,4 +14,3 @@ sphinxcontrib-youtube
 sphinx-tabs
 sphinx-copybutton
 sphinxcontrib-images
-sphinxcontrib-pdfembed
