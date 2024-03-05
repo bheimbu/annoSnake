@@ -6,7 +6,8 @@ configfile: "profile/params.yaml"
 
 with open('rules/scripts/.cogs.yaml', 'r') as file:
     cogs_data = yaml.safe_load(file)
-	
+
+EMAIL=config["email"]
 	
 include: "rules/workflow.smk"
 
@@ -52,7 +53,7 @@ onstart:
 
 onsuccess:
     print("Workflow finished, no error")
-
+    shell("mail -s 'Workflow finished, no error' {EMAIL} < {log}")
 
 onerror:
     print("An error occurred")
