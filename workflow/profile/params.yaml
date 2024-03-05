@@ -1,5 +1,7 @@
 # Workflow configuration
 
+email: "bheimbu@gwdg.de"
+
 # specify input data
 inputdir: "input_paired_end"
 
