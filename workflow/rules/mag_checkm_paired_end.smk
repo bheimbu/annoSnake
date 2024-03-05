@@ -29,6 +29,9 @@ rule MAG_checkm_paired2:
         summary=lambda wildcards, input: Path(input[0]).parent
       shell:
         """
-        set +o pipefail;
-        cp -a {params.summary}/*summary {output}
+        if [ -e {params.summary}/*summary ]; then
+           cp -a {params.summary}/*summary {output}
+        else
+           exit 0
+        fi
         """
