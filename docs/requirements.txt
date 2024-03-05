@@ -1,4 +1,4 @@
-sphinx >=3.11
+sphinx >=3.12
 sphinxcontrib-napoleon
 sphinx-argparse
 docutils
