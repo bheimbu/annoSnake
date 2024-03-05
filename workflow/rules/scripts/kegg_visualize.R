@@ -117,8 +117,7 @@ heatmap <- ggplot(heatmap_data, aes(x = sample, y = gene_name, fill = clr_value)
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
         legend.title = element_text(face = "bold"))
-
-                
+             
 #save as pdf####
 pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
