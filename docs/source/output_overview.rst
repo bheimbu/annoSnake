@@ -12,7 +12,7 @@ Tables
 Figures
 ^^^^^^
 
-.. figure:: MAG_metabolic_pathways.*
+.. figure:: /_static/MAG_metabolic_pathways.*
 
 .. raw:: html
    :file: /_static/prokaryotic_metabolic_pathways.html
