@@ -39,7 +39,7 @@ rule visualization_mags1:
         "envs/visualization.yaml"
     shell:
         """
-        grep -E -f {params.KO_list} {params.kofam_results} > {output.bins}
+        grep -E -f {params.KO_list} {params.kofam_results}/*filt > {output.bins}
         sed -i 's|kofam_results/||g' {output.bins}
         awk -F'\t' '{{sub(/\.faa.*/, ".faa", $1); print $1, $3}}' {output.bins} > {output.hits}
         sed -i 's|.faa||g' {output.hits}
