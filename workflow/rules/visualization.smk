@@ -21,7 +21,8 @@ rule visualization_kegg:
     params:
         keggID="rules/scripts/keggID_to_gene_name.csv"
     output:
-        html=OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html"
+        html=OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html",
+        pdf=OUTDIR/ "visualization/prokaryotic_metabolic_pathways.pdf"
     conda:
         "envs/visualization.yaml"
     script:
