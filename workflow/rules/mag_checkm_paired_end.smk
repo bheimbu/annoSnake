@@ -30,8 +30,8 @@ rule MAG_checkm_paired2:
       shell:
         """
         if [ -e {params.summary}/*summary ]; then
-           cp -a {params.summary}/*summary {output}
+           cp -a {params.summary}/*summary OUTDIR/ "MAGs/checkm/checkm_summaries"
         else
-           exit 0
+           touch {output[0]}
         fi
         """
