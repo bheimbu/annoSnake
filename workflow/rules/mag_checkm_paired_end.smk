@@ -27,7 +27,7 @@ rule MAG_checkm_paired2:
         directory(OUTDIR/ "MAGs/checkm/checkm_summaries")
       params:
         summary=lambda wildcards, input: Path(input[0]).parent
-	  shell:
+      shell:
         """
-        cp -a {params.summary} {output}
+        cp -a {params.summary}/*summary {output}
         """
