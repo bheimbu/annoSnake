@@ -22,6 +22,7 @@ rule MAG_metabat2:
         samtools sort -@{threads} {params.fna}/{wildcards.sample}.bam -o {params.fna}/{wildcards.sample}.sort
         samtools index -@{threads} {params.fna}/{wildcards.sample}.sort
 	runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
+        rm -rf {params.fna}/{wildcards.sample}.sort* {params.fna}/{wildcards.sample}.bam
         mkdir -p {params.dir}
         mv {wildcards.sample}.fna.* {params.dir}
         """
