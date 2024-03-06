@@ -10,11 +10,13 @@ Tables
 ^^^^^^
 
 Figures
-^^^^^^
+^^^^^^^
 
+Presence/absence of proteins associated with metabolic pathways in MAGs including the degree of MAG completeness and contamination (in %).
+ 
 .. pdf-include:: _static/MAG_metabolic_pathways.pdf
 
-See this for an example of a :download:`plotly html <_static/relative_abundance_bacteria_archaea.html>`.
+
 
 .. raw:: html
 
