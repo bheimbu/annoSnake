@@ -18,5 +18,3 @@ See this for an example of a :download:`plotly html <_static/relative_abundance_
 
 .. raw:: html
     :file: _static/relative_abundance_bacteria_archaea.html
-    :width: 200
-    :height: 200
