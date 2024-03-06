@@ -2,7 +2,7 @@
 Output
 ======
 
-.. contents:: Here, you can find detailed information about...
+.. contents::
    :local:
    :backlinks: none
 
