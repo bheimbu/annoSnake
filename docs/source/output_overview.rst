@@ -12,7 +12,7 @@ Tables
 Figures
 ^^^^^^
 
-See :download:`this example <_static/MAG_metabolic_pathways.pdf>`.
+.. pdf-include:: _static/MAG_metabolic_pathways.pdf
 
 See :download:`this example <_static/prokaryotic_metabolic_pathways.html>`.
 
