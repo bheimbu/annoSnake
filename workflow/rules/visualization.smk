@@ -1,4 +1,4 @@
-localrules: visualization_cogs, visualization_kegg, visualization_mags1, visualization_mags2
+localrules: visualization_cogs, visualization_kegg, visualization_mags1, visualization_mags2, visualization_cazymes
 
 rule visualization_cogs:
     input:
@@ -59,3 +59,17 @@ rule visualization_mags2:
         "envs/visualization.yaml"
     script:
         "scripts/mags_visualize.R"
+
+rule visualization_cazymes:
+    input:
+        hits=OUTDIR/ "combine/cazy_combine.txt",
+        gtf=OUTDIR/ "combine/contigs_combine.gtf",
+        sf=OUTDIR/ "combine/contigs_combine.sf"
+    output:
+        pdf=OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.pdf",
+        html=OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.html"
+    conda:
+        "envs/visualization.yaml"
+    script:
+        "scripts/cazymes_visualize.R"
+
