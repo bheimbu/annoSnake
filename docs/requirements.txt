@@ -14,3 +14,4 @@ sphinxcontrib-youtube
 sphinx-tabs
 sphinx-copybutton
 sphinxcontrib-images
+sphinxcontrib-pdfembed
