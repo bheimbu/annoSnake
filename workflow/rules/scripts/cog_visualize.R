@@ -95,28 +95,49 @@ clr_result_long <- gather(clr_result_df, bacteria, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$bacteria <- as.factor(clr_result_long$bacteria)
 
-heatmap <- ggplot(data = clr_result_long, aes(x = sample, y = bacteria, fill = clr_value)) +
+heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `bacteria`)) +
   geom_tile() +
-  geom_tile(fill = NA, color = "black", linewidth = 0.1) +
+  geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
-  theme_minimal() +
+  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
+  scale_y_discrete(limits=rev) +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
+        axis.text.y = element_text(face = "bold"),
+        legend.text = element_text(face = "bold"),
+        legend.title = element_text(face = "bold")) +
+  labs(x = "", y = "")
+                
+#save as pdf####
+pdf(NULL)
+pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
+heatmap
+dev.off()
+
+#save as html####
+clr_long_df_separated <- as_tibble(clr_result_long) %>%
+  extract(bacteria,
+          into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
+          regex = "^d__([^_]+)(?:_p__([^_]+))?(?:_c__([^_]+))?(?:_o__([^_]+))?(?:_f__([^_]+))?(?:_g__([^_]+))?(?:_s__(.*))?",
+          remove = FALSE) %>%
+  mutate(across(domain:species, ~if_else(is.na(.), "Unknown", .)))
+
+heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `domain`, label3 = `phylum`, label4 = `class`, label5 = `order`, label6 = `family`, label7 = `genus`, label8 = `species`)) +
+  geom_tile() +
+  geom_tile(color = "black", linewidth = 0.1, fill = NA) +
+  scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
+  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
   scale_y_discrete(limits=rev) +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_blank(),
         legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold"))
+        legend.title = element_text(face = "bold")) +
+  labs(x = "", y = "")
 
-#save as pdf####
-pdf(NULL)
-pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
-heatmap
-dev.off()
-                
-#save as html####
-p <- ggplotly(heatmap) %>%
-layout(xaxis = list(ticktext = paste0("<b>", levels(factor(clr_result_long$sample)), "</b>")))
+p <- ggplotly(heatmap_plotly, tooltip = c("text","label","label2","label3","label4","label5","label6","label7","label8"))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
 
 
