@@ -15,4 +15,3 @@ sphinx-tabs
 sphinx-copybutton
 sphinxcontrib-images
 sphinx-simplepdf
-myst-nb
