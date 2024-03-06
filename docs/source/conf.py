@@ -29,6 +29,10 @@ sys.path.insert(0, os.path.abspath("../"))
 # If your documentation needs a minimal Sphinx version, state it here.
 # needs_sphinx = '1.0'
 
+html_js_files = [
+    "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"
+]
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -42,6 +46,7 @@ extensions = [
     "sphinxawesome_theme.highlighting",
     'sphinxcontrib.images',
     'sphinx_simplepdf',
+    'myst_nb',
 ]
 
 html_css_files = ["custom.css"]
