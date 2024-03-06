@@ -36,10 +36,10 @@ if config["COG"] == True:
     output.append(OUTDIR/ "combine/cogs.sf")
     output.append(OUTDIR/ "combine/contigs_combine.sf")
     output.append("databases/gtdb/.setup_done")
-if config["COG_VISUALIZATION"] == True and config["COG"] == True:
+if config["COG"] == True:
     output.append(OUTDIR/ "visualization/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html")
     output.append(OUTDIR/ "visualization/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf")
-if config["KEGG_VISUALIZATION"] == True and config["KEGG"] == True:
+if config["KEGG"] == True:
     output.append(OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html")
     output.append(OUTDIR/ "visualization/prokaryotic_metabolic_pathways.pdf")
     output.append(OUTDIR/ "combine/contigs_combine.gtf")
