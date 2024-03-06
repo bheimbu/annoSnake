@@ -46,7 +46,6 @@ extensions = [
     "sphinxawesome_theme.highlighting",
     'sphinxcontrib.images',
     'sphinx_simplepdf',
-    'myst_nb',
 ]
 
 html_css_files = ["custom.css"]
