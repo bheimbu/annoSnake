@@ -27,7 +27,9 @@ if config["mag_assembly"] == True:
 if config["KEGG"] == True:
     output.append(OUTDIR/ "combine/kegg_combine.txt")	
 if config["CAZYMES"] == True:
-    output.append(OUTDIR/ "combine/cazy_combine.txt")	
+    output.append(OUTDIR/ "combine/cazy_combine.txt")
+    output.append(OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.html")
+    output.append(OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.pdf")
 if config["PFAM"] == True:
     output.append(OUTDIR/ "combine/pfam_combine.txt")	
 if config["COG"] == True:
