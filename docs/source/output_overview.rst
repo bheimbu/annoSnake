@@ -16,5 +16,5 @@ Figures
 
 See :download:`this example <_static/prokaryotic_metabolic_pathways.html>`.
 
-.. raw:: html
+.. raw::
     :file: _static/prokaryotic_metabolic_pathways.html
