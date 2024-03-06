@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-
+library(forcats)
 library(dplyr)
 library(propr)
 library(ggplot2)
@@ -100,31 +100,33 @@ clr_result_long$gene_name <- as.factor(clr_result_long$gene_name)
 
 # Join the clr_result_long data frame with keggID_to_gene_name to get pathway information
 heatmap_data <- clr_result_long %>%
-  left_join(keggID_to_gene_name, by = c("gene_name" = "gene_name"), suffix = c("_clr_result", "_keggID"))
+  inner_join(distinct(keggID_to_gene_name, gene_name, .keep_all = TRUE), by = "gene_name")
 
-heatmap_data$gene_name <- factor(heatmap_data$gene_name, levels = unique(heatmap_data$gene_name[order(heatmap_data$pathway)]))
-                
+# Order the rows by the pathway column
 heatmap_data <- heatmap_data %>%
-  arrange(pathway)
+  group_by(pathway) %>%
+  mutate(gene_name = fct_reorder(gene_name, clr_value, .fun = function(x) mean(x))) %>%
+  ungroup()
 
-heatmap <- ggplot(heatmap_data, aes(x = sample, y = gene_name, fill = clr_value)) +
-  geom_tile(color = "white", size = 0.1) +
+#save as pdf####                                 
+heatmap <- heatmap_data %>% ggplot(aes(x = sample, y = gene_name, fill = clr_value, text = sample, label = clr_value, label2 = gene_name, label3 = pathway)) +
+  geom_tile() +
+  geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="D", direction = 1, name = "log(TPM+1)") +
-  theme_minimal() +
+  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold"))
+        legend.title = element_text(face = "bold")) +
+  labs(x = "", y = "")
              
-#save as pdf####
 pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
 heatmap
 dev.off()
                 
 #save as html####
-p <- ggplotly(heatmap) %>%
-layout(xaxis = list(ticktext = paste0("<b>", levels(factor(heatmap_data$sample)), "</b>")))
+p <- ggplotly(heatmap, tooltip = c("text","label","label2","label3"))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
