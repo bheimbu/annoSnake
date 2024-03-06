@@ -12,11 +12,13 @@ Tables
 Figures
 ^^^^^^^
 
-Presence/absence of proteins associated with metabolic pathways in MAGs including the degree of MAG completeness and contamination (in %).
- 
+**Presence/absence** of proteins associated with metabolic pathways in MAGs including the degree of MAG completeness and contamination (in %).
+
+|
+
 .. pdf-include:: _static/MAG_metabolic_pathways.pdf
 
-
+|
 
 .. raw:: html
 
