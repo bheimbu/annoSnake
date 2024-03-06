@@ -32,7 +32,6 @@ include: "rules/setup_databases.smk"
 include: "rules/mag_prokka.smk"
 include: "rules/mag_microbeannotator.smk"
 include: "rules/mag_gtdbtk.smk"
-#include: "rules/mag_annotree.smk"
 include: "rules/metaquast.smk"
 include: "rules/prokka.smk"
 include: "rules/cazy.smk"
@@ -53,7 +52,8 @@ onstart:
 
 onsuccess:
     print("Workflow finished, no error")
-    shell("mail -s 'Workflow finished, no error' {EMAIL} < {log}")
+    shell("mail -s 'Workflow finished, no error.' {EMAIL} < {log}")
 
 onerror:
     print("An error occurred")
+     shell("mail -s 'An error occurred!' {EMAIL} < {log}")
