@@ -2,7 +2,7 @@
 Databases
 =========
 
-.. contents:: Here, you can find detailed information about following topics.
+.. contents::
    :local:
    :backlinks: none
 
