@@ -41,7 +41,7 @@ extensions = [
     "myst_parser",
     "sphinxawesome_theme.highlighting",
     'sphinxcontrib.images',
-    'sphinxcontrib.pdfembed'
+    'sphinx_simplepdf',
 ]
 
 html_css_files = ["custom.css"]
