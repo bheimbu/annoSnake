@@ -54,6 +54,8 @@ The :file:`./profile/params.yaml` is the main configuration file sitting in the 
 
     # Workflow configuration
 
+    email: "your_email_address"
+
     # specify input data
     inputdir: "input_paired_end"
 
@@ -67,17 +69,17 @@ The :file:`./profile/params.yaml` is the main configuration file sitting in the 
     min_length: 1500
 
     # select whether metagenome-assembled genomes (MAGs) shall be assembled or not ('True' or 'False')
-    mag_assembly: False
+    mag_assembly: True
 
-    # if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
+    #if 'mag_assembly: True' specify completeness and contamination of resulting bins [community standards for medium or high-quality MAGs are defined as follows: ≥50% completeness and ≤10% contamination (Bowers et al. (2017)]
     completeness: 30
     contamination: 10
 
     # select databases to use ('True' or 'False')
-    PFAM: False
-    COG: False
+    PFAM: True
+    COG: True
     KEGG: True
-    CAZYMES: False
+    CAZYMES: True
 
     # specify cut-off E-values
     blastp_evalue: "1e-24"
@@ -85,10 +87,6 @@ The :file:`./profile/params.yaml` is the main configuration file sitting in the 
     cog_evalue: "1e-30"
     cazy_evalue: "1e-30"
     pfam_evalue: "1e-30"
-
-    # visualize results ('True' or 'False')
-    COG_VISUALIZATION: False
-    KEGG_VISUALIZATION: True
 
 .. _config_yaml:
 ./profile/config.yaml file
