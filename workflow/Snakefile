@@ -56,4 +56,4 @@ onsuccess:
 
 onerror:
     print("An error occurred")
-     shell("mail -s 'An error occurred!' {EMAIL} < {log}")
+    shell("mail -s 'An error occurred!' {EMAIL} < {log}")
