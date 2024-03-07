@@ -10,7 +10,7 @@ library(vegan)
 #data wrangling####
 data <- read.table(snakemake@input[['hits']], header = FALSE, sep = "\t")
 result <- data[, c(2, 6)]
-as_tibble(result)
+result <- as_tibble(result)
 
 gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsAsFactors = FALSE)
 
@@ -68,7 +68,7 @@ transposed_clr_result[, -1] <- lapply(transposed_clr_result[, -1], as.numeric)
 transposed_clr_result <- transposed_clr_result[-1, ]
 transposed_clr_result <- transposed_clr_result %>% tibble::rownames_to_column(var = "Cazyme")
 transposed_clr_result <- transposed_clr_result %>%  mutate(across(2:ncol(transposed_clr_result), as.numeric))
-as_tibble(transposed_clr_result)
+transposed_clr_result <- as_tibble(transposed_clr_result)
 transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])  # Calculate the row-wise abundances
 
 top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:50, ]
