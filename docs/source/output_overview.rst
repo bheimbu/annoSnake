@@ -12,7 +12,7 @@ Tables
 Figures
 ^^^^^^^
 
-.. pdfembed:: _static/MAG_metabolic_pathways.pdf
+:pdfembed:"_static/MAG_metabolic_pathways.pdf"
 
 
 .. raw:: html
