@@ -17,7 +17,6 @@ Figures
 |
 
 .. figure:: _static/MAG_metabolic_pathways.pdf
-   :scale: 80 %
    :alt: Presence/absence of proteins associated with metabolic pathways in MAGs including the degree of MAG completeness and contamination (in %).
 
 |
