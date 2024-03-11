@@ -1,11 +1,16 @@
 # Load libraries
+library(forcats)
 library(dplyr)
 library(propr)
 library(ggplot2)
 library(tidyr)
 library(compositions)
+library(aplot)
 library(ape)
 library(vegan)
+library(tidyverse)
+library(gridExtra)
+library(plotly)
 
 #data wrangling####
 data <- read.table(snakemake@input[['hits']], header = FALSE, sep = "\t")
