@@ -25,6 +25,7 @@ table_data$Name <- gsub(":.*$", "", table_data$Name)
 
 merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "Name", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "cazyme", "length", "effective_length", "tpm", "num_reads")
+merged_result2 <- na.omit(merged_result2)
 
 merged_result_filtered <- merged_result2 %>%
   filter(num_reads >= 10 & tpm >= 1)
