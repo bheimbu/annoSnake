@@ -60,17 +60,20 @@ clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
 clr <- decostand(clr_data_subset, method = "clr", pseudocount = 1)
 
 clr_result <- cbind(sample = aggregated_data$sample, clr)
-clr_result <- as_tibble(clr_result)
-
-transposed_clr_result <- clr_result %>% t() %>% as.data.frame()
+transposed_clr_result <- t(clr_result) 
+transposed_clr_result<-as.data.frame(transposed_clr_result)
+transposed_clr_result<-tibble::rownames_to_column(transposed_clr_result)
 colnames(transposed_clr_result) <- transposed_clr_result[1, ]
-transposed_clr_result[, -1] <- lapply(transposed_clr_result[, -1], as.numeric)
 transposed_clr_result <- transposed_clr_result[-1, ]
-transposed_clr_result <- transposed_clr_result %>% tibble::rownames_to_column(var = "Cazyme")
-transposed_clr_result <- transposed_clr_result %>%  mutate(across(2:ncol(transposed_clr_result), as.numeric))
 transposed_clr_result <- as_tibble(transposed_clr_result)
+transposed_clr_result <- transposed_clr_result %>%
+  mutate_at(vars(2:ncol(transposed_clr_result)), as.numeric)
+transposed_clr_result <- transposed_clr_result %>%
+  rename(cazyme = sample)
 transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])  # Calculate the row-wise abundances
 
+# Top 50 CAZymes
+top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:50, ]
 top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:50, ]
 top_50_cazymes <- top_50_cazymes[, -ncol(top_50_cazymes)]
 top_50_cazymes <- t(top_50_cazymes)
@@ -85,11 +88,14 @@ clr_result_long <- gather(as.data.frame(top_50_cazymes), cazyme, clr_value, -sam
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$cazyme <- as.factor(clr_result_long$cazyme)
 clr_result_long$cazyme <- sub("\\.hmm", "", clr_result_long$cazyme)
-
+clr_result_long <- clr_result_long %>% arrange(cazyme)
+                
 #save as pdf#### 
-heatmap <- ggplot(data = clr_result_long, aes(x = sample, y = cazyme, fill = clr_value, text = sample, label = clr_value, label2 = cazyme)) +
+heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = cazyme, fill = clr_value, text = sample, label = cazyme, label2 = clr_value)) +
   geom_tile() +
-  geom_tile(fill = NA, color = "black", size = 0.1) +
+  geom_tile(color = "black", linewidth = 0.1, fill = NA) +
+  scale_fill_viridis_c(option="D", direction = 1, name = "log(TPM+1)") +
+  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
   theme_minimal() +
   theme(axis.title.y = element_blank(),
@@ -97,7 +103,8 @@ heatmap <- ggplot(data = clr_result_long, aes(x = sample, y = cazyme, fill = clr
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold"))
+        legend.title = element_text(face = "bold")) +
+  labs(x = "", y = "")
 
 pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
