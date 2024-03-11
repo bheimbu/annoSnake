@@ -12,7 +12,7 @@ Tables
 Figures
 ^^^^^^^
 
-:pdfembed:`src:_static/MAG_metabolic_pathways.pdf`
+:pdfembed:`src: _static/MAG_metabolic_pathways.pdf`
 
 .. raw:: html
     <iframe src=_static/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html></iframe>
