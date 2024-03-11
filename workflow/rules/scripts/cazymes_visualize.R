@@ -20,8 +20,8 @@ colnames(result2) <- c("V1", "V2")
 merged_result <- merge(result, result2, by.x = "V2", by.y = "V2", all.x = TRUE, all.y = FALSE)
 merged_result <- merged_result[, c("V1", "V2", "V6")]
 
-table_data <- read.table(snakemake@input[['sf']], sep = "\t", header = TRUE)
-table_data$Name <- gsub(":.*$", "", table_data$Name)
+table_data <- read.table(snakemake@input[['sf']], sep = "\t", header = FALSE)
+table_data$V1 <- gsub(":.*$", "", table_data$V1)
 
 merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "Name", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "cazyme", "length", "effective_length", "tpm", "num_reads")
