@@ -17,18 +17,23 @@ gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsA
 result2 <- data.frame(gtf[, 1], gsub(".*gene_id\\s+", "", gtf[, 9]))
 colnames(result2) <- c("V1", "V2")
 
-merged_result <- merge(result, result2, by.x = "V2", by.y = "V2", all.x = TRUE, all.y = FALSE)
+merged_result <- merge(result, as_tibble(result2), by.x = "V2", by.y = "V2", all.x = TRUE, all.y = FALSE)
 merged_result <- merged_result[, c("V1", "V2", "V6")]
 
 table_data <- read.table(snakemake@input[['sf']], sep = "\t", header = FALSE)
 table_data$V1 <- gsub(":.*$", "", table_data$V1)
 
-merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "Name", all.x = TRUE, all.y = FALSE)
+merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "V1", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "cazyme", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
+
+merged_result2$tpm <- as.numeric(merged_result2$tpm)
+merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
+
+
 merged_result_filtered <- merged_result2 %>%
-  filter(num_reads >= 10 & tpm >= 1)
+  filter(num_reads >= 50 & tpm >= 1)
 
 merged_result_filtered <- as_tibble(merged_result_filtered)
 
@@ -61,6 +66,7 @@ clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
 clr <- decostand(clr_data_subset, method = "clr", pseudocount = 1)
 
 clr_result <- cbind(sample = aggregated_data$sample, clr)
+
 transposed_clr_result <- t(clr_result) 
 transposed_clr_result<-as.data.frame(transposed_clr_result)
 transposed_clr_result<-tibble::rownames_to_column(transposed_clr_result)
@@ -71,12 +77,13 @@ transposed_clr_result <- transposed_clr_result %>%
   mutate_at(vars(2:ncol(transposed_clr_result)), as.numeric)
 transposed_clr_result <- transposed_clr_result %>%
   rename(cazyme = sample)
-transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])  # Calculate the row-wise abundances
 
-# Top 50 CAZymes
+
+transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])  # Calculate the row-wise abundances
 top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:50, ]
-top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:50, ]
+
 top_50_cazymes <- top_50_cazymes[, -ncol(top_50_cazymes)]
+
 top_50_cazymes <- t(top_50_cazymes)
 colnames(top_50_cazymes) <- top_50_cazymes[1, ]
 top_50_cazymes <- top_50_cazymes[-1, ]
@@ -84,11 +91,12 @@ top_50_cazymes <- as.data.frame(top_50_cazymes)
 top_50_cazymes$sample <- rownames(top_50_cazymes)
 rownames(top_50_cazymes) <- NULL
 
-# Reshape data to long format
 clr_result_long <- gather(as.data.frame(top_50_cazymes), cazyme, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$cazyme <- as.factor(clr_result_long$cazyme)
+
 clr_result_long$cazyme <- sub("\\.hmm", "", clr_result_long$cazyme)
+
 clr_result_long <- clr_result_long %>% arrange(cazyme)
                 
 #save as pdf#### 
