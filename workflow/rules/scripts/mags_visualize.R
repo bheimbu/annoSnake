@@ -64,7 +64,7 @@ heatmap <- ggplot(mags, aes(x = gene, y = bin, fill = binary)) +
   theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
-        axis.text.x = element_text(angle = 45, hjust = .75, vjust = .25),
+        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25),
         axis.text.y = element_blank(),
         legend.text = element_text(face = "bold"),
         legend.title = element_blank(),
