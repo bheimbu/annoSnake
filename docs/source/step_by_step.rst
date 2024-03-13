@@ -13,7 +13,7 @@ The annoSnake workflow: step by step
 Input data
 ^^^^^^^^^^
 
-annoSnake takes either paired-end or interleaved reads (in gzipped format) as input. Reads must sit in the :file:`{INPUTDIR}/`, there is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
+annoSnake takes either paired-end or interleaved reads (in gzipped format) as input. Reads must sit in the :file:`{inputdir}/`, there is no need to specify :samp:`{SAMPLE}` names as annoSnake reads them autmatically from the :file:`{INPUTDIR}/`. 
 
 .. attention::
   
@@ -42,7 +42,7 @@ annoSnake takes either paired-end or interleaved reads (in gzipped format) as in
 ./profile/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. You can specify the name of the :file:`{INPUTDIR}`, :file:`{OUTPUTDIR}`, type of reads, and more.
+The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. You can specify the name of the :file:`{inputdir}`, :file:`{outdir}`, :file:`{library_type}`, and more.
 
 .. tip::
 
