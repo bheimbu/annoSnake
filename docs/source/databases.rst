@@ -9,7 +9,7 @@ Databases
 In general
 ^^^^^^^^^^
 
-Databases are downloaded automatically. However, the user can choose to use their own protein databases, which must be saved in the correct format (see below). The empty file :file:`.setup_done` in each database subdirectory is important in order to run the workflow correctly. So if you want to use your own databases, make sure you create one (``touch .setup_done``) 
+Databases are downloaded automatically. However, you can use your own protein databases, which must be saved in the correct format (see below). The file :file:`.setup_done` in each database subdirectory is necessary to run the workflow correctly. So if you want to use your own databases, make sure you create one within each database you want to use (``touch .setup_done``) 
 
 .. code::
 
@@ -22,23 +22,23 @@ Databases are downloaded automatically. However, the user can choose to use thei
   │       ├── dbCAN-fam-HMMs.txt.v11.h3p
   │       └── .setup_done
   ├── checkm/
-  |       ├── distributions
+  |       ├── distributions/
   │       ├── ...
   │       └── .setup_done
   ├── fetchMGs/
-  |       ├── bin
+  |       ├── bin/
   |       ├── ...
   |       └── .setup_done
   ├── gtdb/
   |       ├── gtdb_vers202_metadata.csv
-  │       ├── gtdb_vers202
+  │       ├── gtdb_vers202/
   |       ├── ...
   │       └── .setup_done
   ├── gtdb_tk/
   |       └── .setup_done
   ├── kegg/
   │       ├── ko_list
-  │       ├── profiles
+  │       ├── profiles/
   │       └── .setup_done
   ├── microbeannotator/
   |       ├── conversion.db
@@ -73,7 +73,7 @@ Sometimes, the download speed of the **GTDB-TK** database decreases dramatically
 MicrobeAnnotator
 ^^^^^^^^^^^^^^^^
 
-An HTTP error may occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect.
+An HTTP error can occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect.
 
 1. The *microbeannotator* conda environment (based on :file:`annoSnake/rules/envs/microbeannotator.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
 
