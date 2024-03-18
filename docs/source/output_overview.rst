@@ -9,6 +9,11 @@ Output
 Tables
 ^^^^^^
 
+.. csv-table:: Kofam results
+   :file: kofam.csv
+   :widths: 30, 70
+   :header-rows: 1
+
 Figures
 ^^^^^^^
 
