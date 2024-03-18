@@ -10,7 +10,7 @@ Tables
 ^^^^^^
 
 .. csv-table:: Kofam results
-   :file: kofam.csv
+   :file: _tables/kofam.csv
    :widths: "auto"
    :header-rows: 1
 
