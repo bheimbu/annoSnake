@@ -6,8 +6,8 @@ rule visualization_cogs:
         gtf=OUTDIR/ "taxonomy/cogs/cogs.gtf",
         microbes=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes"
     output:
-        html=OUTDIR/ "visualization/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html",
-        pdf=OUTDIR/ "visualization/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf"
+        html=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html",
+        pdf=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf"
     conda:
         "envs/visualization.yaml"
     script:
@@ -21,8 +21,8 @@ rule visualization_kegg:
     params:
         keggID="rules/scripts/keggID_to_gene_name.csv"
     output:
-        html=OUTDIR/ "visualization/prokaryotic_metabolic_pathways.html",
-        pdf=OUTDIR/ "visualization/prokaryotic_metabolic_pathways.pdf"
+        html=OUTDIR/ "figures/prokaryotic_metabolic_pathways.html",
+        pdf=OUTDIR/ "figures/prokaryotic_metabolic_pathways.pdf"
     conda:
         "envs/visualization.yaml"
     script:
@@ -54,7 +54,7 @@ rule visualization_mags2:
     params:
         pathway="rules/scripts/keggid_to_genes_pathway.csv"
     output:
-        pdf=OUTDIR/ "visualization/MAG_metabolic_pathways.pdf"
+        pdf=OUTDIR/ "figures/MAG_metabolic_pathways.pdf"
     conda:
         "envs/visualization.yaml"
     script:
@@ -66,8 +66,8 @@ rule visualization_cazymes:
         gtf=OUTDIR/ "combine/contigs_combine.gtf",
         sf=OUTDIR/ "combine/contigs_combine.sf"
     output:
-        pdf=OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.pdf",
-        html=OUTDIR/ "visualization/relative_abundance_CAZymes_metagenomes.html"
+        pdf=OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.pdf",
+        html=OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html"
     conda:
         "envs/visualization.yaml"
     script:
