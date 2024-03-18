@@ -9,7 +9,7 @@ Output
 Tables
 ^^^^^^
 
-Tables are given in **CSV** format and are ready-to-use for downstream analysis. They can be found in the :file:`{{OUTDIR}}/tables`.
+Tables are given in **CSV** format and are ready-to-use for downstream analysis. They can be found in the :file:`{{OUTDIR}}/tables` directory.
 
 |
 
