@@ -67,7 +67,8 @@ rule visualization_cazymes:
         sf=OUTDIR/ "combine/contigs_combine.sf"
     output:
         pdf=OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.pdf",
-        html=OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html"
+        html=OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html",
+        csv=OUTDIR/ "tables/relative_abundance_CAZymes_metagenomes.csv"
     conda:
         "envs/visualization.yaml"
     script:
