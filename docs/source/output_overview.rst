@@ -13,7 +13,7 @@ Tables are given in **CSV** format and are ready-to-use for downstream analysis.
 
 |
 
-.. csv-table:: **Relative abundance of genes related to metabolic pathways.**
+.. csv-table:: **Example table:** Relative abundance of genes related to metabolic pathways.
    :header: "", "sample", "gene_name", "clr_value", "keggID", "pathway"
 
    "1","BEC2","ack",-0.0900557224197549,"K00925","Reductive acetogenesis"
