@@ -38,6 +38,10 @@ Tables are given in **CSV** format and are ready-to-use for downstream analysis.
 Figures
 ^^^^^^^
 
+Figures are given in **PDF** and **HTML** format and are publication-ready. They can be found in the :file:`{{OUTDIR}}/figures` directory. Download here an :download:`example HTML file <_static/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html>`
+
+**Example PDF:** Presence/absence of genes related to metabolic pathways in gut metagenome-assembled genomes (MAGs).
+
 .. pdf-include:: _static/MAG_metabolic_pathways.pdf
 
 .. raw:: html
