@@ -11,7 +11,7 @@ Tables
 
 .. csv-table:: Kofam results
    :file: _static/kofam.csv
-   :widths: 30, 70
+   :widths: "auto"
    :header-rows: 1
 
 Figures
@@ -20,4 +20,4 @@ Figures
 .. pdf-include:: _static/MAG_metabolic_pathways.pdf
 
 .. raw:: html
-    <iframe src=_static/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html></iframe>
+    <iframe height="345px" width="100%" src="_static/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html"></iframe>
