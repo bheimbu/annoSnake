@@ -104,7 +104,7 @@ clr_result_long$cazyme <- sub("\\.hmm", "", clr_result_long$cazyme)
 
 clr_result_long <- clr_result_long %>% arrange(cazyme)
 
-write.csv(heatmap_data[order(heatmap_data$sample), ], snakemake@output[['csv']])
+write.csv(clr_result_long[order(clr_result_long$sample), ], snakemake@output[['csv']])
               
 #save as pdf#### 
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = cazyme, fill = clr_value, text = sample, label = cazyme, label2 = clr_value)) +
