@@ -13,12 +13,12 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     bash Miniforge3-$(uname)-$(uname -m).sh
 
-**Install Snakemake**
-
+**Install Snakemake (note that we use Snakemake below version 8 as there are some breaking changes related to Slurm that haven't been fixed until now; see also https://github.com/jdblischak/smk-simple-slurm/issues/21?notification_referrer_id=NT_kwDOAX35o7M4ODQ4OTE0MTA2OjI1MDMzMTIz)**
 
 .. code::
 
-  mamba install snakemake
+  mamba create -c conda-forge -c bioconda -n snakemake snakemake<8 #install snakemake into an environment called snakemake
+  mamba activate snakemake
 
 |
 **Get annoSnake**
@@ -47,6 +47,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
    .. code::
 
     tmux new -s annosnake #starts a new tmux session with the name annosnake
+    mamba activate snakemake #always start the snakemake envirnoment first
     snakemake --profile profile/ #starts annoSnake workflow
 
    You can exit the session by pressing :kbd:`Ctrl+B D`; and may close your terminal while the workflow is running.
