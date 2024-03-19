@@ -13,7 +13,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     bash Miniforge3-$(uname)-$(uname -m).sh
 
-**Install Snakemake (note that we use Snakemake below version 8 as there are some breaking changes related to Slurm that haven't been fixed until now; see also https://github.com/jdblischak/smk-simple-slurm/issues/21?notification_referrer_id=NT_kwDOAX35o7M4ODQ4OTE0MTA2OjI1MDMzMTIz)**
+**Install Snakemake** (note that we use Snakemake <8 as there are some breaking changes related to Slurm submissions that haven't been fixed yet; see also this `thread <https://github.com/jdblischak/smk-simple-slurm/issues/21?notification_referrer_id=NT_kwDOAX35o7M4ODQ4OTE0MTA2OjI1MDMzMTIz>`_)
 
 .. code::
 
