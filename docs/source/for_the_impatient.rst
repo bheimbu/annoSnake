@@ -17,7 +17,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
 .. code::
 
-  mamba create -c conda-forge -c bioconda -n snakemake snakemake<8 #install snakemake into an environment called snakemake
+  mamba create -c conda-forge -c bioconda -n snakemake snakemake=7.32.4 #install snakemake into an environment called snakemake
   mamba activate snakemake
 
 |
