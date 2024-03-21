@@ -47,7 +47,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
    .. code::
 
     tmux new -s annosnake #starts a new tmux session with the name annosnake
-    mamba activate snakemake #always start the snakemake envirnoment first
+    mamba activate snakemake #always activate the environment first
     snakemake --profile profile/ #starts annoSnake workflow
 
    You can exit the session by pressing :kbd:`Ctrl+B D`; and may close your terminal while the workflow is running.
