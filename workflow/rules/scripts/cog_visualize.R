@@ -51,7 +51,7 @@ merged_result_filtered <- merged_result_filtered %>%
 # Group by contig names and filter based on marker_taxonomy
 result <- merged_result_filtered %>%
   group_by(contig_names) %>%
-  filter(grepl("^d__[^_]+_p__[^_]+_c__[^_]+_o__[^_]+", marker_taxonomy))
+  filter(grepl("^d__[^_]", marker_taxonomy))
 
 result <- result %>%
   distinct(contig_names, marker_taxonomy, log_tpm)
