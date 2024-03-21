@@ -113,7 +113,7 @@ heatmap <- heatmap_data %>% ggplot(aes(x = sample, y = gene_name, fill = clr_val
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="D", direction = 1, name = "log(TPM+1)") +
-  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
+  theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
