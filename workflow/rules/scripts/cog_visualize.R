@@ -103,6 +103,7 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_v
   scale_y_discrete(limits=rev) +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
+        axis.text=element_text(size=6),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
@@ -110,10 +111,7 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_v
   labs(x = "", y = "")
                 
 #save as pdf####
-pdf(NULL)
-pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
-heatmap
-dev.off()
+ggsave(snakemake@output[['pdf']], width = 30, height = 20, units = "cm")
 
 #save as html####
 clr_long_df_separated <- as_tibble(clr_result_long) %>%
