@@ -99,7 +99,7 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_v
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
-  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
+  theme_minimal() +
   scale_y_discrete(limits=rev) +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
