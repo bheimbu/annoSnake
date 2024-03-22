@@ -27,7 +27,7 @@ rule blastp1:
     shell:
         """
         mkdir -p {OUTDIR}/taxonomy/blastp
-        if ! diamond blastp --db {params.db}/gtdb_vers202.dmnd --query {input.faa} --outfmt 102 --out {OUTDIR}/taxonomy/blastp/{wildcards.cog}/{wildcards.cog}.blastp --max-hsps 0 --evalue {params.evalue} --threads {threads}; then
+        if ! diamond blastp --ultra-sensitive --db {params.db}/gtdb_vers202.dmnd --query {input.faa} --outfmt 102 --out {OUTDIR}/taxonomy/blastp/{wildcards.cog}/{wildcards.cog}.blastp --max-hsps 0 --evalue {params.evalue} --threads {threads}; then
             touch "{OUTDIR}/taxonomy/blastp/{wildcards.cog}/.{wildcards.cog}_completed";
         fi
 	"""
