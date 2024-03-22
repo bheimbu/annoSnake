@@ -1,6 +1,6 @@
 rule prokka:
     input:
-	    OUTDIR/ "assemblies/preprocessed_contigs/{sample}/.rule_completed"
+        OUTDIR/ "assemblies/preprocessed_contigs/{sample}/.rule_completed"
     output:
         OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf"
     params:
