@@ -23,6 +23,7 @@ rerun-incomplete: True
 printshellcmds: True
 scheduler: greedy
 use-conda: True
+conda-frontend: mamba
 touch: False
 reason: True
 show-failed-logs: True
