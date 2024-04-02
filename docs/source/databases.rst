@@ -59,11 +59,11 @@ GTDB-TK
 
 Sometimes, the download speed of the **GTDB-TK** database decreases dramatically (see https://github.com/Ecogenomics/GTDBTk/issues/522). If this is the case for you too, you can change the download URL in the bash script :file:`download-db.sh` as follows.
 
-1. The *gtdbtk* conda environment (based on :file:`annoSnake/rules/envs/gtdbtk.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
+1. Run ``snakemake --profile profile/`` to create the *gtdbtk* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
 
-2. Then, use ``find annoSnake/workflow/ -type f -name "download-db.sh"``. In this example, :file:`download-db.sh` can be found under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`.
+2. Use ``find annoSnake/workflow/ -type f -name "download-db.sh"`` to search for :file:`download-db.sh` (here under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh).
 
-3. Now, you change the URL in the script :file:`download-db.sh` (**note, you must adjust the code below to the name of your conda environment**).
+3. Now, change the URL within the script :file:`download-db.sh` (**Note, you must adjust the code below to the name of your conda environment**).
 
 .. code::
 
@@ -75,11 +75,11 @@ MicrobeAnnotator
 
 An HTTP error can occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect.
 
-1. The *microbeannotator* conda environment (based on :file:`annoSnake/rules/envs/microbeannotator.yaml`) has to be created first by annoSnake, that is run ``snakemake --profile profile/`` once and stop the workflow in case of troubles with :kbd:`Ctrl+D`.
+1. Run ``snakemake --profile profile/`` first to create the *microbeannotator* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
 
-2. Then, use ``find annoSnake/workflow/ -type f -name "conversion_database_creator.py"``. In this example, :file:`conversion_database_creator.py` can be found under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`.
+2. Use ``find annoSnake/workflow/ -type f -name "conversion_database_creator.py"`` to search for :file:`conversion_database_creator.py` (here under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`).
 
-3. Now change the URL (**note, you must adjust the code below to the name of your conda environment**).
+3. Change the URL like this... (**Note, you must adjust the code below to the name of your conda environment**)
 
 .. code::
 
