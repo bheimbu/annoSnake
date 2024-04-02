@@ -1,6 +1,6 @@
 # Workflow configuration
 
-email: "bheimbu@gwdg.de"
+email: "abc@mail.com"
 
 # specify input data
 inputdir: "input_paired_end"
@@ -33,7 +33,3 @@ blastx_evalue: "1e-24"
 cog_evalue: "1e-30"
 cazy_evalue: "1e-30"
 pfam_evalue: "1e-30"
-
-# visualize results ('True' or 'False')
-COG_VISUALIZATION: True
-KEGG_VISUALIZATION: True
