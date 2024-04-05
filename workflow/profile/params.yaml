@@ -22,10 +22,10 @@ completeness: 30
 contamination: 10
 
 # select databases to use ('True' or 'False')
-PFAM: False
-COG: False
-KEGG: False
-CAZYMES: False
+PFAM: True
+COG: True
+KEGG: True
+CAZYMES: True
 
 # specify cut-off E-values
 blastp_evalue: "1e-24"
