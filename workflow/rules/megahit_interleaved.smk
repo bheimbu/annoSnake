@@ -26,7 +26,7 @@ rule megahit:
     threads:
         40
     conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
     shell:
         """
         rm -rf {OUTDIR}/assemblies/megahit/{wildcards.sample}
