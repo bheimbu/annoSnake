@@ -27,3 +27,5 @@ conda-frontend: mamba
 touch: False
 reason: True
 show-failed-logs: True
+rerun-triggers: mtime
+quiet: rules
