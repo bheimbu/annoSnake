@@ -14,7 +14,7 @@ rule MAG_metabat2:
     threads:
         40
     conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
     shell:
         """
 	bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
@@ -43,7 +43,7 @@ rule MAG_metacoag:
      threads:
         20
      conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
      shell:
         """
         coverm contig -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
@@ -68,7 +68,7 @@ rule MAG_maxbin2:
       shadow:
         "shallow"
       conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
       shell:
         """
         if ! run_MaxBin.pl -contig {params.fna}/{wildcards.sample}.fna -reads {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -reads2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -thread {threads} -out {wildcards.sample}; then
@@ -95,7 +95,7 @@ rule MAG_refinement:
       threads:
         20
       conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
       shell:
         """      
         if [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
@@ -130,7 +130,7 @@ rule MAG_above_threshold_bins:
       output:
         touch(OUTDIR/ "MAGs/above_threshold_bins/.rule_completed")
       conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
       shell:
         """  
         if [ ! -d {OUTDIR}/MAGs/above_threshold_bins ]; then
