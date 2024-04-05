@@ -11,7 +11,7 @@ rule metaquast:
     threads:
         20
     conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
     shell:
         """
         {params.metaquast}/metaquast.py --threads {threads} -o {params.outdir} {params.contigs} --no-krona
