@@ -6,7 +6,7 @@ rule MAG_prokka:
            threads:
                20
            conda:
-               "envs/environment.yaml"
+               "envs/mags.yaml"
            shell:
                """
                mkdir -p {OUTDIR}/MAGs/prokka
