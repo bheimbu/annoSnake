@@ -4,7 +4,7 @@ rule setup_checkm:
     output:
         touch("databases/checkm/.setup_done")
     conda:
-        "envs/MAGs.yaml"
+        "envs/mags.yaml"
     retries:
         3
     shell:
