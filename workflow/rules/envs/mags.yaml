@@ -112,6 +112,7 @@ dependencies:
   - libzlib=1.2.13=hd590300_5
   - make=4.3=hd18ef5c_1
   - maxbin2=2.2.7=hdbdd923_5
+  - megahit=1.2.9=h43eeafb_5
   - metabat2=2.15=h4da6f23_2
   - metacoag=1.1.4=pyh7cba7a3_0
   - metawrap=0.0.2=py_1
