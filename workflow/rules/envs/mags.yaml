@@ -17,6 +17,7 @@ dependencies:
   - blast=2.15.0=pl5321h6f7f691_1
   - boost-cpp=1.74.0=h75c5d50_8
   - bowtie2=2.5.1=py36hb79b6da_0
+  - bwa=0.7.17=he4a0461_11
   - bwidget=1.9.14=ha770c72_1
   - bzip2=1.0.8=hd590300_5
   - c-ares=1.28.1=hd590300_0
@@ -26,10 +27,13 @@ dependencies:
   - cffi=1.14.6=py36hd8eec40_1
   - click=8.0.1=py36h5fab9bb_0
   - clustalw=2.1=h4ac6f70_10
+  - coverm=0.7.0=h07ea13f_0
   - curl=7.86.0=h7bff187_1
+  - dashing=1.0=h40c17d1_2
   - decorator=4.4.2=py_0
   - entrez-direct=21.6=he881be0_0
   - expat=2.6.2=h59595ed_0
+  - fastani=1.34=h4dfc31f_1
   - font-ttf-dejavu-sans-mono=2.37=hab24e00_0
   - font-ttf-inconsolata=3.000=h77eed37_0
   - font-ttf-source-code-pro=2.038=h77eed37_0
@@ -61,6 +65,7 @@ dependencies:
   - importlib-metadata=4.8.1=py36h5fab9bb_0
   - infernal=1.1.4=h779adbc_0
   - jpeg=9e=h0b41bf4_3
+  - k8=0.2.5=hdcf5f25_4
   - kernel-headers_linux-64=2.6.32=he073ed8_17
   - keyutils=1.6.1=h166bdaf_0
   - krb5=1.19.3=h3790be6_0
@@ -118,11 +123,13 @@ dependencies:
   - metawrap=0.0.2=py_1
   - metis=5.1.0=h59595ed_1007
   - minced=0.4.2=hdfd78af_1
+  - minimap2=2.28=he4a0461_0
   - mpfr=4.2.1=h9458935_0
   - ncbi-vdb=3.1.0=hdbdd923_0
   - ncurses=6.4.20240210=h59595ed_0
   - networkx=2.5.1=pyhd8ed1ab_0
   - numpy=1.19.5=py36hfc0c790_2
+  - openblas=0.3.25=pthreads_h7a3da1a_0
   - openjdk=17.0.3=h58dac75_5
   - openssl=1.1.1w=hd590300_0
   - ossuuid=1.6.2=hf484d3e_1000
@@ -358,11 +365,13 @@ dependencies:
   - r-gtools=3.9.5=r42h57805ef_0
   - r-kernsmooth=2.23_22=r42h13b3f57_0
   - readline=8.2=h8228510_1
+  - samtools=1.16.1=h6899075_1
   - scipy=1.5.3=py36h81d768a_1
   - sed=4.8=he412f7d_0
   - setuptools=58.0.4=py36h5fab9bb_2
   - six=1.16.0=pyh6c4a22f_0
   - sqlite=3.45.2=h2c6b66d_0
+  - starcode=1.4=h031d066_4
   - suitesparse=5.10.1=h9e50725_1
   - sysroot_linux-64=2.12=he073ed8_17
   - t_coffee=11.0.8=py36hea885bf_8
