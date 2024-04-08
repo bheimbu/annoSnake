@@ -47,6 +47,8 @@ dependencies:
   - gcc_impl_linux-64=13.2.0=h338b0a0_5
   - gdk-pixbuf=2.42.8=hff1cb4f_1
   - gettext=0.21.1=h27087fc_0
+  - gfa1=0.53.alpha=he4a0461_2
+  - gfatools=0.5=he4a0461_4
   - gfortran_impl_linux-64=13.2.0=h76e1118_5
   - giflib=5.2.1=h0b41bf4_3
   - glpk=4.65=h9202a9a_1004
