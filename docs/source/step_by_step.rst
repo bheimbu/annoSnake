@@ -139,16 +139,13 @@ annoSnake uses `MEGAHIT v1.2.9 <https://github.com/voutcn/megahit>`_ to assemble
 
 If you want to change how the assembly is handled by MEGAHIT, you must change either :file:`annoSnake/workflow/rules/megahit_paired_end.smk` or :file:`annoSnake/workflow/rules/megahit_interleaved.smk`.
 
-For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, then change...   
+For example, if you don't want to run MEGAHIT with ``--presets meta-sensitive``, you can change the line into...   
 
 .. code-block:: bash
-   :emphasize-removed: 1
-   :emphasize-added: 2
 
-   megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --presets meta-sensitive --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
    megahit -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --out-prefix {wildcards.sample} --min-contig-len {params.min_length} -o {OUTDIR}/assemblies/megahit/{wildcards.sample} -t {threads}
 
-Quality control of assembled contigs is done by `metaQuast <https://quast.sourceforge.net/metaquast>`_ and contigs with modified Fasta headers (including the :file:`{SAMPLE}` name) can be found under :file:`{OUTDIR}/assemblies/preprocessed_contigs`.
+annoSnake modifies the Fasta headers using the :samp:`{SAMPLE}` name and quality checks all contigs with `metaQuast <https://quast.sourceforge.net/metaquast>`_.
 
 .. code::
 
@@ -167,7 +164,7 @@ Quality control of assembled contigs is done by `metaQuast <https://quast.source
 Taxonomic annotation
 ^^^^^^^^^^^^^^^^^^^^
 
-annoSnake uses `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) to identify protein-coding sequences (CDS), rRNAs, and tRNAs. `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts 40 single copy marker genes (called COGs; in protein format) from the predicted CDS, which are then taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations make use of `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_.
+annoSnake uses `Prokka 1.14.6 <https://github.com/tseemann/prokka>`_ (in ``--metagenome`` mode) to identify protein-coding sequences (CDS), rRNAs, and tRNAs. To assign contigs taxonomically, 40 single copy marker genes (called COGs; in protein format) are extracted with the help of `fetchMG v.1.2 <https://github.com/motu-tool/fetchMGs>`_ extracts  from the predicted CDS, which are then taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ in ``blastp`` mode. Other CDS (in nucleotide format) are taxonomically assigned with `DIAMOND <https://github.com/bbuchfink/diamond>`_ but in ``blastx`` mode. Both annotations make use of `GTDB database ver 202 <https://gtdb.ecogenomic.org/>`_.
 
 .. code::
 
