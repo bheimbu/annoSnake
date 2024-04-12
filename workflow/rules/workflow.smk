@@ -22,7 +22,6 @@ if config["mag_assembly"] == True:
     output.append(OUTDIR/ "MAGs/gtdbtk/.rule_completed")
     output.append(OUTDIR/ "MAGs/microbeannotator/.rule_completed")
     output.append(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed")
-    output.append("databases/checkm/.setup_done")
     output.append(OUTDIR/ "figures/MAG_metabolic_pathways.pdf")
 if config["KEGG"] == True:
     output.append(OUTDIR/ "combine/kegg_combine.txt")	
