@@ -2,7 +2,8 @@ localrules: MAG_checkm_interleaved2
 
 rule MAG_checkm_interleaved1:
       input:
-        OUTDIR/ "MAGs/above_threshold_bins/.rule_completed"
+        OUTDIR/ "MAGs/above_threshold_bins/.rule_completed",
+        "databases/checkm/.setup_done"
       output:
         touch(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed")
       threads:
