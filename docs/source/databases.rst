@@ -61,7 +61,7 @@ Sometimes, the download speed of the **GTDB-TK** database decreases dramatically
 
 1. Run ``snakemake --profile profile/`` to create the *gtdbtk* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
 
-2. Use ``find annoSnake/workflow/ -type f -name "download-db.sh"`` to search for :file:`download-db.sh` (here under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh).
+2. Use ``find annoSnake/workflow/ -type f -name "download-db.sh"`` to search for :file:`download-db.sh` (here under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`).
 
 3. Now, change the URL within the script :file:`download-db.sh` (**Note, you must adjust the code below to the name of your conda environment**).
 
