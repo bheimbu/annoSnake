@@ -133,6 +133,7 @@ rule MAG_above_threshold_bins:
         "envs/mags.yaml"
       shell:
         """  
+        rm -rf {OUTDIR}/MAGs/metacoag/*pickle
         if [ ! -d {OUTDIR}/MAGs/above_threshold_bins ]; then
           mkdir -p {OUTDIR}/MAGs/above_threshold_bins
         fi
