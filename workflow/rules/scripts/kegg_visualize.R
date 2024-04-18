@@ -15,7 +15,7 @@ library(gridExtra)
 library(plotly)
 
 #data preparation####
-kofam <- read.table("~/Schreibtisch/kegg_combine.txt", header = FALSE, sep = ",")
+kofam <- read.table(snakemake@input[['kegg']], header = FALSE, sep = ",")
 # Select the third and last columns
 kofam <- kofam[, c( 4, 5)]
 kofam <- subset(kofam, V5 != "fullproteinnames" & V5 != "annotation")
