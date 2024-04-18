@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Load libraries
 library(forcats)
 library(dplyr)
@@ -57,7 +59,7 @@ aggregated_data <- spread %>%
   summarise_all(~ if (is.numeric(.)) sum(., na.rm = TRUE) else first(.))
 
 contig <- spread %>%
-  mutate(contig_names = sub("_.*", "", contig_names))
+  mutate(contig_names = sub("_contig.*", "", contig_names))
 
 aggregated_data <- contig %>%
   group_by(contig_names) %>%
