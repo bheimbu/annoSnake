@@ -23,6 +23,7 @@ if config["mag_assembly"] == True:
     output.append(OUTDIR/ "MAGs/microbeannotator/.rule_completed")
     output.append(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed")
     output.append(OUTDIR/ "figures/MAG_metabolic_pathways.pdf")
+    output.append(OUTDIR/ "tables/MAG_metabolic_pathways.csv")
 if config["CAZYMES"] == True:
     output.append(OUTDIR/ "combine/cazy_combine.txt")
     output.append(OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html")
