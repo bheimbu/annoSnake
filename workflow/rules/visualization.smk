@@ -7,7 +7,8 @@ rule visualization_cogs:
         microbes=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes"
     output:
         html=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html",
-        pdf=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf"
+        pdf=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf",
+        csv=OUTDIR/ "tables/rel_abundance_of_bacteria_and_archaea_in_metagenomes.csv"
     conda:
         "envs/visualization.yaml"
     script:
