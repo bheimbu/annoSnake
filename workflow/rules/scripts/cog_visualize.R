@@ -110,6 +110,9 @@ clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 # Convert 'bacteria' column to factor
 clr_result_long$bacteria <- as.factor(clr_result_long$bacteria)
 
+#write csv       
+write.csv(clr_result_long[order(clr_result_long$sample), ], "snakemake@output[['csv']]")
+                
 #plotting####
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `bacteria`)) +
   geom_tile() +
