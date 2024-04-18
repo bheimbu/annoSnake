@@ -1,4 +1,6 @@
 #!/usr/bin/env Rscript
+
+# Load required libraries
 library(forcats)
 library(dplyr)
 library(propr)
@@ -12,58 +14,58 @@ library(tidyverse)
 library(gridExtra)
 library(plotly)
 
-kofam <- read.table(snakemake@input[['kegg']], header = FALSE, sep = ",")
+#data preparation####
+kofam <- read.table("~/Schreibtisch/kegg_combine.txt", header = FALSE, sep = ",")
 # Select the third and last columns
 kofam <- kofam[, c( 4, 5)]
 kofam <- subset(kofam, V5 != "fullproteinnames" & V5 != "annotation")
 
-keggids <- c("K01938","K01491","K13990","K00297","K00122","K00198","K14138","K00194","K00197","K15023","K00625","K00925","K00394","K00395","K00958","K11180","K11181","K02586","K02591","K02588","K02587","K02592","K02585","K00370","K00371","K00374","K02567","K02568","K00362","K00363","K03385","K15876","K01428","K01429","K01430","K00265","K00266","K01915","K03320","K11959","K11960","K11961","K11962","K11963","K00926","K00611","K01940","K01755","K00399","K00401","K00402")
-
-filtered_kofam <- kofam %>%
-  filter(V4 %in% keggids)
-
-colnames(filtered_kofam) <- c("keggID", "protein")
-
-keggID_to_gene_name <- read.csv(snakemake@params[['keggID']], header = T)
-
+# Read KEGG ID to gene name mapping
+keggID_to_gene_name <- read.csv(snakemake@params[['keggID']], header = TRUE)
 keggID_to_gene_name <- keggID_to_gene_name %>%
   separate_rows(keggID, sep = " ")
 
+# Filter KEGG data
+filtered_kofam <- kofam %>%
+  filter(V4 %in% keggID_to_gene_name$keggID)
+colnames(filtered_kofam) <- c("keggID", "protein")
+
+# Merge filtered KEGG data with gene names
 kofam_gene <- merge(filtered_kofam, keggID_to_gene_name, by.x = "keggID", by.y = "keggID", all.x = TRUE)
 
-# Read the tab-separated table
+# Read GTF data
 gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsAsFactors = FALSE)
 
-# Extract the first column and everything after "gene_id"
+# Extract contig names and protein IDs from GTF data
 gtf_extracted <- data.frame(gtf[, 1], gsub(".*gene_id\\s+", "", gtf[, 9]))
 colnames(gtf_extracted) <- c("contig_names", "protein")
 
+# Merge KOFAM gene data with GTF extracted data
 merged_result <- merge(kofam_gene, gtf_extracted, by.x = "protein", by.y = "protein", all.x = TRUE, all.y = FALSE)
 
 # Read tab-separated table data
-quant <- read.table(snakemake@input[['quant']], sep = "\t", header = F)
+quant <- read.table(snakemake@input[['quant']], sep = "\t", header = FALSE)
 quant$V1 <- gsub(":.*$", "", quant$V1)
 
+# Merge merged result with quant data
 merged_result2 <- merge(merged_result, quant, by.x = "contig_names", by.y = "V1", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein", "keggID", "gene_name", "pathway", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
 # Filter merged result
 merged_result2 <- as_tibble(merged_result2)
-
-merged_result_filtered  <- merged_result2  %>%
-  mutate(tpm = as.numeric(tpm), num_reads = as.numeric(num_reads))
-
-merged_result_filtered <- merged_result_filtered %>%
+merged_result_filtered <- merged_result2 %>%
+  mutate(tpm = as.numeric(tpm), num_reads = as.numeric(num_reads)) %>%
   filter(num_reads >= 10 & tpm >= 1)
 
+# Calculate log TPM
 merged_result_filtered$log_tpm <- log10(merged_result_filtered$tpm + 1)
 
-# Select specific columns and remove duplicates
+# Remove duplicates
 merged_result_filtered <- merged_result_filtered %>%
   distinct(contig_names, gene_name, log_tpm)
 
-# Spread the filtered result
+# Spread the data
 spread <- spread(merged_result_filtered, gene_name, log_tpm)
 
 # Group by contig names and summarize data
@@ -73,13 +75,14 @@ aggregated_data <- spread %>%
 
 # Extract the contig names
 contig <- spread %>%
-  mutate(contig_names = sub("_.*", "", contig_names))
+  mutate(contig_names = sub("_contig.*", "", contig_names))
 
 # Group and summarize the data
 aggregated_data <- contig %>%
   group_by(contig_names) %>%
   summarise(across(everything(), sum, na.rm = TRUE))
 
+# Rename columns
 aggregated_data <- aggregated_data %>%
   rename(sample = contig_names)
 
@@ -108,7 +111,9 @@ heatmap_data <- heatmap_data %>%
   mutate(gene_name = fct_reorder(gene_name, clr_value, .fun = function(x) mean(x))) %>%
   ungroup()
 
-#save as pdf####                                 
+#plotting####
+
+#save as pdf####
 heatmap <- heatmap_data %>% ggplot(aes(x = sample, y = gene_name, fill = clr_value, text = sample, label = clr_value, label2 = gene_name, label3 = pathway)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
@@ -121,12 +126,12 @@ heatmap <- heatmap_data %>% ggplot(aes(x = sample, y = gene_name, fill = clr_val
         legend.text = element_text(face = "bold"),
         legend.title = element_text(face = "bold")) +
   labs(x = "", y = "")
-             
+
 pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
 heatmap
 dev.off()
-                
+
 #save as html####
 p <- ggplotly(heatmap, tooltip = c("text","label","label2","label3"))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
