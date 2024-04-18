@@ -40,5 +40,6 @@ if config["COG"] == True:
 if config["KEGG"] == True:
     output.append(OUTDIR/ "figures/prokaryotic_metabolic_pathways.html")
     output.append(OUTDIR/ "figures/prokaryotic_metabolic_pathways.pdf")
+    output.append(OUTDIR/ "figures/prokaryotic_metabolic_pathways.csv")
     output.append(OUTDIR/ "combine/contigs_combine.gtf")
     output.append(OUTDIR/ "combine/kegg_combine.txt")	
