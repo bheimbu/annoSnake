@@ -103,18 +103,18 @@ clr_result <- cbind(sample = aggregated_data$sample, clr)
 clr_result_df <- as.data.frame(clr_result)
 
 # Reshape data to long format
-clr_result_long <- gather(clr_result_df, bacteria, clr_value, -sample)
+clr_result_long <- gather(clr_result_df, prokaryote, clr_value, -sample)
 
 # Convert 'clr_value' column to numeric
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
-# Convert 'bacteria' column to factor
-clr_result_long$bacteria <- as.factor(clr_result_long$bacteria)
+# Convert 'prokaryote' column to factor
+clr_result_long$prokaryote <- as.factor(clr_result_long$prokaryote)
 
 #write csv       
 write.csv(clr_result_long[order(clr_result_long$sample), ], snakemake@output[['csv']])
                 
 #plotting####
-heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `bacteria`)) +
+heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = prokaryote, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `prokaryote`)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
@@ -134,13 +134,13 @@ ggsave(snakemake@output[['pdf']], width = 30, height = 20, units = "cm")
 
 #save as html####
 clr_long_df_separated <- as_tibble(clr_result_long) %>%
-  extract(bacteria,
+  extract(prokaryote,
           into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
           regex = "^d__([^_]+)(?:_p__([^_]+))?(?:_c__([^_]+))?(?:_o__([^_]+))?(?:_f__([^_]+))?(?:_g__([^_]+))?(?:_s__(.*))?",
           remove = FALSE) %>%
   mutate(across(domain:species, ~if_else(is.na(.), "Unknown", .)))
 
-heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `domain`, label3 = `phylum`, label4 = `class`, label5 = `order`, label6 = `family`, label7 = `genus`, label8 = `species`)) +
+heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = prokaryote, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `domain`, label3 = `phylum`, label4 = `class`, label5 = `order`, label6 = `family`, label7 = `genus`, label8 = `species`)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
