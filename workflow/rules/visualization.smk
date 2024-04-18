@@ -56,7 +56,8 @@ rule visualization_mags2:
     params:
         pathway="rules/scripts/keggid_to_genes_pathway.csv"
     output:
-        pdf=OUTDIR/ "figures/MAG_metabolic_pathways.pdf"
+        pdf=OUTDIR/ "figures/MAG_metabolic_pathways.pdf",
+        csv=OUTDIR/ "tables/MAG_metabolic_pathways.csv"
     conda:
         "envs/visualization.yaml"
     script:
