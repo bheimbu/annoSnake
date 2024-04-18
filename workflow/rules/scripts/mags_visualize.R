@@ -1,3 +1,6 @@
+#!/usr/bin/env Rscript
+
+# Load required libraries
 library(dplyr)
 library(propr)
 library(ggplot2)
@@ -8,7 +11,7 @@ library(aplot)
 library(ape)
 library(vegan)
 
-#hits####
+#data preparation####
 meth_hits <- read.table(snakemake@input[['hits']])
 colnames(meth_hits) <- c("bin", "KO")
 meth_hits$binary <- rep(1, nrow(meth_hits))
@@ -25,7 +28,7 @@ mags <- as_tibble(mags)
 mags <- mags %>%
   mutate(binary = ifelse(binary == 1, "present", "absent"))
 
-#checkm_summaries####
+#checkm summaries
 checkm_summaries <- list.files(snakemake@input[['checkm']], pattern = "\\.summary$", full.names = TRUE)
 checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   df <- read.table(file, header=TRUE, fill=TRUE, comment.char = "-")
@@ -33,6 +36,10 @@ checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   colnames(subset_df) <- c("bin", "Completeness", "Contamination") 
   return(subset_df)
 }))
+
+#write csv
+combined <- left_join(checkm_combine, mags, by = "bin")
+write.csv(combined[order(combined$bin), ], snakemake@output[['csv']])
 
 #plotting####
 checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "Completeness", y = bin, fill = Completeness)) +
