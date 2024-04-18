@@ -13,26 +13,20 @@ Tables are given in **CSV** format and are ready-to-use for downstream analysis.
 
 |
 
-.. csv-table:: **Example table:** Relative abundance of genes related to metabolic pathways.
-   :header: "", "sample", "gene_name", "clr_value", "keggID", "pathway"
+.. csv-table:: **Example table:** Relative abundance of CAZymes found in termite guts.
+   :header: "","sample","cazyme","clr_value"
 
-   "1","BEC2","ack",-0.0900557224197549,"K00925","Reductive acetogenesis"
-   "2","BEC2","acsABCDE",-0.0900557224197549,"K00198","Reductive acetogenesis"
-   "3","BEC2","aprAB",-0.0900557224197549,"K00394","Sulfate reduction"
-   "4","BEC2","arcC",-0.0900557224197549,"K00926","Arginine Synthesis"
-   "5","BEC2","argFGH",-0.0900557224197549,"K00611","Arginine Synthesis"
-   "6","BEC2","dsrAB",-0.0900557224197549,"K11180","Sulfate reduction"
-   "7","BEC2","fdhF",-0.0900557224197549,"K00122","Reductive acetogenesis"
-   "8","BEC2","gltBD",-0.0900557224197549,"K00265","Glutamate Synthesis"
-   "9","BEC2","mcrABG",-0.0900557224197549,"K00399","Methanogenesis"
-   "10","BEC2","metF",-0.0900557224197549,"K00297","Reductive acetogenesis"
-   "11","BEC2","narGHI",-0.0900557224197549,"K00370","Dissimilatory Nitrate Reduction"
-   "12","BEC2","nirBD",-0.0900557224197549,"K00362","Dissimilatory Nitrate Reduction"
-   "13","BEC2","pta",-0.0900557224197549,"K00625","Reductive acetogenesis"
-   "14","BEC2","sat",-0.0900557224197549,"K00958","Sulfate reduction"
-   "15","BEC2","urtABCDE",1.26078011387657,"K11959","Urea Transport"
-   "16","BEC323","ack",-0.494540242875745,"K00925","Reductive acetogenesis"
-   "17","BEC323","acsABCDE",0.796801709911475,"K00198","Reductive acetogenesis"
+   "1","A_heterognathus_BEC338","CE9",-0.08008254
+   "21","A_heterognathus_BEC338","GH1",-0.08008254
+   "41","A_heterognathus_BEC338","GH10",-0.08008254
+   "61","A_heterognathus_BEC338","GH115",-0.08008254
+   "81","A_heterognathus_BEC338","GH116",-0.08008254
+   "101","A_heterognathus_BEC338","GH127",-0.08008254
+   "121","A_heterognathus_BEC338","GH13_14",-0.08008254
+   "141","A_heterognathus_BEC338","GH13_2",-0.08008254
+   "161","A_heterognathus_BEC338","GH13_20",1.34193247
+   "181","A_heterognathus_BEC338","GH13_31",-0.08008254
+   "201","A_heterognathus_BEC338","GH13_39",-0.08008254
    "...","...","...",...,"...","..."
 
 Figures
