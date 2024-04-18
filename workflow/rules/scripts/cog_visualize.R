@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+# Load required libraries
 library(dplyr)
 library(propr)
 library(ggplot2)
@@ -11,6 +12,8 @@ library(vegan)
 library(tidyverse)
 library(gridExtra)
 library(plotly)
+
+#data preparation####
 
 # Read the CSV file
 data <- read.csv(snakemake@input[['microbes']], header = FALSE)
@@ -29,6 +32,7 @@ gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsA
 result2 <- data.frame(gtf[, 1], gsub(".*gene_id\\s+", "", gtf[, 9]))
 colnames(result2) <- c("V1", "V2")
 
+# Merge the results
 merged_result <- merge(result, result2, by.x = "V3", by.y = "V2", all.x = TRUE, all.y = FALSE)
 merged_result <- merged_result[, c("V1", "V3", "V7")]
 
@@ -43,58 +47,70 @@ colnames(merged_result2) <- c("contig_names", "protein_names", "marker_taxonomy"
 merged_result_filtered <- merged_result2 %>%
   filter(num_reads >= 10 & tpm >= 1)
 
+# Apply log transformation to 'tpm' column
 merged_result_filtered$log_tpm <- log(merged_result_filtered$tpm + 1)
 
+# Remove duplicate rows based on specified columns
 merged_result_filtered <- merged_result_filtered %>%
   distinct(contig_names, marker_taxonomy, log_tpm)
 
-# Group by contig names and filter based on marker_taxonomy
+# Group by 'contig_names' and filter based on 'marker_taxonomy'
 result <- merged_result_filtered %>%
   group_by(contig_names) %>%
   filter(grepl("^d__[^_]", marker_taxonomy))
 
+# Remove duplicate rows based on specified columns
 result <- result %>%
   distinct(contig_names, marker_taxonomy, log_tpm)
 
+# Add a row identifier
 result <- result %>% dplyr::mutate(row_id = row_number())
 
 # Spread the filtered result
 spread <- spread(result, marker_taxonomy, log_tpm)
 
+# Remove the row identifier column
 spread <- spread %>% select(-row_id)
-# Group by contig names and summarize data
+
+# Group by 'contig_names' and summarize data
 aggregated_data <- spread %>%
   group_by(contig_names) %>%
   summarise_all(~ if (is.numeric(.)) sum(., na.rm = TRUE) else first(.))
 
 # Extract the contig names
 contig <- spread %>%
-  mutate(contig_names = sub("_.*", "", contig_names))
+  mutate(contig_names = sub("_contig.*", "", contig_names))
 
 # Group and summarize the data
 aggregated_data <- contig %>%
   dplyr::group_by(contig_names) %>%
   summarise(across(everything(), sum, na.rm = TRUE))
 
+# Rename the 'contig_names' column to 'sample'
 aggregated_data <- aggregated_data %>%
   rename(sample = contig_names)
 
 # Subset the data frame to exclude the "sample" column
 clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
 
+# Apply the clr transformation
 clr <- as_tibble(decostand(clr_data_subset, method = "clr", pseudocount = 1))
 
 # Add the "sample" column back to the transformed data
 clr_result <- cbind(sample = aggregated_data$sample, clr)
 
+# Convert the result to a data frame
 clr_result_df <- as.data.frame(clr_result)
 
 # Reshape data to long format
 clr_result_long <- gather(clr_result_df, bacteria, clr_value, -sample)
 
+# Convert 'clr_value' column to numeric
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
+# Convert 'bacteria' column to factor
 clr_result_long$bacteria <- as.factor(clr_result_long$bacteria)
 
+#plotting####
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `bacteria`)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
@@ -109,7 +125,7 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = bacteria, fill = clr_v
         legend.text = element_text(face = "bold"),
         legend.title = element_text(face = "bold")) +
   labs(x = "", y = "")
-                
+
 #save as pdf####
 ggsave(snakemake@output[['pdf']], width = 30, height = 20, units = "cm")
 
@@ -137,5 +153,3 @@ heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = bacteria,
 
 p <- ggplotly(heatmap_plotly, tooltip = c("text","label","label2","label3","label4","label5","label6","label7","label8"))
 htmlwidgets::saveWidget(p, snakemake@output[['html']])
-
-
