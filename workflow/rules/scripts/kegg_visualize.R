@@ -110,7 +110,12 @@ heatmap_data <- heatmap_data %>%
   group_by(pathway) %>%
   mutate(gene_name = fct_reorder(gene_name, clr_value, .fun = function(x) mean(x))) %>%
   ungroup()
+heatmap_data <- heatmap_data %>%
+  select(sample, gene_name, keggID, pathway, clr_value)
 
+#write csv
+write.csv(heatmap_data[order(heatmap_data$sample), ], snakemake@output[['csv']])
+                          
 #plotting####
 
 #save as pdf####
