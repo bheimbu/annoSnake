@@ -1,4 +1,4 @@
-category,pathway,keggid,gene
+pathway,pathway_in_detail,keggid,gene
 methanogenesis,coenzyme_M_reduction_to_methane,K00399,mcrA
 methanogenesis,coenzyme_M_reduction_to_methane,K00401,mcrB
 methanogenesis,coenzyme_M_reduction_to_methane,K00402,mcrG
