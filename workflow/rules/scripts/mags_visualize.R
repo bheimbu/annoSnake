@@ -67,7 +67,7 @@ checkm_contamination_plot <- ggplot(checkm_combine, aes(x = "contamination", y =
 heatmap <- ggplot(mags, aes(x = gene, y = bin, fill = binary)) +
   geom_tile(color = "black", size = 0.1) +
   scale_fill_viridis_d() + 
-  facet_wrap(~category, scales = "free_x") +
+  facet_wrap(~pathway, scales = "free_x") +
   theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
