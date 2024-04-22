@@ -21,17 +21,17 @@ kofam <- kofam[, c( 4, 5)]
 kofam <- subset(kofam, V5 != "fullproteinnames" & V5 != "annotation")
 
 # Read KEGG ID to gene name mapping
-keggID_to_gene_name <- read.csv(snakemake@params[['keggID']], header = TRUE)
-keggID_to_gene_name <- keggID_to_gene_name %>%
-  separate_rows(keggID, sep = " ")
+keggid_to_gene_name <- read.csv(snakemake@params[['keggid']], header = TRUE)
+keggid_to_gene_name <- keggid_to_gene_name %>%
+  separate_rows(keggid, sep = " ")
 
 # Filter KEGG data
 filtered_kofam <- kofam %>%
-  filter(V4 %in% keggID_to_gene_name$keggID)
-colnames(filtered_kofam) <- c("keggID", "protein")
+  filter(V4 %in% keggid_to_gene_name$keggid)
+colnames(filtered_kofam) <- c("keggid", "protein")
 
 # Merge filtered KEGG data with gene names
-kofam_gene <- merge(filtered_kofam, keggID_to_gene_name, by.x = "keggID", by.y = "keggID", all.x = TRUE)
+kofam_gene <- merge(filtered_kofam, keggid_to_gene_name, by.x = "keggid", by.y = "keggid", all.x = TRUE)
 
 # Read GTF data
 gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsAsFactors = FALSE)
@@ -49,7 +49,7 @@ quant$V1 <- gsub(":.*$", "", quant$V1)
 
 # Merge merged result with quant data
 merged_result2 <- merge(merged_result, quant, by.x = "contig_names", by.y = "V1", all.x = TRUE, all.y = FALSE)
-colnames(merged_result2) <- c("contig_names", "protein", "keggID", "gene_name", "pathway", "length", "effective_length", "tpm", "num_reads")
+colnames(merged_result2) <- c("contig_names", "protein", "keggid", "gene_name", "pathway", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
 # Filter merged result
@@ -101,9 +101,9 @@ clr_result_long <- gather(clr_result, gene_name, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$gene_name <- as.factor(clr_result_long$gene_name)
 
-# Join the clr_result_long data frame with keggID_to_gene_name to get pathway information
+# Join the clr_result_long data frame with keggid_to_gene_name to get pathway information
 heatmap_data <- clr_result_long %>%
-  inner_join(distinct(keggID_to_gene_name, gene_name, .keep_all = TRUE), by = "gene_name")
+  inner_join(distinct(keggid_to_gene_name, gene_name, .keep_all = TRUE), by = "gene_name")
 
 # Order the rows by the pathway column
 heatmap_data <- heatmap_data %>%
@@ -111,7 +111,7 @@ heatmap_data <- heatmap_data %>%
   mutate(gene_name = fct_reorder(gene_name, clr_value, .fun = function(x) mean(x))) %>%
   ungroup()
 heatmap_data <- heatmap_data %>%
-  select(sample, gene_name, keggID, pathway, clr_value)
+  select(sample, gene_name, keggid, pathway, clr_value)
 
 #write csv
 write.csv(heatmap_data[order(heatmap_data$sample), ], snakemake@output[['csv']])
