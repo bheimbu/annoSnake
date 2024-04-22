@@ -33,7 +33,7 @@ checkm_summaries <- list.files(snakemake@input[['checkm']], pattern = "\\.summar
 checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   df <- read.table(file, header=TRUE, fill=TRUE, comment.char = "-")
   subset_df <- df[, c("Bin", "X..1", "markers")]  
-  colnames(subset_df) <- c("bin", "Completeness", "Contamination") 
+  colnames(subset_df) <- c("bin", "completeness", "contamination") 
   return(subset_df)
 }))
 
@@ -42,9 +42,9 @@ combined <- left_join(checkm_combine, mags, by = "bin")
 write.csv(combined[order(combined$bin), ], snakemake@output[['csv']])
 
 #plotting####
-checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "Completeness", y = bin, fill = Completeness)) +
+checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "completeness", y = bin, fill = completeness)) +
   geom_tile(color = "black", size = 0.1) +
-  scale_fill_viridis_c(option="D", direction = 1, name = "Completeness in %") +
+  scale_fill_viridis_c(option="D", direction = 1, name = "completeness in %") +
   theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
@@ -53,9 +53,9 @@ checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "Completeness", y = b
         legend.text = element_text(face = "bold"),
         legend.title = element_text(face = "bold"))
 
-checkm_contamination_plot <- ggplot(checkm_combine, aes(x = "Contamination", y = bin, fill = Contamination)) +
+checkm_contamination_plot <- ggplot(checkm_combine, aes(x = "contamination", y = bin, fill = contamination)) +
   geom_tile(color = "black", size = 0.1) +
-  scale_fill_viridis_c(option="D", direction = -1, name = "Contamination in %") +
+  scale_fill_viridis_c(option="D", direction = -1, name = "contamination in %") +
   theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
