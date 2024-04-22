@@ -1,4 +1,4 @@
-gene_name,keggID,pathway
+gene_name,keggid,pathway
 amtB,K03320,ammonia transport
 argFGH,K00611 K01940 K01755,arginine synthesis
 arcC,K00926,arginine synthesis
