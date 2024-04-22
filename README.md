@@ -9,4 +9,4 @@
 ```
 
 
-See the documentation under https://annosnake.readthedocs.io/en/latest/!
+See the documentation under https://annosnake.readthedocs.io/en/latest/.
