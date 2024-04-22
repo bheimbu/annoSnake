@@ -21,7 +21,7 @@ kofam <- kofam[, c( 4, 5)]
 kofam <- subset(kofam, V5 != "fullproteinnames" & V5 != "annotation")
 
 # Read KEGG ID to gene name mapping
-keggid_to_gene_name <- read.csv(snakemake@params[['keggid']], header = TRUE)
+keggid_to_gene_name <- read.csv(snakemake@params[['keggID']], header = TRUE)
 keggid_to_gene_name <- keggid_to_gene_name %>%
   separate_rows(keggid, sep = " ")
 
