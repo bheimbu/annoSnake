@@ -13,7 +13,7 @@ Welcome to...
 
 |
 
-...a Snakemake workflow streamlining taxonomic and functional annotation of metagenomes and metagenome-assembled genomes (MAGs). It takes raw sequencing reads, assembles and annotates contigs, and outputs colorful graphics and rich tables. You can choose between different types of input read formats (paired-end or interleaved), annotation databases (eg. Pfam, KEGG, CAZy), and more. 
+...a Snakemake workflow streamlining taxonomic and functional annotation of metagenomes and metagenome-assembled genomes (MAGs). It takes raw sequencing reads, assembles and annotates contigs, and outputs colorful graphics and rich tables. You can choose between different types of input read formats (paired-end or interleaved), annotation databases (eg. PFAM, KEGG, CAZy), and more. 
 
 |
 .. admonition:: If in doubt, reach out!
