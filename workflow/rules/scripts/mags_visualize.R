@@ -59,7 +59,7 @@ checkm_contamination_plot <- ggplot(checkm_combine, aes(x = "contamination", y =
   theme_minimal() +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
-        axis.text.x = element_text("Contamination", angle = 90, hjust = .75, vjust = .25, face = "bold"),
+        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_blank(),
         legend.text = element_text(face = "bold"),
         legend.title = element_text(face = "bold"))
