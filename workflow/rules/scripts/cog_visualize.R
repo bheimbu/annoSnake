@@ -119,14 +119,15 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = taxonomy, fill = clr_v
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
   theme_minimal() +
-  scale_y_discrete(limits=rev) +
+  scale_y_discrete(limits=rev, position = "right") +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text=element_text(size=6),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold")) +
+        legend.title = element_text(face = "bold"),
+        legend.position = "left") +
   labs(x = "", y = "")
 
 #save as pdf####
