@@ -9,7 +9,7 @@ elif config["library_type"] == "interleaved":
     SAMPLES = set(glob_wildcards(str(INPUTDIR / "{sample}.fastq.gz")).sample)
 
 def setup(sample):
-    l = [expand(output, sample=SAMPLES), OUTDIR/ "combine/metaquast.html"]
+    l = [expand(output, sample=SAMPLES), OUTDIR/ "figures/metaquast.html"]
     return l
 
 output = []
