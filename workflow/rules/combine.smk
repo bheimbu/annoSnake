@@ -74,7 +74,7 @@ rule combine_metaquast:
     input:
         OUTDIR/ "assemblies/metaquast/report.html"
     output:
-        OUTDIR/ "combine/metaquast.html"
+        OUTDIR/ "figures/metaquast.html"
     shell:
         """
         cp -a {input} {output}
