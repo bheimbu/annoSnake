@@ -20,7 +20,7 @@ rule visualization_kegg:
         gtf=OUTDIR/ "combine/contigs_combine.gtf",
         quant=OUTDIR/ "combine/contigs_combine.sf"
     params:
-        keggID="rules/scripts/keggID_to_gene_name.csv"
+        keggID="rules/scripts/keggid_to_gene_name.csv"
     output:
         html=OUTDIR/ "figures/prokaryotic_metabolic_pathways.html",
         pdf=OUTDIR/ "figures/prokaryotic_metabolic_pathways.pdf",
