@@ -39,7 +39,7 @@ checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
 
 #write csv
 combined <- left_join(checkm_combine, mags, by = "bin")
-write.csv(combined[order(combined$bin), ], snakemake@output[['csv']])
+write.csv(combined[order(combined$bin), ], snakemake@output[['csv']], row.names = FALSE)
 
 #plotting####
 checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "completeness", y = bin, fill = completeness)) +
