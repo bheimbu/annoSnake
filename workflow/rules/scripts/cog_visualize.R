@@ -111,7 +111,7 @@ clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$taxonomy <- as.factor(clr_result_long$taxonomy)
 
 #write csv       
-write.csv(clr_result_long[order(clr_result_long$sample), ], snakemake@output[['csv']])
+write.csv(clr_result_long[order(clr_result_long$sample), ], snakemake@output[['csv']], row.names = FALSE)
                 
 #plotting####
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = taxonomy, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `taxonomy`)) +
