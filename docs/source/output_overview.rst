@@ -14,20 +14,20 @@ Tables are given in **CSV** format and are ready-to-use for downstream analysis.
 |
 
 .. csv-table:: **Example table:** Relative abundance of CAZymes found in termite guts.
-   :header: "","sample","cazyme","clr_value"
+   :header: "sample","cazyme","clr_value"
 
-   "1","A_heterognathus_BEC338","CE9",-0.08008254
-   "21","A_heterognathus_BEC338","GH1",-0.08008254
-   "41","A_heterognathus_BEC338","GH10",-0.08008254
-   "61","A_heterognathus_BEC338","GH115",-0.08008254
-   "81","A_heterognathus_BEC338","GH116",-0.08008254
-   "101","A_heterognathus_BEC338","GH127",-0.08008254
-   "121","A_heterognathus_BEC338","GH13_14",-0.08008254
-   "141","A_heterognathus_BEC338","GH13_2",-0.08008254
-   "161","A_heterognathus_BEC338","GH13_20",1.34193247
-   "181","A_heterognathus_BEC338","GH13_31",-0.08008254
-   "201","A_heterognathus_BEC338","GH13_39",-0.08008254
-   "...","...","...",...,"...","..."
+   "A_heterognathus_BEC338","CE9",-0.08008254
+   "A_heterognathus_BEC338","GH1",-0.08008254
+   "A_heterognathus_BEC338","GH10",-0.08008254
+   "A_heterognathus_BEC338","GH115",-0.08008254
+   "A_heterognathus_BEC338","GH116",-0.08008254
+   "A_heterognathus_BEC338","GH127",-0.08008254
+   "A_heterognathus_BEC338","GH13_14",-0.08008254
+   "A_heterognathus_BEC338","GH13_2",-0.08008254
+   "A_heterognathus_BEC338","GH13_20",1.34193247
+   "A_heterognathus_BEC338","GH13_31",-0.08008254
+   "A_heterognathus_BEC338","GH13_39",-0.08008254
+   "...","...",...,"...","..."
 
 Figures
 ^^^^^^^
