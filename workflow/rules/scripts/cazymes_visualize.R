@@ -116,12 +116,14 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = cazyme, fill = clr_val
   theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 10) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
   theme_minimal() +
+  scale_y_discrete(position = "right") +              
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
         axis.text.y = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold")) +
+        legend.title = element_text(face = "bold"),
+        legend.position = "left") +
   labs(x = "", y = "")
 
 pdf(NULL)
