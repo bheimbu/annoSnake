@@ -114,7 +114,7 @@ heatmap_data <- heatmap_data %>%
   select(sample, gene_name, keggid, pathway, clr_value)
 
 #write csv
-write.csv(heatmap_data[order(heatmap_data$sample), ], snakemake@output[['csv']])
+write.csv(heatmap_data[order(heatmap_data$sample), ], snakemake@output[['csv']], row.names = FALSE)
                           
 #plotting####
 
