@@ -43,9 +43,20 @@ table_data$Name <- gsub(":.*$", "", table_data$Name)
 merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "Name", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "marker_taxonomy", "length", "effective_length", "tpm", "num_reads")
 
+# write csv####
+csv <- merged_result2  %>%
+  mutate(contig_names = sub("_contig.*", "", contig_names))
+
+csv$cazyme <- sub("\\.hmm", "",csv$cazyme)
+csv <- csv %>% rename(sample = contig_names)
+
+csv_write <- csv[, c("sample", "marker_taxonomy", "tpm", "num_reads")]
+write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
+#####
+               
 # Filter merged result
 merged_result_filtered <- merged_result2 %>%
-  filter(num_reads >= 10 & tpm >= 1)
+  filter(num_reads >= 50 & tpm >= 1)
 
 # Apply log transformation to 'tpm' column
 merged_result_filtered$log_tpm <- log(merged_result_filtered$tpm + 1)
@@ -109,9 +120,6 @@ clr_result_long <- gather(clr_result_df, taxonomy, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 # Convert 'taxonomy' column to factor
 clr_result_long$taxonomy <- as.factor(clr_result_long$taxonomy)
-
-#write csv       
-write.csv(clr_result_long[order(clr_result_long$sample), ], snakemake@output[['csv']], row.names = FALSE)
                 
 #plotting####
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = taxonomy, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `taxonomy`)) +
