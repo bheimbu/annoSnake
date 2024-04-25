@@ -34,7 +34,6 @@ merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "V1", all
 colnames(merged_result2) <- c("contig_names", "protein_names", "cazyme", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
-
 merged_result2$tpm <- as.numeric(merged_result2$tpm)
 merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
 
