@@ -46,10 +46,7 @@ colnames(merged_result2) <- c("contig_names", "protein_names", "marker_taxonomy"
 # write csv####
 csv <- merged_result2  %>%
   mutate(contig_names = sub("_contig.*", "", contig_names))
-
-csv$cazyme <- sub("\\.hmm", "",csv$cazyme)
 csv <- csv %>% rename(sample = contig_names)
-
 csv_write <- csv[, c("sample", "marker_taxonomy", "tpm", "num_reads")]
 write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
 #####
