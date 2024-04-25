@@ -42,7 +42,7 @@ merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
 csv <- merged_result_filtered  %>%
   mutate(contig_names = sub("_contig.*", "", contig_names))
 
-csv$cazyme <- sub("\\.hmm", "",contig$cazyme)
+csv$cazyme <- sub("\\.hmm", "",csv$cazyme)
 csv <- csv %>% rename(sample = contig_names)
 
 csv_write <- csv[, c("sample", "cazyme", "tpm", "num_reads")]
