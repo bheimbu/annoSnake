@@ -52,11 +52,19 @@ merged_result2 <- merge(merged_result, quant, by.x = "contig_names", by.y = "V1"
 colnames(merged_result2) <- c("contig_names", "protein", "keggid", "gene_name", "pathway", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
+# write csv####
+csv <- merged_result2  %>%
+  mutate(contig_names = sub("_contig.*", "", contig_names))
+csv <- csv %>% rename(sample = contig_names)
+csv_write <- csv[, c("sample", "keggid","gene_name", "pathway", "tpm", "num_reads")]
+write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
+#####
+
 # Filter merged result
 merged_result2 <- as_tibble(merged_result2)
 merged_result_filtered <- merged_result2 %>%
   mutate(tpm = as.numeric(tpm), num_reads = as.numeric(num_reads)) %>%
-  filter(num_reads >= 10 & tpm >= 1)
+  filter(num_reads >= 50 & tpm >= 1)
 
 # Calculate log TPM
 merged_result_filtered$log_tpm <- log10(merged_result_filtered$tpm + 1)
