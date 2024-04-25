@@ -38,9 +38,6 @@ merged_result2 <- na.omit(merged_result2)
 merged_result2$tpm <- as.numeric(merged_result2$tpm)
 merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
 
-merged_result_filtered <- merged_result2 %>%
-  filter(num_reads >= 50 & tpm >= 1)
-
 # write csv####
 csv <- merged_result_filtered  %>%
   mutate(contig_names = sub("_contig.*", "", contig_names))
@@ -51,6 +48,9 @@ csv <- csv %>% rename(sample = contig_names)
 csv_write <- csv[, c("sample", "cazyme", "tpm", "num_reads")]
 write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
 #####
+
+merged_result_filtered <- merged_result2 %>%
+  filter(num_reads >= 50 & tpm >= 1)
 
 merged_result_filtered <- as_tibble(merged_result_filtered)
 
