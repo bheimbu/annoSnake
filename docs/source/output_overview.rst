@@ -36,7 +36,9 @@ Figures are given in **PDF** and **HTML** format and are publication-ready. They
 
 **Example PDF:** Presence/absence of genes related to metabolic pathways in gut metagenome-assembled genomes (MAGs).
 
-.. pdf-include:: _static/MAG_metabolic_pathways.pdf
+.. image:: _static/MAG_metabolic_pathways.png
+  :width: 400
+  :alt: Presence/absence of metabolic pathway genes (protein annotation by MicrobeAnnotator) involved in lignocellulose digestion found in MAGs (metagenome-assembled genomes). Completeness and contamination of MAGs (assessed with CheckM) is given on the left site; lighter colours indicate higher completeness and less contamination, respectively. Purple squares indicate absence of genes and yellow squares indicate presence of genes. Note that some genes are shared between pathways, for instance genes of the Rnf complex.
 
 .. raw:: html
     <iframe height="345px" width="100%" src="_static/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html"></iframe>
