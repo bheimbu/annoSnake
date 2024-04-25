@@ -56,7 +56,8 @@ merged_result2 <- na.omit(merged_result2)
 csv <- merged_result2  %>%
   mutate(contig_names = sub("_contig.*", "", contig_names))
 csv <- csv %>% rename(sample = contig_names)
-csv_write <- csv[, c("sample", "keggid","gene_name", "pathway", "tpm", "num_reads")]
+csv <- csv %>% rename(gene = gene_name)
+csv_write <- csv[, c("sample", "keggid","gene", "pathway", "tpm", "num_reads")]
 write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
 #####
 
