@@ -139,14 +139,31 @@ heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = taxonomy, fill = clr_v
 ggsave(snakemake@output[['pdf']], width = 30, height = 20, units = "cm")
 
 #save as html####
-clr_long_df_separated <- as_tibble(clr_result_long) %>%
-  extract(taxonomy,
-          into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
-          regex = "^d__([^_]+)(?:_p__([^_]+))?(?:_c__([^_]+))?(?:_o__([^_]+))?(?:_f__([^_]+))?(?:_g__([^_]+))?(?:_s__(.*))?",
-          remove = FALSE) %>%
-  mutate(across(domain:species, ~if_else(is.na(.), "Unknown", .)))
+clr_result_long$taxonomy_orig <- clr_result_long$taxonomy
 
-heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = taxonomy, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `domain`, label3 = `phylum`, label4 = `class`, label5 = `order`, label6 = `family`, label7 = `genus`, label8 = `species`)) +
+clr_result_long$taxonomy <- gsub("d__", "domain_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_p__", ",phylum_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_c__", ",class_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_o__", ",order_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_f__", ",family_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_g__", ",genus_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("_s__", ",species_", clr_result_long$taxonomy)
+
+clr_long_df_separated <- as_tibble(clr_result_long) %>%
+  separate(taxonomy,
+           into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
+           sep = ",",
+           extra = "drop")
+
+clr_long_df_separated$domain <- gsub("domain_", "", clr_long_df_separated$domain)
+clr_long_df_separated$phylum <- gsub("phylum_", "", clr_long_df_separated$phylum)
+clr_long_df_separated$class <- gsub("class_", "", clr_long_df_separated$class)
+clr_long_df_separated$order <- gsub("order_", "", clr_long_df_separated$order)
+clr_long_df_separated$family <- gsub("family_", "", clr_long_df_separated$family)
+clr_long_df_separated$genus <- gsub("genus_", "", clr_long_df_separated$genus)
+clr_long_df_separated$species <- gsub("species_", "", clr_long_df_separated$species)
+
+heatmap_plotly <- clr_long_df_separated %>% ggplot(aes(x = sample, y = taxonomy_orig, fill = clr_value, text = `sample`, label = `clr_value`, label2 = `domain`, label3 = `phylum`, label4 = `class`, label5 = `order`, label6 = `family`, label7 = `genus`, label8 = `species`)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
   scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)") +
