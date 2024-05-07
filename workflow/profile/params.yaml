@@ -3,7 +3,7 @@
 email: "abc@mail.com"
 
 # specify input data
-inputdir: "input_paired_end"
+inputdir: "worked_example_input_paired_end"
 
 # input files are 'paired-end' or 'interleaved'?
 library_type: "paired-end"
