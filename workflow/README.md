@@ -2,7 +2,7 @@ To run annoSnake with the worked example data, use following commands. But first
 
 **See the *./profile/config.yaml* file to change any parameters related to Slurm job submission.**
 
-**Additionally, you can enter your email address to be notified of any errors, etc using the *./profile/params.yaml* file.**
+**Additionally, you can enter your email address to be notified of any errors, etc. using the *./profile/params.yaml* file.**
 
 
     $ cd annoSnake/workflow 
