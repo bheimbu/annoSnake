@@ -64,8 +64,10 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
 **Run annoSnake locally**
 
-You can also run annoSnake locally using
+.. note::
 
-.. code::
+   You may also run annoSnake locally using
 
-  snakemake --cores 4 # adjust the number of cores to your PC specs
+   .. code::
+
+     snakemake --cores 4 # adjust the number of cores to your PC specs
