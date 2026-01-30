@@ -10,7 +10,6 @@ Install Databases
 ^^^^^^^^^^^^^^^^^
 .. important::
   Before executing the full workflow, install all required databases by running
-  .. code::
     snakemake --profile profile/ databases/.setup_done
 
 In general
