@@ -34,9 +34,12 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 .. code::
 
   cd annoSnake/workflow
-  snakemake --profile profile/ -n # view the DAG of jobs first, then run...
-  snakemake --profile profile/
+  # Step 1: install all databases
+  snakemake --profile profile/ databases/.setup_done  
 
+  # Step 2: run the full workflow
+  snakemake --profile profile/snakemake --profile profile/ -n # view the DAG of jobs first, then run...
+  snakemake --profile profile/
 |
 
 .. important::
