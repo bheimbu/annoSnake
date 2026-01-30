@@ -29,7 +29,7 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
   git clone https://github.com/bheimbu/annoSnake.git
 
 |
-**Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_ **
+**Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_**
 
 .. code::
 
