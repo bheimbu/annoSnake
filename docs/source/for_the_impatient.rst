@@ -29,12 +29,12 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
   git clone https://github.com/bheimbu/annoSnake.git
 
 |
-**Run with example data**
+**Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_ **
 
 .. code::
 
   cd annoSnake/workflow
-  # Step 1: download sequencing data from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_ 
+  # Step 1: unzip read folder and move figshare folder to workflow dir
   unzip 25772187.zip
   mv 25772187/figshare figshare # in params.yaml as inputdir specified
   # Step 2: install all databases
