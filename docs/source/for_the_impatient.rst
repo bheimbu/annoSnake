@@ -1,9 +1,13 @@
 .. _getting_started:
 Getting started
 =================
-|
-**Install Mamba**
 
+.. contents::
+   :local:
+   :backlinks: none
+
+Install Mamba
+^^^^^^^^^^^^
 Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ using `miniforge <https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html>`_.
 
 .. admonition:: For Unix-like platforms (Mac OS & Linux)
