@@ -53,23 +53,6 @@ Databases are downloaded automatically. However, you can use your own protein da
         ├── ...
         └── .setup_done
 
-
-GTDB-TK
-^^^^^^^
-
-Sometimes, the download speed of the **GTDB-TK** database decreases dramatically (see https://github.com/Ecogenomics/GTDBTk/issues/522). If this is the case for you too, you can change the download URL in the bash script :file:`download-db.sh` as follows.
-
-1. Run ``snakemake --profile profile/`` to create the *gtdbtk* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
-
-2. Use ``find annoSnake/workflow/ -type f -name "download-db.sh"`` to search for :file:`download-db.sh` (here under :file:`annoSnake/workflow/.snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh`).
-
-3. Now, change the URL within the script :file:`download-db.sh` (**Note, you must adjust the code below to the name of your conda environment**).
-
-.. code::
-
-  cd annoSnake/workflow
-  sed -i 's#DB_URL="https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"#DB_URL="https://data.ace.uq.edu.au/public/gtdb/data/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"#' .snakemake/conda/470c2f2e8fcb8ca18fd3a63b874c8969_/bin/download-db.sh 
-
 MicrobeAnnotator
 ^^^^^^^^^^^^^^^^
 
