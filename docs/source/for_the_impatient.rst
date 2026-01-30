@@ -34,7 +34,10 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 .. code::
 
   cd annoSnake/workflow
-  # Step 1: install all databases
+  # Step 1: download sequencing data from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_ 
+  unzip 25772187.zip
+  mv 25772187/figshare figshare # in params.yaml as inputdir specified
+  # Step 2: install all databases
   snakemake --profile profile/ databases/.setup_done  
 
   # Step 2: run the full workflow
