@@ -62,3 +62,10 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
     tmux attach -t annosnake #get back to your session
 
+**Run annoSnake locally**
+
+You can also run annoSnake locally using
+
+.. code::
+
+  snakemake --cores 4 # adjust the number of cores to your PC specs
