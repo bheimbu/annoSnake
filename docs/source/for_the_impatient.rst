@@ -24,17 +24,15 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
   mamba create -c conda-forge -c bioconda -n snakemake snakemake=7.32.4 #install Snakemake v7.32.4 into an environment called snakemake
   mamba activate snakemake # activate environment
 
-|
-**Get annoSnake**
-
+Get annoSnake
+^^^^^^^^^^^^^
 
 .. code::
 
   git clone https://github.com/bheimbu/annoSnake.git
 
-|
-**Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_**
-
+Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaacf2f8e573bf2>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code::
 
   cd annoSnake/workflow
@@ -47,7 +45,6 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
   # Step 2: run the full workflow
   snakemake --profile profile/snakemake --profile profile/ -n # view the DAG of jobs first, then run...
   snakemake --profile profile/
-|
 
 .. important::
   For more information see :ref:`step_by_step`.
@@ -66,8 +63,8 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
 
     tmux attach -t annosnake #get back to your session
 
-**Run annoSnake locally**
-
+Run annoSnake locally
+^^^^^^^^^^^^^^^^^^^^^
 .. note::
 
    You may also run annoSnake locally using
