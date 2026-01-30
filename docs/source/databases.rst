@@ -9,6 +9,9 @@ Databases
 In general
 ^^^^^^^^^^
 
+In general
+^^^^^^^^^^
+
 Databases are downloaded automatically. However, you can use your own protein databases, which must be saved in the correct format (see below). The file :file:`.setup_done` in each database subdirectory is necessary to run the workflow correctly. So if you want to use your own databases, make sure that there is one in the respective subdirectories (``touch .setup_done``) 
 
 .. code::
