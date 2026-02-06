@@ -71,4 +71,4 @@ Run annoSnake locally
 
    .. code::
 
-     snakemake --cores 4 # adjust the number of cores to your PC specs
+     snakemake --use-conda --conda-frontend conda --cores 4 # adjust the number of cores to your PC specs
