@@ -74,7 +74,7 @@ An HTTP error can occur during MicrobeAnnotator setup. This is because the URL u
 .. code::
 
   cd annoSnake/workflow
-  find . -type f -name "conversion_database_creator.py" -exec sed -i 's#ftp://ftp\.ebi\.ac\.uk/pub/databases/interpro/current/release/interpro\.xml\.gz#https://ftp.ebi.ac.uk/pub/databases/interpro/current_release/interpro.xml.gz#' {} +
+  find . -type f -name "conversion_database_creator.py" -exec sed -i 's|ftp://ftp.ebi.ac.uk|https://ftp.ebi.ac.uk|g' {} +
 
 
 
