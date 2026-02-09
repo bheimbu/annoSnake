@@ -69,14 +69,13 @@ An HTTP error can occur during MicrobeAnnotator setup. This is because the URL u
 
 1. Run ``snakemake --profile profile/`` first to create the *microbeannotator* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
 
-2. Use ``find annoSnake/workflow/ -type f -name "conversion_database_creator.py"`` to search for :file:`conversion_database_creator.py` (here under :file:`annoSnake/workflow/.snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py`).
-
-3. Change the URL like this... (**Note, you must adjust the code below to the name of your conda environment**)
+2. Then execute following command to change the URL.
 
 .. code::
 
   cd annoSnake/workflow
-  sed -i 's#ftp://ftp\.ebi\.ac\.uk/pub/databases/interpro/current/release/interpro\.xml\.gz#https://ftp.ebi.ac.uk/pub/databases/interpro/current_release/interpro.xml.gz#' .snakemake/conda/6be050a6334173be2297d22f5f22d0eb_/lib/python3.7/site-packages/microbeannotator/database/conversion_database_creator.py
+  find . -type f -name "conversion_database_creator.py" -exec sed -i 's#ftp://ftp\.ebi\.ac\.uk/pub/databases/interpro/current/release/interpro\.xml\.gz#https://ftp.ebi.ac.uk/pub/databases/interpro/current_release/interpro.xml.gz#' {} +
+
 
 
   
