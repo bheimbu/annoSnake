@@ -18,7 +18,7 @@ Install Databases
 In general
 ^^^^^^^^^^
 
-Databases are downloaded automatically. However, you can use your own protein databases, which must be saved in the correct format (see below). The file :file:`.setup_done` in each database subdirectory is necessary to run the workflow correctly. So if you want to use your own databases, make sure that there is one in the respective subdirectories (``touch .setup_done``) 
+Databases are downloaded automatically (annoSnake always uses the latest available database versions if possible). However, you can use your own protein databases, which must be saved in the correct format (see below). Check out `./rules/setup_databases.smk` for how annoSnake sets up databases. The file :file:`.setup_done` in each database subdirectory is necessary to run the workflow correctly. So if you want to use your own databases, make sure that there is one in the respective subdirectories (``touch .setup_done``). If you need any help, please visit `GitHub <https://github.com/bheimbu/annoSnake/issues`_ and open a New issue. 
 
 .. code::
 
@@ -60,22 +60,4 @@ Databases are downloaded automatically. However, you can use your own protein da
   └── quast/
         ├── metaquast.py
         ├── ...
-        └── .setup_done
-
-MicrobeAnnotator
-^^^^^^^^^^^^^^^^
-
-An HTTP error can occur during MicrobeAnnotator setup. This is because the URL used to download the InterPro tables is incorrect.
-
-1. Run ``snakemake --profile profile/`` first to create the *microbeannotator* conda environment, then stop the workflow with :kbd:`Ctrl+D`.
-
-2. Then execute following command to change the URL.
-
-.. code::
-
-  cd annoSnake/workflow
-  find . -type f -name "conversion_database_creator.py" -exec sed -i 's|ftp://ftp.ebi.ac.uk|https://ftp.ebi.ac.uk|g' {} +
-
-
-
-  
+        └── .setup_done 
