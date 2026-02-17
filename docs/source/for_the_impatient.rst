@@ -39,11 +39,12 @@ Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaac
   # Step 1: unzip read folder and move figshare folder to workflow dir
   unzip 25772187.zip
   mv 25772187/figshare figshare # in params.yaml specified as inputdir 
-  # Step 2: install all databases
+  # Step 2: install all environments and databases
+  snakemake --use-conda --conda-frontend conda --conda-create-envs-only
   snakemake --profile profile/ databases/.setup_done  
 
   # Step 2: run the full workflow
-  snakemake --profile profile/snakemake --profile profile/ -n # view the DAG of jobs first, then run...
+  snakemake --profile profile/ -n # view the DAG of jobs first, then run...
   snakemake --profile profile/
 
 .. important::
