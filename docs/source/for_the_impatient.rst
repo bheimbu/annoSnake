@@ -63,8 +63,8 @@ Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaac
 
     tmux attach -t annosnake #get back to your session
 
-Run annoSnake locally
-^^^^^^^^^^^^^^^^^^^^^
+Running annoSnake locally
+^^^^^^^^^^^^^^^^^^^^^^^^
 .. note::
 
    You may also run annoSnake locally using
@@ -72,3 +72,7 @@ Run annoSnake locally
    .. code::
 
      snakemake --use-conda --conda-frontend conda --cores 4 # adjust the number of cores to your PC specs
+
+Running annoSnake with other scheduling systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You may have no access to SLURM, but that's no problem at all. There are Snakemake profiles for different scheduling systems, including LSF, HTCondor, etc. Check out `here <https://github.com/Snakemake-Profiles>`_. Additionally, there are plugins, which help Snakemake workflows function better in, for example, HTCondor environments (see `here <https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/htcondor.html>`_ for more details).
