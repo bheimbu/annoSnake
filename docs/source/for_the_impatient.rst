@@ -17,12 +17,13 @@ Install `Mamba <https://mamba.readthedocs.io/en/latest/user_guide/mamba.html>`_ 
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     bash Miniforge3-$(uname)-$(uname -m).sh
 
-**Install Snakemake** (note Snakemake <v8 is necessary as there are some breaking changes between Snakemake v7 and v8 that haven't been fixed yet; see this `thread <https://github.com/jdblischak/smk-simple-slurm/issues/21?notification_referrer_id=NT_kwDOAX35o7M4ODQ4OTE0MTA2OjI1MDMzMTIz>`_ for more infos about this)
+Install `Snakemake <https://snakemake.github.io/>`_ and `snakemake-executor-plugin-slurm <https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html>`_
 
 .. code::
 
-  mamba create -c conda-forge -c bioconda -n snakemake snakemake=7.32.4 #install Snakemake v7.32.4 into an environment called snakemake
+  mamba create -c conda-forge -c bioconda -n snakemake snakemake
   mamba activate snakemake # activate environment
+  pip install snakemake-executor-plugin-slurm # To run annoSnake on HPC environments using the SLURM scheduler
 
 Get annoSnake
 ^^^^^^^^^^^^^
