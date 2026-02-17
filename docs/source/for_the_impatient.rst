@@ -59,7 +59,7 @@ Run with example data, download from `Figshare <https://figshare.com/s/59c0bbaac
     mamba activate snakemake #always activate the environment first
     snakemake --profile profile/ #starts annoSnake workflow
 
-   You can exit the session by pressing :kbd:`Ctrl+B D`; and may close your terminal while the workflow is running.
+   You can exit the session by pressing :kbd:`Ctrl+B` followed by :kbd:`D`; and may close your terminal while the workflow is running.
   
    .. code::
 
