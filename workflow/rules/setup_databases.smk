@@ -2,7 +2,7 @@ localrules: setup_gtdb_tk, setup_checkm2, setup_pfam, setup_cazymes, setup_kegg,
 
 rule setup_databases:
     input:
-        "databases/checkm/.setup_done",
+        "databases/checkm2/.setup_done",
         "databases/gtdb_tk/.setup_done",
         "databases/pfam/.setup_done",
         "databases/cazymes/.setup_done",
