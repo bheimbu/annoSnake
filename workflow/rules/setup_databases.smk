@@ -173,7 +173,7 @@ rule setup_gtdb4:
     params:
         bac_metadata="databases/gtdb/bac120_metadata.tsv",
         ar_metadata="databases/gtdb/ar53_metadata.tsv",
-		names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp"
+        names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     script:
