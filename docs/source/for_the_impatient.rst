@@ -43,7 +43,7 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
   snakemake --use-conda --conda-frontend conda --conda-create-envs-only
   snakemake --profile profile/ databases/.setup_done  
 
-  # Step 2: run the full workflow
+  # Step 3: run the full workflow
   snakemake --profile profile/ -n # view the DAG of jobs first, then run...
   snakemake --profile profile/
 
