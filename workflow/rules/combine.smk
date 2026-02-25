@@ -29,7 +29,7 @@ rule combine_pfam:
         """
         header="seq_id\talignment_start\talignment_end\tenvelope_start\tenvelope_end\thmm_acc\thmm_name\ttype\thmm_start\thmm_end\thmm_length\tbit_score\tE-value\tsignificance\tclan"
         echo -e "$header" > {output}
-        cat {input} | grep -v '^$' | sed 's/[[:space:]]\+/\t/g' | sed 's/^\t//' >> {output}
+        cat {input} | grep -v '^$' | sed 's/[[:space:]]\\+/\\t/g' | sed 's/^\\t//' >> {output}
         """
 		
 rule combine_cazy:
