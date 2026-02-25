@@ -13,9 +13,9 @@ rule fetchmg:
     threads:
         20
     conda:
-        "envs/environment.yaml"
+        "envs/fetchmg.yaml"
     shell:
         """
         rm -rf {params.dir}
-        {params.fetchmg}/fetchMGs.pl -m extraction -x {params.fetchmg}/bin {params.faa}/{wildcards.sample}.faa -o {params.dir} -t {threads}
+        fetchMGs extraction {params.faa}/{wildcards.sample}.faa gene {params.dir} -t {threads}
         """

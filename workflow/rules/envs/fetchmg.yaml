@@ -1,6 +1,8 @@
-name: gtdbtk
+name: fetchmg
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - gtdbtk=2.6.1
+  - python=3.12
+  - pip:
+    - fetchMGs

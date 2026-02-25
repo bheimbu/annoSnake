@@ -1,6 +1,6 @@
-name: gtdbtk
+name: seqtk
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - gtdbtk=2.6.1
+  - seqtk

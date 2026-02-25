@@ -57,7 +57,7 @@ dependencies:
   - datrie=0.8.2=py311hd4cff14_6
   - dbus=1.13.18=hb2f20db_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
-  - diamond=2.1.9=h43eeafb_0
+  - diamond
   - docutils=0.20.1=py311h38be061_0
   - dpath=2.1.6=pyha770c72_0
   - dropbox=11.36.2=pyhd8ed1ab_0

@@ -1,6 +1,7 @@
-name: gtdbtk
+name: checkm2
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - gtdbtk=2.6.1
+  - checkm2
+  - coverm

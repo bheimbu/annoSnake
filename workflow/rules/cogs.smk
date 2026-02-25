@@ -1,14 +1,46 @@
-localrules: cogs, blastp2, blastp3, blastp4, salmon_index_cogs1
+localrules: split_fetchmg_cogs, cogs, blastp2, blastp3, blastp4, salmon_index_cogs1
+
+rule split_fetchmg_cogs:
+    input:
+        done=OUTDIR / "taxonomy/fetchmg/{sample}/.rule_completed"
+    output:
+        expand(OUTDIR / "taxonomy/fetchmg/{{sample}}/{cog}.faa", cog=COGS)
+    params:
+        cogs=" ".join(COGS)
+    conda:
+        "envs/seqkit.yaml"
+    shell:
+        """
+        set -euo pipefail
+        outdir="{OUTDIR}/taxonomy/fetchmg/{wildcards.sample}"
+        mkdir -p "$outdir"
+        COG_LIST="{params.cogs}"
+        for cog in $COG_LIST; do
+            : > "$outdir/${{cog}}.faa"
+        done
+        if [ ! -s "{OUTDIR}/taxonomy/fetchmg/{wildcards.sample}/{wildcards.sample}.faa.fetchMGs.scores" ] || [ "$(wc -l < "{OUTDIR}/taxonomy/fetchmg/{wildcards.sample}/{wildcards.sample}.faa.fetchMGs.scores")" -le 1 ]; then
+            exit 0
+        fi
+        tmpdir="$(mktemp -d)"
+        trap 'rm -rf "$tmpdir"' EXIT
+        awk 'NR>1 && $3 ~ /^COG/ {{print $1 > ("'"$tmpdir"'/" $3 ".ids")}}' "{OUTDIR}/taxonomy/fetchmg/{wildcards.sample}/{wildcards.sample}.faa.fetchMGs.scores"
+        for ids in "$tmpdir"/COG*.ids; do
+            [ -e "$ids" ] || continue
+            cog="$(basename "$ids" .ids)"
+            seqkit grep -r -f "$ids" "{OUTDIR}/taxonomy/fetchmg/{wildcards.sample}/{wildcards.sample}.faa.fetchMGs.faa" > "$outdir/${{cog}}.faa" || true
+        done
+        """
 
 rule cogs:
     input:
-        expand(OUTDIR/ "taxonomy/fetchmg/{sample}/.rule_completed", sample=SAMPLES)
+        gtdb_done="databases/gtdb/.setup_done",
+        per_sample = lambda wildcards: expand(OUTDIR / "taxonomy/fetchmg/{sample}/{cog}.faa", sample=SAMPLES, cog=wildcards.cog)
     output:
         OUTDIR/ "taxonomy/cogs/{cog}/{cog}.faa"
     shell:
         """
         mkdir -p {OUTDIR}/taxonomy/cogs
-        cat {OUTDIR}/taxonomy/fetchmg/*/{wildcards.cog}.faa >> {output}
+        cat {input.per_sample} > {output}
         """
 
 rule blastp1:
@@ -27,10 +59,10 @@ rule blastp1:
     shell:
         """
         mkdir -p {OUTDIR}/taxonomy/blastp
-        if ! diamond blastp --ultra-sensitive --db {params.db}/gtdb_vers202.dmnd --query {input.faa} --outfmt 102 --out {OUTDIR}/taxonomy/blastp/{wildcards.cog}/{wildcards.cog}.blastp --max-hsps 0 --evalue {params.evalue} --threads {threads}; then
+        if ! diamond blastp --ultra-sensitive --db {params.db}/*.dmnd --query {input.faa} --outfmt 102 --out {OUTDIR}/taxonomy/blastp/{wildcards.cog}/{wildcards.cog}.blastp --max-hsps 0 --evalue {params.evalue} --threads {threads}; then
             touch "{OUTDIR}/taxonomy/blastp/{wildcards.cog}/.{wildcards.cog}_completed";
         fi
-	"""
+        """
 
 rule blastp2:
     input:
@@ -53,7 +85,7 @@ rule blastp3:
         output=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca"
     params:
         lca=lambda wildcards, input: Path(input["gtdb"]).parent,
-        evalue=config["blastp_evalue"]		
+        evalue=config["blastp_evalue"]
     conda:
         "envs/environment.yaml"
     script:
@@ -68,7 +100,7 @@ rule blastp4:
     shell:
         """
         grep "d__" {input} > {output.microbes}
-        awk -F"," '{{print $3}}' {output.microbes} | sed 's/"//g' > {output.header}
+        awk -F"," '{{print $2}}' {output.microbes} | sed 's/"//g' | cut -d '.' -f1 > {output.header}
         """
 
 rule salmon_index_cogs1:
@@ -80,14 +112,14 @@ rule salmon_index_cogs1:
     params:
         bed=lambda wildcards, input: Path(input["gtf"]).parent
     conda:
-        "envs/environment.yaml"
+        "envs/seqtk.yaml"
     shell:
         """
         sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.bed}/cogs.bed && rm "$filtered_gtf_file"        
         cat {OUTDIR}/taxonomy/prokka/*/*.fsa >> {OUTDIR}/taxonomy/cogs/cogs.fsa
         seqtk subseq {OUTDIR}/taxonomy/cogs/cogs.fsa {OUTDIR}/taxonomy/cogs/cogs.bed > {output}
         """
-		
+
 rule salmon_index_cogs2:
     input:
         OUTDIR/ "taxonomy/cogs/cogs.protein_contigs"

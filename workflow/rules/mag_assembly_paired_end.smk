@@ -95,7 +95,7 @@ rule MAG_refinement:
       threads:
         20
       conda:
-        "envs/mags.yaml"
+        "envs/metawrap.yaml"
       shell:
         """      
         if [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
@@ -129,8 +129,6 @@ rule MAG_above_threshold_bins:
         expand(OUTDIR/ "MAGs/bin_refinement/{sample}/.rule_completed", sample=SAMPLES)
       output:
         touch(OUTDIR/ "MAGs/above_threshold_bins/.rule_completed")
-      conda:
-        "envs/mags.yaml"
       shell:
         """  
         rm -rf {OUTDIR}/MAGs/metacoag/*pickle
