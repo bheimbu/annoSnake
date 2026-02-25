@@ -1,0 +1,6 @@
+name: metawrap
+channels:
+  - ursky
+dependencies:
+  - metawrap-mg
+  - metawrap-binning

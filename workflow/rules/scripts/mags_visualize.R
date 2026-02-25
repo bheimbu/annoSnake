@@ -45,7 +45,7 @@ write.csv(combined[order(combined$bin), ], snakemake@output[['csv']], row.names 
 checkm_completeness_plot <- ggplot(checkm_combine, aes(x = "completeness", y = bin, fill = completeness)) +
   geom_tile(color = "black", size = 0.1) +
   scale_fill_viridis_c(option="D", direction = 1, name = "Completeness in %") +
-  theme_minimal() +
+  theme_minimal(base_size = 11) +
   theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),

@@ -3,7 +3,7 @@ rule pfam:
         gtf=OUTDIR/ "taxonomy/prokka/{sample}/{sample}.gtf",
         db_setup="databases/pfam/.setup_done"
     output:
-        OUTDIR/ "annotation/pfam/{sample}/{sample}.evalue"
+        OUTDIR/ "annotation/pfam/{sample}/{sample}.pfam"
     params:
         evalue=config["pfam_evalue"],
         db=lambda wildcards, input: Path(input[1]).parent,

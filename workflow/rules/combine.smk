@@ -22,21 +22,25 @@ rule combine_kegg2:
 		
 rule combine_pfam:
     input:
-        expand(OUTDIR/ "annotation/pfam/{sample}/{sample}.evalue", sample=SAMPLES)
+        expand(OUTDIR/ "annotation/pfam/{sample}/{sample}.pfam", sample=SAMPLES)
     output:
-        OUTDIR/ "combine/pfam_combine.txt"
+        OUTDIR/ "combine/pfam_combine.tsv"
     shell:
         """
-        cat {input} >> {output}
+        header="seq_id\talignment_start\talignment_end\tenvelope_start\tenvelope_end\thmm_acc\thmm_name\ttype\thmm_start\thmm_end\thmm_length\tbit_score\tE-value\tsignificance\tclan"
+        echo -e "$header" > {output}
+        cat {input} | grep -v '^$' | sed 's/[[:space:]]\+/\t/g' | sed 's/^\t//' >> {output}
         """
 		
 rule combine_cazy:
     input:
-        expand(OUTDIR/ "annotation/cazy/{sample}/{sample}.top", sample=SAMPLES)
+        expand(OUTDIR/ "annotation/cazy/{sample}/{sample}.dbcan", sample=SAMPLES)
     output:
-        OUTDIR/ "combine/cazy_combine.txt"
+        OUTDIR/ "combine/cazy_combine.tsv"
     shell:
         """
+		header="domain_name\tdomain_length\tquery_id\tquery_length\te-value\thit_start\thit_end\tquery_start\tquery_end\thit_coverage"
+		echo -e "$header" > {output}
         cat {input} >> {output}
         """
 

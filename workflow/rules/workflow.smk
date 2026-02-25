@@ -30,7 +30,10 @@ if config["CAZYMES"] == True:
     output.append(OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.pdf")
     output.append(OUTDIR/ "tables/relative_abundance_CAZymes_metagenomes.csv")
 if config["PFAM"] == True:
-    output.append(OUTDIR/ "combine/pfam_combine.txt")	
+    output.append(OUTDIR/ "combine/pfam_combine.txt")
+    output.append(OUTDIR/ "figures/relative_abundance_PFAM_metagenomes.pdf")
+    output.append(OUTDIR/ "figures/relative_abundance_PFAM_metagenomes.html")
+    output.append(OUTDIR/ "tables/relative_abundance_PFAM_metagenomes.csv")	
 if config["COG"] == True:
     output.append(OUTDIR/ "combine/cogs.sf")
     output.append(OUTDIR/ "combine/contigs_combine.sf")

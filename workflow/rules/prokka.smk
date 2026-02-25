@@ -9,7 +9,7 @@ rule prokka:
     threads:
         20
     conda:
-        "envs/mags.yaml"
+        "envs/prokka.yaml"
     shell:
         """
         prokka --force --cpus {threads} --metagenome --prefix {wildcards.sample} --outdir {OUTDIR}/taxonomy/prokka/{wildcards.sample} {params.contigs}/{wildcards.sample}.fna

@@ -11,19 +11,20 @@ rule cazy1:
     conda:
         "envs/environment.yaml"
     params:
-        db=lambda wildcards, input: Path(input[1]).parent
+        db="databases/cazymes/dbCAN-fam-HMMs.txt",
+        evalue=config["cazy_evalue"]
     threads:
         20
     shell:
         """
-        hmmscan -E 1.0e-5 --cpu {threads} -o {output.out} --tblout {output.perseq} --domtblout {output.perdomain} {params.db}/dbCAN-fam-HMMs.txt.v11 {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa			
+        hmmscan -E {params.evalue} --cpu {threads} -o {output.out} --tblout {output.perseq} --domtblout {output.perdomain} {params.db} {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa			
         """
 		
 rule cazy2:
     input:
         OUTDIR/ "{sample}.perdomain"
     output:
-        OUTDIR/ "annotation/cazy/{sample}/{sample}.top"
+        OUTDIR/ "annotation/cazy/{sample}/{sample}.dbcan"
     conda:
         "envs/environment.yaml"
     params:
@@ -33,8 +34,5 @@ rule cazy2:
         """
         if [ -s {OUTDIR}/{wildcards.sample}.perdomain ]; then
             {params.hmmscanparser} {OUTDIR}/{wildcards.sample}.perdomain > {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.dbcan
-            awk -F"\t" '$5<{params.evalue} {{print $2"\t"$3"\t"$4"\t"$5"\t"$10"\t"$1}}' {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.dbcan > {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.evalue
-            export LC_ALL=C LC_LANG=C; sort -k3,3 -k5,5gr {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.evalue > {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.sorted
-            for next in $(cut -f2 {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.sorted | sort | uniq -u); do grep -w -m 1 "$next" {OUTDIR}/annotation/cazy/{wildcards.sample}/{wildcards.sample}.sorted; done > {output}
         fi			
         """

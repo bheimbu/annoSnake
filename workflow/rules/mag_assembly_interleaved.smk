@@ -95,7 +95,7 @@ rule MAG_refinement:
       threads:
         20
       conda:
-        "envs/mags.yaml"
+        "envs/metawrap.yaml"
       shell:
         """      
         if [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
