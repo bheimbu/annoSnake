@@ -25,12 +25,12 @@ if config["mag_assembly"] == True:
     output.append(OUTDIR/ "figures/MAG_metabolic_pathways.pdf")
     output.append(OUTDIR/ "tables/MAG_metabolic_pathways.csv")
 if config["CAZYMES"] == True:
-    output.append(OUTDIR/ "combine/cazy_combine.txt")
+    output.append(OUTDIR/ "combine/cazy_combine.tsv")
     output.append(OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html")
     output.append(OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.pdf")
     output.append(OUTDIR/ "tables/relative_abundance_CAZymes_metagenomes.csv")
 if config["PFAM"] == True:
-    output.append(OUTDIR/ "combine/pfam_combine.txt")
+    output.append(OUTDIR/ "combine/pfam_combine.tsv")
     output.append(OUTDIR/ "figures/relative_abundance_PFAM_metagenomes.pdf")
     output.append(OUTDIR/ "figures/relative_abundance_PFAM_metagenomes.html")
     output.append(OUTDIR/ "tables/relative_abundance_PFAM_metagenomes.csv")	
