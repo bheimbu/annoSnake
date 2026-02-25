@@ -167,7 +167,8 @@ rule setup_gtdb3:
         
 rule setup_gtdb4:
     input:
-        names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp"
+        names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp",
+		faa="databases/gtdb/gtdb_latest/gtdb_all.faa.gz"
     output:
         "databases/gtdb/gtdb_latest_lca.csv"
     params:
