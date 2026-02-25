@@ -167,13 +167,13 @@ rule setup_gtdb3:
         
 rule setup_gtdb4:
     input:
-        names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp",
-		faa="databases/gtdb/gtdb_latest/gtdb_all.faa.gz"
+        faa="databases/gtdb/gtdb_latest/gtdb_all.faa.gz"
     output:
         "databases/gtdb/gtdb_latest_lca.csv"
     params:
         bac_metadata="databases/gtdb/bac120_metadata.tsv",
-        ar_metadata="databases/gtdb/ar53_metadata.tsv"
+        ar_metadata="databases/gtdb/ar53_metadata.tsv",
+		names_dmp="databases/gtdb/gtdb-taxdump-latest/names.dmp"
     conda:
         "envs/gtdb_to_taxdump.yaml"
     script:

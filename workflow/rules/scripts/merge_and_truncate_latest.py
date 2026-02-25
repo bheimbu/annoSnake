@@ -21,7 +21,7 @@ def parse_names_dmp(names_dmp_file):
     return name_to_taxid
 
 print("Reading names.dmp...")
-name_to_taxid = parse_names_dmp(snakemake.input.names_dmp)
+name_to_taxid = parse_names_dmp(snakemake.params.names_dmp)
 
 print("Reading metadata files...")
 cols = ['accession', 'gtdb_representative', 'gtdb_taxonomy']
