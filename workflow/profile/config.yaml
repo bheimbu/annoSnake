@@ -1,31 +1,35 @@
 ### Kudos to @jdblischak! https://github.com/jdblischak/smk-simple-slurm
-cluster:
+executor: cluster-generic
+cluster-generic-submit-cmd:
   mkdir -p {OUTDIR}/logs/{rule} &&
   sbatch
     --partition={resources.partition}
     --time={resources.time}
     --cpus-per-task={threads}
     --mem={resources.mem_mb}
-    --job-name={rule}.{jobid}
+    --job-name=smk-{rule}-{wildcards}
     --output={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.out
     --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
+    --parsable
 default-resources:
-  - partition=medium #eg. 'medium' or 'fat' (if in doubt, contact your local HPC support)
+  - partition=scc-cpu # name-of-default-partition
   - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
-  - mem_mb=150000 # required memory per node, here in MB
+  - mem_mb=250000 # required memory per node, here in MB
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
 local-cores: 1
 latency-wait: 60
-jobs: 100
+jobs: 50
 keep-going: True
 rerun-incomplete: True
-printshellcmds: True
+printshellcmds: False
 scheduler: greedy
 use-conda: True
-conda-frontend: mamba
+conda-frontend: conda
 touch: False
-reason: True
 show-failed-logs: True
 rerun-triggers: mtime
 quiet: rules
+restart-times: 3
+cluster-generic-cancel-cmd: scancel
+cluster-generic-cancel-nargs: 50
