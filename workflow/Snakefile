@@ -6,6 +6,15 @@ configfile: "profile/params.yaml"
 
 with open('rules/scripts/.cogs.yaml', 'r') as file:
     cogs_data = yaml.safe_load(file)
+	
+if isinstance(cogs_data, dict) and "cogs" in cogs_data:
+    COGS = list(cogs_data["cogs"])
+elif isinstance(cogs_data, dict):
+    COGS = list(cogs_data.keys())
+else:
+    COGS = list(cogs_data)
+
+#print("Loaded COGs:", COGS[:5], "...", len(COGS))
 
 EMAIL=config["email"]
 	
