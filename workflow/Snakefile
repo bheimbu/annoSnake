@@ -23,6 +23,10 @@ include: "rules/workflow.smk"
 rule all:
     input:
          unpack(setup)
+		 
+...
+report: "report/workflow.rst"
+...
 
 if config["library_type"] == "paired-end":
     include: "rules/megahit_paired_end.smk"
@@ -52,6 +56,7 @@ include: "rules/blastx.smk"
 include: "rules/salmon_index_contigs.smk"
 include: "rules/combine.smk"
 include: "rules/visualization.smk"
+include: "rules/report.smk"
 
 onstart:
     print("######## Starting annoSnake for: ########\n")
