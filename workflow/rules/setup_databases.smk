@@ -93,7 +93,7 @@ rule setup_microbeannotator:
         40
     shell:
         """
-		find . -type f -name "conversion_database_creator.py" -exec sed -i 's|ftp://ftp.ebi.ac.uk|https://ftp.ebi.ac.uk|g' {{}} +
+		find . -type f -name "conversion_database_creator.py" -exec sed -i 's|https://ftp.ebi.ac.uk/pub/databases/interpro/interpro.xml.gz|https://ftp.ebi.ac.uk/pub/databases/interpro/current_release/interpro.xml.gz|g' {{}} +
         microbeannotator_db_builder -d {params.db} -m diamond -t {threads} --light
         """
 

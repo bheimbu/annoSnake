@@ -11,6 +11,8 @@ rule MAG_gtdbtk:
         40
       conda:
         "envs/gtdbtk.yaml"
+      benchmark:
+        "benchmarks/MAG_gtdbtk.txt"
       shell:
         """
         mkdir -p {OUTDIR}/MAGs/gtdbtk/genome_dir

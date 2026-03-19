@@ -6,3 +6,4 @@ channels:
 dependencies:
   - metawrap-mg
   - blas=2.5=mkl
+  - checkm-genome

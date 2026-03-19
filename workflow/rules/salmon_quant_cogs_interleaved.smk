@@ -9,6 +9,8 @@ rule salmon_quant_cogs_interleaved:
         cogs=lambda wildcards, output: Path(output[0]).parent  
     conda:
         "envs/salmon.yaml"
+    benchmark:
+        "benchmarks/salmon_quant_cogs_interleaved.txt"
     shell:
         """
         rules/scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/*gz) -o {params.cogs}/cogs.quant --meta -p {threads}

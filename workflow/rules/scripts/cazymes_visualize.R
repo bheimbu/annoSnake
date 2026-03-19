@@ -21,17 +21,16 @@ result <- data[, c(1, 3)]
 result <- as_tibble(result)
 
 gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsAsFactors = FALSE)
-
 result2 <- data.frame(gtf[, 1], gsub(".*gene_id\\s+", "", gtf[, 9]))
-colnames(result2) <- c("V1", "V2")
+colnames(result2) <- c("protein_name", "query_id")
 
-merged_result <- merge(result, as_tibble(result2), by.x = "V2", by.y = "V2", all.x = TRUE, all.y = FALSE)
-merged_result <- merged_result[, c("V1", "query_id", "domain_name")]
+merged_result <- merge(result, as_tibble(result2), by.x = "query_id", by.y = "query_id", all.x = TRUE, all.y = FALSE)
+merged_result <- merged_result[, c("protein_name", "query_id", "domain_name")]
 
 table_data <- read.table(snakemake@input[['sf']], sep = "\t", header = FALSE)
 table_data$V1 <- gsub(":.*$", "", table_data$V1)
 
-merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "V1", all.x = TRUE, all.y = FALSE)
+merged_result2 <- merge(merged_result, table_data, by.x = "protein_name", by.y = "V1", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "cazyme", "length", "effective_length", "tpm", "num_reads")
 merged_result2 <- na.omit(merged_result2)
 
@@ -42,9 +41,9 @@ merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
 csv <- merged_result2 %>%
   mutate(sample = sub("_contig.*", "", contig_names)) %>%
   relocate(sample, .before = everything())
-csv$cazyme <- sub("\\.hmm", "",csv$cazyme)
+csv$cazyme <- sub("\\.hmm", "", csv$cazyme)
 csv <- csv %>% rename(contig_name = contig_names)
-write.csv(csv_write[order(csv_write$sample), ], snakemake@output[['csv']], row.names = FALSE)
+write.csv(csv[order(csv$sample), ], snakemake@output[['csv']], row.names = FALSE)
 #####
 
 merged_result_filtered <- merged_result2 %>%
@@ -77,9 +76,7 @@ aggregated_data <- aggregated_data %>%
   rename(sample = contig_names)
 
 clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
-
 clr <- decostand(clr_data_subset, method = "clr", pseudocount = 1)
-
 clr_result <- cbind(sample = aggregated_data$sample, clr)
 
 transposed_clr_result <- t(clr_result) 
@@ -92,15 +89,12 @@ transposed_clr_result <- transposed_clr_result %>%
   mutate_at(vars(2:ncol(transposed_clr_result)), as.numeric)
 transposed_clr_result <- transposed_clr_result %>%
   rename(cazyme = sample)
-
-transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])  # Calculate the row-wise abundances
+transposed_clr_result$TotalAbundance <- rowSums(transposed_clr_result[, -1])
 n_cazymes <- nrow(transposed_clr_result)
+
 top_n <- min(50, n_cazymes)
-
 top_50_cazymes <- transposed_clr_result[order(transposed_clr_result$TotalAbundance, decreasing = TRUE), ][1:top_n, ]
-
 top_50_cazymes <- top_50_cazymes[, -ncol(top_50_cazymes)]
-
 top_50_cazymes <- t(top_50_cazymes)
 colnames(top_50_cazymes) <- top_50_cazymes[1, ]
 top_50_cazymes <- top_50_cazymes[-1, ]
@@ -111,10 +105,9 @@ rownames(top_50_cazymes) <- NULL
 clr_result_long <- gather(as.data.frame(top_50_cazymes), cazyme, clr_value, -sample)
 clr_result_long$clr_value <- as.numeric(clr_result_long$clr_value)
 clr_result_long$cazyme <- as.factor(clr_result_long$cazyme)
-
 clr_result_long$cazyme <- sub("\\.hmm", "", clr_result_long$cazyme)
-
 clr_result_long <- clr_result_long %>% arrange(cazyme)
+
 #save as pdf#### 
 heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = cazyme, fill = clr_value, text = sample, label = cazyme, label2 = clr_value)) +
   geom_tile() +

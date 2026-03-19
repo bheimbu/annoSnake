@@ -15,13 +15,15 @@ rule MAG_metabat2:
         40
     conda:
         "envs/mags.yaml"
+    benchmark:
+        "benchmarks/{sample}_MAG_metabat2.txt"
     shell:
         """
-	bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
+        bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
         bowtie2 -x {params.fna}/{wildcards.sample}.fna -p {threads} -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz | samtools view -@{threads} -bS -o {params.fna}/{wildcards.sample}.bam
         samtools sort -@{threads} {params.fna}/{wildcards.sample}.bam -o {params.fna}/{wildcards.sample}.sort
         samtools index -@{threads} {params.fna}/{wildcards.sample}.sort
-	runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
+        runMetaBat.sh -m {params.min_length} {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.sort
         rm -rf {params.fna}/{wildcards.sample}.sort* {params.fna}/{wildcards.sample}.bam
         mkdir -p {params.dir}
         mv {wildcards.sample}.fna.* {params.dir}
@@ -44,6 +46,8 @@ rule MAG_metacoag:
         20
      conda:
         "envs/mags.yaml"
+     benchmark:
+        "benchmarks/{sample}_MAG_metacoag.txt"
      shell:
         """
         coverm contig -1 {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
@@ -69,6 +73,8 @@ rule MAG_maxbin2:
         "shallow"
       conda:
         "envs/mags.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_maxbin2.txt"
       shell:
         """
         if ! run_MaxBin.pl -contig {params.fna}/{wildcards.sample}.fna -reads {INPUTDIR}/{wildcards.sample}_R1.fastq.gz -reads2 {INPUTDIR}/{wildcards.sample}_R2.fastq.gz -thread {threads} -out {wildcards.sample}; then
@@ -96,6 +102,8 @@ rule MAG_refinement:
         20
       conda:
         "envs/metawrap.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_refinement.txt"
       shell:
         """      
         if [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
@@ -129,6 +137,8 @@ rule MAG_above_threshold_bins:
         expand(OUTDIR/ "MAGs/bin_refinement/{sample}/.rule_completed", sample=SAMPLES)
       output:
         touch(OUTDIR/ "MAGs/above_threshold_bins/.rule_completed")
+      benchmark:
+        "benchmarks/MAG_above_threshold_bins.txt"
       shell:
         """  
         rm -rf {OUTDIR}/MAGs/metacoag/*pickle
@@ -143,8 +153,8 @@ rule MAG_above_threshold_bins:
               if [ -f "$file" ]; then
                 base_name=$(basename "$file")
                 new_name="$dir_name"_"$base_name"
-                mkdir -p results_paired_end/MAGs/above_threshold_bins/"$dir_name"/
-				cp "$file" results_paired_end/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
+                mkdir -p {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/
+				cp "$file" {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
               fi
             done
           fi

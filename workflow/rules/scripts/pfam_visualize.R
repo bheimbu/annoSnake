@@ -38,7 +38,7 @@ merged_result2$num_reads <- as.numeric(merged_result2$num_reads)
 csv <- merged_result2 %>%
   mutate(sample = sub("_contig.*", "", contig_name)) %>%
   relocate(sample, .before = everything())
-write.csv(csv,"~/Schreibtisch/pfam.csv", row.names = FALSE)
+write.csv(csv,snakemake@output[['csv']], row.names = FALSE)
 
 #data wrangling continued####
 merged_result_filtered <- csv %>%

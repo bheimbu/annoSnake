@@ -12,6 +12,8 @@ rule MAG_microbeannotator:
           20
       conda:
           "envs/microbeannotator.yaml"
+      benchmark:
+          "benchmarks/MAG_microbeannotator.txt"
       shell:
           """
           microbeannotator -i $(ls {params.faa}/*/*.faa) -d {params.db} -o {params.dir} -m diamond -p 2 -t {threads} --light

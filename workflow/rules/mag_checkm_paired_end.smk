@@ -12,10 +12,12 @@ rule MAG_checkm_paired1:
         40
       conda:
         "envs/checkm2.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_checkm_paired1.txt"
       shell:
         """
         if [ -e {OUTDIR}/"MAGs/above_threshold_bins/{wildcards.sample}/{wildcards.sample}_bin.1.fa" ]; then
-			checkm2 predict --threads {threads} --input {OUTDIR}/MAGs/above_threshold_bins/{wildcards.sample} --output-directory {OUTDIR}/MAGs/checkm/{wildcards.sample} --database_path {params.db}
+			checkm2 predict --threads {threads} --extension .fa --input {OUTDIR}/MAGs/above_threshold_bins/{wildcards.sample} --output-directory {OUTDIR}/MAGs/checkm/{wildcards.sample} --database_path {params.db} --force
             coverm genome --coupled {INPUTDIR}/{wildcards.sample}_R1.fastq.gz {INPUTDIR}/{wildcards.sample}_R2.fastq.gz --genome-fasta-files {OUTDIR}/MAGs/above_threshold_bins/{wildcards.sample}/*.fa --threads {threads} >& {OUTDIR}/MAGs/checkm/{wildcards.sample}/{wildcards.sample}.abundance
         else
             touch "{OUTDIR}/MAGs/checkm/{wildcards.sample}/.rule_completed"
@@ -23,13 +25,18 @@ rule MAG_checkm_paired1:
         """
 
 rule MAG_checkm_paired2:
-      input:
-        expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
-      output:
-        directory(OUTDIR/ "MAGs/checkm/summaries")
-      params:
-        summary=lambda wildcards, output: Path(output[0]).parent
-      shell:
+    input:
+        expand(OUTDIR / "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
+    output:
+        directory(OUTDIR / "MAGs/checkm/summaries")
+    params:
+        indir=OUTDIR / "MAGs/checkm",
+        samples=" ".join(SAMPLES)
+    benchmark:
+        "benchmarks/MAG_checkm_paired2.txt"
+    shell:
         """
-        mkdir -p {output} && cp -a {params.summary}/*/*summary {output}
+        mkdir -p {output}
+        find {params.indir} -maxdepth 2 -name "quality_report.tsv" \
+        -exec sh -c 'cp "$1" "{output}/$(basename $(dirname "$1")).tsv"' _ {{}} \\;
         """

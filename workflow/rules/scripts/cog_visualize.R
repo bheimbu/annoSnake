@@ -22,25 +22,26 @@ data <- read.csv(snakemake@input[['microbes']], header = FALSE)
 data <- lapply(data, function(x) gsub('"', '', x))
 data <- as.data.frame(data)
 
-# Select the third and last columns
-result <- data[, c(3, 7)]
+# Select the third and sixth column (protein name and taxonomic lineage, respectively)
+result <- data[, c(2, 6)]
+colnames(result) <- c("protein", "lineage")
+result$protein <- gsub("\\..*", "", result$protein)
 
 # Read the tab-separated table
 gtf <- read.table(snakemake@input[['gtf']], sep = "\t", header = FALSE, stringsAsFactors = FALSE)
 
 # Extract the first column and everything after "gene_id"
 result2 <- data.frame(gtf[, 1], gsub(".*gene_id\\s+", "", gtf[, 9]))
-colnames(result2) <- c("V1", "V2")
+colnames(result2) <- c("contig", "protein")
 
 # Merge the results
-merged_result <- merge(result, result2, by.x = "V3", by.y = "V2", all.x = TRUE, all.y = FALSE)
-merged_result <- merged_result[, c("V1", "V3", "V7")]
+merged_result <- merge(result, result2, by.x = "protein", by.y = "protein", all.x = TRUE, all.y = FALSE)
 
 # Read tab-separated table data
 table_data <- read.table(snakemake@input[['quant']], sep = "\t", header = TRUE)
 table_data$Name <- gsub(":.*$", "", table_data$Name)
 
-merged_result2 <- merge(merged_result, table_data, by.x = "V1", by.y = "Name", all.x = TRUE, all.y = FALSE)
+merged_result2 <- merge(merged_result, table_data, by.x = "contig", by.y = "Name", all.x = TRUE, all.y = FALSE)
 colnames(merged_result2) <- c("contig_names", "protein_names", "marker_taxonomy", "length", "effective_length", "tpm", "num_reads")
 
 # write csv####
@@ -141,17 +142,17 @@ ggsave(snakemake@output[['pdf']], width = 30, height = 20, units = "cm")
 clr_result_long$taxonomy_orig <- clr_result_long$taxonomy
 
 clr_result_long$taxonomy <- gsub("d__", "domain_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_p__", ",phylum_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_c__", ",class_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_o__", ",order_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_f__", ",family_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_g__", ",genus_", clr_result_long$taxonomy)
-clr_result_long$taxonomy <- gsub("_s__", ",species_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("p__", "phylum_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("c__", "class_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("o__", "order_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("f__", "family_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("g__", "genus_", clr_result_long$taxonomy)
+clr_result_long$taxonomy <- gsub("s__", "species_", clr_result_long$taxonomy)
 
 clr_long_df_separated <- as_tibble(clr_result_long) %>%
   separate(taxonomy,
            into = c("domain", "phylum", "class", "order", "family", "genus", "species"),
-           sep = ",",
+           sep = ";",
            extra = "drop")
 
 clr_long_df_separated$domain <- gsub("domain_", "", clr_long_df_separated$domain)

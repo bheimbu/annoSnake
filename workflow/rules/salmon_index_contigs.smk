@@ -10,6 +10,8 @@ rule salmon_index_contigs1:
         prokka=lambda wildcards, input: Path(input["gtf"]).parent
     conda:
         "envs/seqtk.yaml"
+    benchmark:
+        "benchmarks/{sample}_salmon_index_contigs1.txt"
     shell:
         """
         sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.prokka}/{wildcards.sample}.bed && rm "$filtered_gtf_file"
@@ -25,6 +27,8 @@ rule salmon_index_contigs2:
         20
     conda:
         "envs/salmon.yaml"
+    benchmark:
+        "benchmarks/{sample}_salmon_index_contigs2.txt"
     shell:
         """
         salmon index -p {threads} -t {input} -i {output}
