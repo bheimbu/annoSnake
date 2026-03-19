@@ -3,13 +3,13 @@
 email: "bheimbu@gwdg.de"
 
 # specify input data
-inputdir: "figshare_D_perniger"
+inputdir: "figshare"
 
 # input files are 'paired-end' or 'interleaved'?
 library_type: "paired-end"
 
 # specify output directory
-outdir: "results_D_perniger" 
+outdir: "results_figshare_benchmark" 
 
 # specify minimum length of contigs to output in MEGAHIT
 min_length: 1500
