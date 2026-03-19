@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyverse)
 
 # Read LCA file
-taxa <- read.csv(file.path(snakemake@params[["lca"]], "gtdb_latest_lca.csv"), header = TRUE, sep = ",")
+taxa <- read.csv(file.path(snakemake@params[["lca"]]), header = TRUE, sep = ",")
 
 # Remove X column if it exists
 if ("X" %in% colnames(taxa)) {

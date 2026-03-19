@@ -14,6 +14,8 @@ rule fetchmg:
         20
     conda:
         "envs/fetchmg.yaml"
+    benchmark:
+        "benchmarks/{sample}_fetchmg.txt"
     shell:
         """
         rm -rf {params.dir}

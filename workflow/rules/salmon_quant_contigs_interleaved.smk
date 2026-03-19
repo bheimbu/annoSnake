@@ -9,6 +9,8 @@ rule salmon_quant_contigs_interleaved:
         20
     conda:
         "envs/salmon.yaml"
+    benchmark:
+        "benchmarks/{sample}_salmon_quant_contigs_interleaved.txt"
     shell:
         """
         rules/scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/{wildcards.sample}.fastq.gz) -o {params.contigs}/{wildcards.sample}.quant --meta -p {threads}

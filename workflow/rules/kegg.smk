@@ -13,6 +13,8 @@ rule kegg1:
         20
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_kegg1.txt"
     shell:
         """
         exec_annotation -o {output} --tmp-dir {params.tmp} -p {params.db}/profiles -k {params.db}/ko_list --cpu {threads} -f detail-tsv {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa
@@ -30,5 +32,7 @@ rule kegg2:
         db=lambda wildcards, input: Path(input["db_setup"]).parent
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_kegg2.txt"
     script:
         "scripts/kegg.R"

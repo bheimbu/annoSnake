@@ -9,6 +9,8 @@ rule salmon_quant_contigs_paired_end:
         20
     conda:
         "envs/salmon.yaml"
+    benchmark:
+        "benchmarks/{sample}_salmon_quant_contigs_paired_end.txt"
     shell:
         """
         salmon quant -i {input} -l IU -1 <(gunzip -c {INPUTDIR}/{wildcards.sample}_R1.fastq.gz) -2 <(gunzip -c {INPUTDIR}/{wildcards.sample}_R2.fastq.gz) -o {params.contigs}/{wildcards.sample}.quant --meta -p {threads}

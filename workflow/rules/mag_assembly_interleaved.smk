@@ -15,6 +15,8 @@ rule MAG_metabat2:
         40
     conda:
         "envs/mags.yaml"
+    benchmark:
+        "benchmarks/{sample}_MAG_metabat2.txt"
     shell:
         """
 	bowtie2-build {params.fna}/{wildcards.sample}.fna {params.fna}/{wildcards.sample}.fna
@@ -44,6 +46,8 @@ rule MAG_metacoag:
         20
      conda:
         "envs/mags.yaml"
+     benchmark:
+        "benchmarks/{sample}_MAG_metacoag.txt"
      shell:
         """      
 	coverm contig --interleaved {INPUTDIR}/{wildcards.sample}.fastq.gz -r {params.contigs}/{wildcards.sample}.fna -o {output.abundance} -t {threads} 
@@ -69,6 +73,8 @@ rule MAG_maxbin2:
         "shallow"
       conda:
         "envs/mags.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_maxbin2.txt"
       shell:
         """
         if ! run_MaxBin.pl -contig {params.fna}/{wildcards.sample}.fna -reads {INPUTDIR}/{wildcards.sample}.fastq.gz -thread {threads} -out {wildcards.sample}; then
@@ -96,6 +102,8 @@ rule MAG_refinement:
         20
       conda:
         "envs/metawrap.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_refinement.txt"
       shell:
         """      
         if [ "$(find {params.metabat2}/{wildcards.sample}.fna.metabat-bins* -type f -name '*.fa' | wc -l)" -gt 0 ] &&
@@ -131,6 +139,8 @@ rule MAG_above_threshold_bins:
         touch(OUTDIR/ "MAGs/above_threshold_bins/.rule_completed")
       conda:
         "envs/mags.yaml"
+      benchmark:
+        "benchmarks/{sample}_MAG_above_threshold_bins.txt"
       shell:
         """  
         if [ ! -d {OUTDIR}/MAGs/above_threshold_bins ]; then
@@ -145,7 +155,7 @@ rule MAG_above_threshold_bins:
                 base_name=$(basename "$file")
                 new_name="$dir_name"_"$base_name"
                 mkdir -p {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/
-		cp "$file" {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
+				cp "$file" {OUTDIR}/MAGs/above_threshold_bins/"$dir_name"/"$new_name"
               fi
             done
           fi

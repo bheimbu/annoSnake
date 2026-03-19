@@ -14,6 +14,8 @@ rule blastx1:
         40
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_blastx1.txt"
     shell:
         """
         diamond blastx --db {params.db}/*.dmnd --query {params.fna}/{wildcards.sample}.fna --outfmt 102 --out {output} --max-hsps 0 --evalue {params.evalue} --threads {threads}
@@ -26,6 +28,8 @@ rule blastx2:
         OUTDIR/ "taxonomy/blastx/{sample}/{sample}.blastx.matches"
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_blastx2.txt"
     shell:
         """
         if [ -s {OUTDIR}/taxonomy/blastx/{wildcards.sample}/{wildcards.sample}.blastx ]; then
@@ -44,6 +48,8 @@ rule blastx3:
         evalue=config["blastx_evalue"]
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_blastx3.txt"
     script:
         "scripts/gtdb_diamond_lca.R"
 		
@@ -55,6 +61,8 @@ rule blastx4:
         headers=OUTDIR/ "taxonomy/blastx/{sample}/{sample}.blastx.matches.lca.microbes.headers"
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_blastx4.txt"
     shell:
         """
         grep "d__" {input} > {output.microbes}

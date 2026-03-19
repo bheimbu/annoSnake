@@ -11,6 +11,8 @@ rule visualization_cogs:
         csv=OUTDIR/ "tables/rel_abundance_of_bacteria_and_archaea_in_metagenomes.csv"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_cogs.txt"
     script:
         "scripts/cog_visualize.R"
 		
@@ -27,6 +29,8 @@ rule visualization_kegg:
         csv=OUTDIR/ "tables/prokaryotic_metabolic_pathways.csv"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_kegg.txt"
     script:
         "scripts/kegg_visualize.R"
 
@@ -41,6 +45,8 @@ rule visualization_mags1:
         bins=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.bins"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_mags1.txt"
     shell:
         """
         grep -E -f {params.KO_list} {params.kofam_results}/*filt > {output.bins}
@@ -60,6 +66,8 @@ rule visualization_mags2:
         csv=OUTDIR/ "tables/MAG_metabolic_pathways.csv"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_mags2.txt"
     script:
         "scripts/mags_visualize.R"
 
@@ -74,6 +82,8 @@ rule visualization_cazymes:
         csv=OUTDIR/ "tables/relative_abundance_CAZymes_metagenomes.csv"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_cazymes.txt"
     script:
         "scripts/cazymes_visualize.R"
 
@@ -88,5 +98,7 @@ rule visualization_pfam:
         csv=OUTDIR/ "tables/relative_abundance_PFAM_metagenomes.csv"
     conda:
         "envs/visualization.yaml"
+    benchmark:
+        "benchmarks/visualization_pfam.txt"
     script:
         "scripts/pfam_visualize.R"

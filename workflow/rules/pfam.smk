@@ -12,6 +12,8 @@ rule pfam:
         20
     conda:
         "envs/environment.yaml"
+    benchmark:
+        "benchmarks/{sample}_pfam.txt"
     shell:
         """
         pfam_scan.pl -fasta {params.faa}/{wildcards.sample}.faa -dir {params.db} -e_seq 1e-4 -cpu {threads} |

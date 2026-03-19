@@ -10,6 +10,8 @@ rule prokka:
         20
     conda:
         "envs/prokka.yaml"
+    benchmark:
+        "benchmarks/{sample}_prokka.txt"
     shell:
         """
         prokka --force --cpus {threads} --metagenome --prefix {wildcards.sample} --outdir {OUTDIR}/taxonomy/prokka/{wildcards.sample} {params.contigs}/{wildcards.sample}.fna
