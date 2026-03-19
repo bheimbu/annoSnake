@@ -12,7 +12,7 @@ cluster-generic-submit-cmd:
     --error={OUTDIR}/logs/{rule}/{rule}_{wildcards}_%J.err
     --parsable
 default-resources:
-  - partition=scc-cpu # name-of-default-partition
+  - partition=medium96s # name-of-default-partition
   - time="1-00:00:00" # maximum runtime of jobs, here 1 day / 24h
   - mem_mb=250000 # required memory per node, here in MB
 max-jobs-per-second: 1
