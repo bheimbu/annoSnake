@@ -17,4 +17,5 @@ rule MAG_gtdbtk:
         mkdir -p {OUTDIR}/MAGs/gtdbtk/genome_dir
         cp -a {OUTDIR}/MAGs/above_threshold_bins/*/*.fa {params.out}/genome_dir
         gtdbtk classify_wf --genome_dir {params.out}/genome_dir --out_dir {params.out} --cpus {threads} --skip_ani_screen --extension fa
+		cp -a {OUTDIR}/MAGs/gtdbtk/*summary.tsv {OUTDIR}/tables/
         """
