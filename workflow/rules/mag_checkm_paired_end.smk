@@ -13,7 +13,7 @@ rule MAG_checkm_paired1:
       conda:
         "envs/checkm2.yaml"
       benchmark:
-        "benchmarks/{sample}_MAG_checkm_paired1.txt"
+        OUTDIR/ "benchmarks/{sample}_MAG_checkm_paired1.txt"
       shell:
         """
         if [ -e {OUTDIR}/"MAGs/above_threshold_bins/{wildcards.sample}/{wildcards.sample}_bin.1.fa" ]; then
@@ -33,7 +33,7 @@ rule MAG_checkm_paired2:
         indir=OUTDIR / "MAGs/checkm",
         samples=" ".join(SAMPLES)
     benchmark:
-        "benchmarks/MAG_checkm_paired2.txt"
+        OUTDIR/ "benchmarks/MAG_checkm_paired2.txt"
     shell:
         """
         mkdir -p {output}

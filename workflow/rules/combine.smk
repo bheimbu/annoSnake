@@ -6,7 +6,7 @@ rule combine_kegg1:
     output:
         touch(OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.no_header")
     benchmark:
-        "benchmarks/{sample}_combine_kegg1.txt"
+        OUTDIR/ "benchmarks/{sample}_combine_kegg1.txt"
     shell:
         """
         sed '1d' {input} > {output}
@@ -18,7 +18,7 @@ rule combine_kegg2:
     output:
         OUTDIR/ "combine/kegg_combine.txt"
     benchmark:
-        "benchmarks/combine_kegg2.txt"
+        OUTDIR/ "benchmarks/combine_kegg2.txt"
     shell:
         """
         cat {input} >> {output}
@@ -30,7 +30,7 @@ rule combine_pfam:
     output:
         OUTDIR/ "combine/pfam_combine.tsv"
     benchmark:
-        "benchmarks/combine_pfam.txt"
+        OUTDIR/ "benchmarks/combine_pfam.txt"
     shell:
         """
         header="seq_id\talignment_start\talignment_end\tenvelope_start\tenvelope_end\thmm_acc\thmm_name\ttype\thmm_start\thmm_end\thmm_length\tbit_score\tE-value\tsignificance\tclan"
@@ -44,7 +44,7 @@ rule combine_cazy:
     output:
         OUTDIR/ "combine/cazy_combine.tsv"
     benchmark:
-        "benchmarks/combine_cazy.txt"
+        OUTDIR/ "benchmarks/combine_cazy.txt"
     shell:
         """
 		header="domain_name\tdomain_length\tquery_id\tquery_length\te-value\thit_start\thit_end\tquery_start\tquery_end\thit_coverage"
@@ -58,7 +58,7 @@ rule combine_salmon_contigs1:
     output:
         touch(OUTDIR/ "quantification/contigs/{sample}/{sample}.quant/quant_no_header.sf")
     benchmark:
-        "benchmarks/{sample}_combine_salmon_contigs1.txt"
+        OUTDIR/ "benchmarks/{sample}_combine_salmon_contigs1.txt"
     shell:
         """
         sed '1d' {OUTDIR}/quantification/contigs/{wildcards.sample}/{wildcards.sample}.quant/quant.sf > {output}
@@ -70,7 +70,7 @@ rule combine_salmon_contigs2:
     output:
         OUTDIR/ "combine/contigs_combine.sf"
     benchmark:
-        "benchmarks/combine_salmon_contigs2.txt"
+        OUTDIR/ "benchmarks/combine_salmon_contigs2.txt"
     shell:
         """
         cat {input} >> {output}
@@ -82,7 +82,7 @@ rule combine_salmon_cogs:
     output:
         OUTDIR/ "combine/cogs.sf"
     benchmark:
-        "benchmarks/combine_salmon_cogs.txt"
+        OUTDIR/ "benchmarks/combine_salmon_cogs.txt"
     shell:
         """
         cp -a {OUTDIR}/quantification/cogs/cogs.quant/quant.sf {output}
@@ -94,7 +94,7 @@ rule combine_metaquast:
     output:
         OUTDIR/ "figures/metaquast.html"
     benchmark:
-        "benchmarks/combine_metaquast.txt"
+        OUTDIR/ "benchmarks/combine_metaquast.txt"
     shell:
         """
         cp -a {input} {output}
@@ -104,7 +104,7 @@ rule combine_checkm:
     input:
         expand(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed", sample=SAMPLES)
     benchmark:
-        "benchmarks/combine_checkm.txt"
+        OUTDIR/ "benchmarks/combine_checkm.txt"
     shell:
         """
         rm -rf {OUTDIR}/MAGs/above_threshold_bins/{wildcards.sample}_bin.*.fa
@@ -116,7 +116,7 @@ rule combine_gtf:
     output:
         OUTDIR/ "combine/contigs_combine.gtf"
     benchmark:
-        "benchmarks/combine_gtf.txt"
+        OUTDIR/ "benchmarks/combine_gtf.txt"
     shell:
         """
         cat {input} >> {output}

@@ -10,7 +10,7 @@ rule salmon_quant_cogs_interleaved:
     conda:
         "envs/salmon.yaml"
     benchmark:
-        "benchmarks/salmon_quant_cogs_interleaved.txt"
+        OUTDIR/ "benchmarks/salmon_quant_cogs_interleaved.txt"
     shell:
         """
         rules/scripts/runner.sh salmon quant -i {input} -l IU --interleaved <(gunzip -c {INPUTDIR}/*gz) -o {params.cogs}/cogs.quant --meta -p {threads}

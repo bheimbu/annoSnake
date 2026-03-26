@@ -29,13 +29,15 @@ mags <- mags %>%
   mutate(binary = ifelse(binary == 1, "present", "absent"))
 
 #checkm summaries
-checkm_summaries <- list.files(snakemake@input[['checkm']], pattern = "\\.tsv$", full.names = TRUE)
+checkm_summaries <- list.files(snakemake@input[['checkm2']], pattern = "\\.tsv$", full.names = TRUE)
 checkm_combine <- do.call(rbind, lapply(checkm_summaries, function(file) {
   df <- read.delim(file)
   subset_df <- df[, c("Name", "Completeness", "Contamination")]
   colnames(subset_df) <- c("bin", "completeness", "contamination")
   return(subset_df)
 }))
+
+checkm_combine <- checkm_combine[checkm_combine$completeness > snakemake@params[['completeness']] & checkm_combine$contamination < snakemake@params[['contamination']], ]
 
 #write csv
 combined <- left_join(checkm_combine, mags, by = "bin")

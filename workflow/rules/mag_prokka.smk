@@ -1,6 +1,6 @@
 rule MAG_prokka:
     input:
-       OUTDIR/ "MAGs/above_threshold_bins/.rule_completed"
+       OUTDIR / "MAGs/checkm2/summaries"
     output:
        touch(OUTDIR/ "MAGs/prokka/.rule_completed")
     threads:
@@ -8,7 +8,7 @@ rule MAG_prokka:
     conda:
        "envs/prokka.yaml"
     benchmark:
-       "benchmarks/MAG_prokka.txt"
+       OUTDIR/ "benchmarks/MAG_prokka.txt"
     shell:
        """
        mkdir -p {OUTDIR}/MAGs/prokka
