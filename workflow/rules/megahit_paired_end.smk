@@ -28,7 +28,7 @@ rule megahit:
     conda:
         "envs/mags.yaml"
     benchmark:
-        "benchmarks/{sample}_megahit.txt"
+        OUTDIR/ "benchmarks/{sample}_megahit.txt"
     shell:
         """
         rm -rf {OUTDIR}/assemblies/megahit/{wildcards.sample}
@@ -41,7 +41,7 @@ rule preprocess:
     output:
         touch(OUTDIR/ "assemblies/preprocessed_contigs/{sample}/.rule_completed")
     benchmark:
-        "benchmarks/{sample}_preprocess.txt"
+        OUTDIR/ "benchmarks/{sample}_preprocess.txt"
     shell: 
 	    """
         for fasta_file in {OUTDIR}/assemblies/megahit/{wildcards.sample}/{wildcards.sample}.contigs.fa; do

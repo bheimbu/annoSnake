@@ -13,7 +13,7 @@ rule metaquast:
     conda:
         "envs/mags.yaml"
     benchmark:
-        "benchmarks/metaquast.txt"
+        OUTDIR/ "benchmarks/metaquast.txt"
     shell:
         """
         {params.metaquast}/metaquast.py --threads {threads} -o {params.outdir} {params.contigs} --no-krona

@@ -16,7 +16,7 @@ rule cazy1:
     threads:
         20
     benchmark:
-        "benchmarks/{sample}_cazy1.txt"
+        OUTDIR/ "benchmarks/{sample}_cazy1.txt"
     shell:
         """
         hmmscan -E {params.evalue} --cpu {threads} -o {output.out} --tblout {output.perseq} --domtblout {output.perdomain} {params.db} {OUTDIR}/taxonomy/prokka/{wildcards.sample}/{wildcards.sample}.faa			
@@ -33,7 +33,7 @@ rule cazy2:
         hmmscanparser="rules/scripts/hmmscan-parser.sh",
         evalue=config["cazy_evalue"]
     benchmark:
-        "benchmarks/{sample}_cazy2.txt"
+        OUTDIR/ "benchmarks/{sample}_cazy2.txt"
     shell:
         """
         if [ -s {OUTDIR}/{wildcards.sample}.perdomain ]; then

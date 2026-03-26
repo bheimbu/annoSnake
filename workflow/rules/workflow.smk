@@ -21,7 +21,7 @@ if config["library_type"] == "interleaved":
 if config["mag_assembly"] == True:
     output.append(OUTDIR/ "MAGs/gtdbtk/.rule_completed")
     output.append(OUTDIR/ "MAGs/microbeannotator/.rule_completed")
-    output.append(OUTDIR/ "MAGs/checkm/{sample}/.rule_completed")
+    output.append(OUTDIR/ "MAGs/coverm/{sample}/.rule_completed")
     output.append(OUTDIR/ "figures/MAG_metabolic_pathways.pdf")
     output.append(OUTDIR/ "tables/MAG_metabolic_pathways.csv")
 if config["CAZYMES"] == True:

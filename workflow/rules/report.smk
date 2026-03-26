@@ -7,8 +7,8 @@ rule report:
         from glob import glob
 
         dfs = []
-        for f in glob("benchmarks/**/*.txt", recursive=True):
-            rule_name = f.replace("benchmarks/", "").replace(".txt", "")
+        for f in glob(OUTDIR/ "benchmarks/**/*.txt", recursive=True):
+            rule_name = f.replace(OUTDIR/ "benchmarks/", "").replace(".txt", "")
             df = pd.read_csv(f, sep="\t")
             df.insert(0, "rule", rule_name)
             dfs.append(df)

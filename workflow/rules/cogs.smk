@@ -10,7 +10,7 @@ rule split_fetchmg_cogs:
     conda:
         "envs/seqkit.yaml"
     benchmark:
-        "benchmarks/{sample}_split_fetchmg_cogs.txt"
+        OUTDIR/ "benchmarks/{sample}_split_fetchmg_cogs.txt"
     shell:
         """
         set -euo pipefail
@@ -59,7 +59,7 @@ rule blastp1:
     conda:
         "envs/environment.yaml"
     benchmark:
-        "benchmarks/{cog}_blastp1.txt"
+        OUTDIR/ "benchmarks/{cog}_blastp1.txt"
     shell:
         """
         mkdir -p {OUTDIR}/taxonomy/blastp
@@ -75,7 +75,7 @@ rule blastp2:
         matches=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches",
         gtf=OUTDIR/ "taxonomy/cogs/cogs.gtf"
     benchmark:
-        "benchmarks/blastp2.txt"
+        OUTDIR/ "benchmarks/blastp2.txt"
     shell:
         """
         cat {OUTDIR}/taxonomy/prokka/*/*.gtf >> {output.gtf}
@@ -90,12 +90,12 @@ rule blastp3:
     output:
         output=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca"
     params:
-        lca=lambda wildcards, input: Path(input["gtdb"]).parent,
+        lca="databases/gtdb/gtdb_latest_lca.csv",
         evalue=config["blastp_evalue"]
     conda:
         "envs/environment.yaml"
     benchmark:
-        "benchmarks/blastp3.txt"
+        OUTDIR/ "benchmarks/blastp3.txt"
     script:
         "scripts/gtdb_diamond_lca.R"
 
@@ -106,7 +106,7 @@ rule blastp4:
         header=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes.headers",
         microbes=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes"
     benchmark:
-        "benchmarks/blastp4.txt"
+        OUTDIR/ "benchmarks/blastp4.txt"
     shell:
         """
         grep "d__" {input} > {output.microbes}
@@ -124,7 +124,7 @@ rule salmon_index_cogs1:
     conda:
         "envs/seqtk.yaml"
     benchmark:
-        "benchmarks/salmon_index_cogs1.txt"
+        OUTDIR/ "benchmarks/salmon_index_cogs1.txt"
     shell:
         """
         sample=$(basename {input.gtf} .gtf) && filtered_gtf_file="$sample"_filtered.gtf && grep -w -f {input.headers} {input.gtf} > "$filtered_gtf_file" && awk 'BEGIN {{OFS="\t"}} !seen[$1]++ {{split($9, a, "gene_id "); gsub(/;/, "", a[2]); print $1, $4 - 1, $5, a[2], $7}}' "$filtered_gtf_file" > {params.bed}/cogs.bed && rm "$filtered_gtf_file"        
@@ -142,7 +142,7 @@ rule salmon_index_cogs2:
     conda:
         "envs/salmon.yaml"
     benchmark:
-        "benchmarks/salmon_index_cogs2.txt"
+        OUTDIR/ "benchmarks/salmon_index_cogs2.txt"
     shell:
         """
         salmon index -p {threads} -t {input} -i {output}

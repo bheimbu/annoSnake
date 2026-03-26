@@ -12,7 +12,7 @@ rule visualization_cogs:
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_cogs.txt"
+        OUTDIR/ "benchmarks/visualization_cogs.txt"
     script:
         "scripts/cog_visualize.R"
 		
@@ -30,7 +30,7 @@ rule visualization_kegg:
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_kegg.txt"
+        OUTDIR/ "benchmarks/visualization_kegg.txt"
     script:
         "scripts/kegg_visualize.R"
 
@@ -46,7 +46,7 @@ rule visualization_mags1:
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_mags1.txt"
+        OUTDIR/ "benchmarks/visualization_mags1.txt"
     shell:
         """
         grep -E -f {params.KO_list} {params.kofam_results}/*filt > {output.bins}
@@ -58,16 +58,18 @@ rule visualization_mags1:
 rule visualization_mags2:
     input:
         hits=OUTDIR/ "MAGs/microbeannotator/kofam_results/all.hits",
-        checkm=OUTDIR/ "MAGs/checkm/summaries"
+        checkm2=OUTDIR/ "MAGs/checkm2/summaries"
     params:
-        pathway="rules/scripts/keggid_to_genes_pathway.csv"
+        pathway="rules/scripts/keggid_to_genes_pathway.csv",
+        completeness=config['completeness'],
+        contamination=config['contamination']
     output:
         pdf=OUTDIR/ "figures/MAG_metabolic_pathways.pdf",
         csv=OUTDIR/ "tables/MAG_metabolic_pathways.csv"
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_mags2.txt"
+        OUTDIR/ "benchmarks/visualization_mags2.txt"
     script:
         "scripts/mags_visualize.R"
 
@@ -83,7 +85,7 @@ rule visualization_cazymes:
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_cazymes.txt"
+        OUTDIR/ "benchmarks/visualization_cazymes.txt"
     script:
         "scripts/cazymes_visualize.R"
 
@@ -99,6 +101,6 @@ rule visualization_pfam:
     conda:
         "envs/visualization.yaml"
     benchmark:
-        "benchmarks/visualization_pfam.txt"
+        OUTDIR/ "benchmarks/visualization_pfam.txt"
     script:
         "scripts/pfam_visualize.R"

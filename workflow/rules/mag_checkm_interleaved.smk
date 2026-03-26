@@ -13,7 +13,7 @@ rule MAG_checkm_interleaved1:
       conda:
         "envs/checkm2.yaml"
       benchmark:
-        "benchmarks/{sample}_MAG_checkm_interleaved1.txt"
+        OUTDIR/ "benchmarks/{sample}_MAG_checkm_interleaved1.txt"
       shell:
         """
         if [ -e {OUTDIR}/"MAGs/above_threshold_bins/{wildcards.sample}/{wildcards.sample}_bin.1.fa" ]; then
@@ -32,7 +32,7 @@ rule MAG_checkm_interleaved2:
       params:
         summary=lambda wildcards, output: Path(output[0]).parent
       benchmark:
-        "benchmarks/{sample}_MAG_checkm_interleaved2.txt"
+        OUTDIR/ "benchmarks/{sample}_MAG_checkm_interleaved2.txt"
       shell:
         """
         mkdir -p {output} && cp -a {params.summary}/*/*summary {output}
