@@ -4,11 +4,12 @@ rule report:
     localrule: True
     run:
         import pandas as pd
-        from glob import glob
+        from pathlib import Path
 
         dfs = []
-        for f in glob(OUTDIR/ "benchmarks/**/*.txt", recursive=True):
-            rule_name = f.replace(OUTDIR/ "benchmarks/", "").replace(".txt", "")
+        benchmarks_dir = OUTDIR / "benchmarks"
+        for f in benchmarks_dir.glob("*.txt"):
+            rule_name = f.stem
             df = pd.read_csv(f, sep="\t")
             df.insert(0, "rule", rule_name)
             dfs.append(df)
