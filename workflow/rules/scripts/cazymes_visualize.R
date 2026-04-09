@@ -109,26 +109,44 @@ clr_result_long$cazyme <- sub("\\.hmm", "", clr_result_long$cazyme)
 clr_result_long <- clr_result_long %>% arrange(cazyme)
 
 #save as pdf#### 
-heatmap <- clr_result_long %>% ggplot(aes(x = sample, y = cazyme, fill = clr_value, text = sample, label = cazyme, label2 = clr_value)) +
+.min_val <- min(clr_result_long$clr_value, na.rm = TRUE)
+.max_val <- max(clr_result_long$clr_value, na.rm = TRUE)
+.breaks_seq <- sort(unique(
+  seq(floor(.min_val), ceiling(.max_val), by = 0.5)
+))
+.next_above_min <- min(.breaks_seq[.breaks_seq > .min_val])
+.next_below_max <- max(.breaks_seq[.breaks_seq < .max_val])
+.breaks <- sort(unique(c(
+  if (abs(.min_val - .next_above_min) >= 0.25) .min_val,
+  .breaks_seq,
+  if (abs(.max_val - .next_below_max) >= 0.25) .max_val
+)))
+
+heatmap <- clr_result_long %>%
+  ggplot(aes(x = sample, y = cazyme, fill = clr_value,
+             text = sample, label = cazyme, label2 = clr_value)) +
   geom_tile() +
   geom_tile(color = "black", linewidth = 0.1, fill = NA) +
-  scale_fill_viridis_c(option="D", direction = 1, name = "log(TPM+1)") +
-  theme_bw(base_line_size = 0, base_rect_size = 0, base_size = 11) +
-  scale_fill_viridis_c(option="viridis", direction = 1, name = "log(TPM+1)",
-                       breaks = seq(floor(min(clr_result_long$clr_value, na.rm=TRUE)),
-                                    ceiling(max(clr_result_long$clr_value, na.rm=TRUE)),
-                                    by = 0.5)) +
+  scale_fill_viridis_c(
+    option  = "viridis",
+    direction = 1,
+    name    = "log(TPM+1)",
+    breaks  = .breaks,
+    labels  = \(x) round(x, 2),
+    limits  = c(.min_val, .max_val)
+  ) +
+  scale_y_discrete(position = "right") +
   theme_minimal() +
-  scale_y_discrete(position = "right") +              
-  theme(axis.title.y = element_blank(),
-        axis.title.x = element_blank(),
-        axis.text.x = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
-        axis.text.y = element_text(face = "bold"),
-        legend.text = element_text(face = "bold"),
-        legend.title = element_text(face = "bold"),
-        legend.position = "left") +
+  theme(
+    axis.title.y  = element_blank(),
+    axis.title.x  = element_blank(),
+    axis.text.x   = element_text(angle = 90, hjust = .75, vjust = .25, face = "bold"),
+    axis.text.y   = element_text(face = "bold"),
+    legend.text   = element_text(face = "bold"),
+    legend.title  = element_text(face = "bold"),
+    legend.position = "left"
+  ) +
   labs(x = "", y = "")
-
 pdf(NULL)
 pdf(snakemake@output[['pdf']], paper = "a4r", width = 30, height = 15)
 heatmap
