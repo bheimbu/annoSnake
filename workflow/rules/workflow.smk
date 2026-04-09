@@ -19,11 +19,11 @@ if config["library_type"] == "paired-end":
 if config["library_type"] == "interleaved":  
     output.append(OUTDIR/ "quantification/contigs/{sample}/.rule_completed")
 if config["mag_assembly"] == True:
-    output.append(OUTDIR/ "MAGs/gtdbtk/.rule_completed")
     output.append(OUTDIR/ "MAGs/microbeannotator/.rule_completed")
     output.append(OUTDIR/ "MAGs/coverm/{sample}/.rule_completed")
     output.append(OUTDIR/ "figures/MAG_metabolic_pathways.pdf")
     output.append(OUTDIR/ "tables/MAG_metabolic_pathways.csv")
+    output.append(OUTDIR/ "MAGs/gtdbtk/.rule_completed")
 if config["CAZYMES"] == True:
     output.append(OUTDIR/ "combine/cazy_combine.tsv")
     output.append(OUTDIR/ "figures/relative_abundance_CAZymes_metagenomes.html")

@@ -92,8 +92,8 @@ rule MAG_refinement:
       output:
         touch(OUTDIR/ "MAGs/bin_refinement/{sample}/.rule_completed")
       params:
-        completeness=config['completeness'],
-        contamination=config['contamination'],
+        completeness=10,
+        contamination=90,
         metabat2=lambda w, input: Path(input["metabat2"]).parent,
         metacoag=lambda w, input: Path(input["metacoag"]).parent,
         maxbin2=lambda w, input: Path(input["maxbin2"]).parent,
