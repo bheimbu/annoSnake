@@ -5,24 +5,10 @@ library(stringr)
 library(data.table)
 library(dplyr)
 
-detail<-read.csv(snakemake@input[['input']],sep='\t',header=TRUE)
-
-kolist<-read.csv(file.path(snakemake@params[['db']],"ko_list"),header=TRUE,sep='\t')
-kolist<-kolist%>%select(knum,threshold)
-colnames(kolist)<-c('knum','kthreshold')
-
-#join the two files-
-kofam_klist<-merge(detail,kolist,by.x=c('KO'),by.y=c('knum'),all.x=TRUE)
-kofam_klist$X.<-NULL
-kofam_klist<-unique(kofam_klist)
-
-#filter the KOs by their thresholds-
-kofam_klist<-kofam_klist%>%mutate(keepkos=ifelse(as.numeric(thrshld)>=as.numeric(kthreshold),'aboveandequal','less'))
-kofam_klist_selected<-kofam_klist%>%filter(keepkos=='aboveandequal')
-
-kofam_klist_selected$E.value<-as.numeric(as.character(kofam_klist_selected$E.value))
-
-write.csv(kofam_klist_selected,snakemake@output[['selected']]) #...(A)
+detail <- read.csv(snakemake@input[['input']], sep='\t', header=TRUE, comment.char="")
+kofam_klist_selected <- detail %>% filter(X. == "*")
+kofam_klist_selected$E.value <- as.numeric(as.character(kofam_klist_selected$E.value))
+write.csv(kofam_klist_selected, snakemake@output[['selected']])
 #-------------------------------------------------------------------------------------------
 #get all koids per geneid in a single columns-
 setDT(kofam_klist_selected)

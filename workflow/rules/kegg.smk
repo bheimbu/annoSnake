@@ -10,7 +10,7 @@ rule kegg1:
         db=lambda wildcards, input: Path(input[1]).parent,
         tmp=lambda wildcards, output: Path(output[0]).parent,
     threads:
-        20
+        40
     conda:
         "envs/environment.yaml"
     benchmark:

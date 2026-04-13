@@ -9,7 +9,7 @@ rule pfam:
         db=lambda wildcards, input: Path(input[1]).parent,
         faa=lambda wildcards, input: Path(input[0]).parent
     threads:
-        20
+        40
     conda:
         "envs/environment.yaml"
     benchmark:

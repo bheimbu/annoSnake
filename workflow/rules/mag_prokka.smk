@@ -4,7 +4,7 @@ rule MAG_prokka:
     output:
        touch(OUTDIR/ "MAGs/prokka/.rule_completed")
     threads:
-       20
+       40
     conda:
        "envs/prokka.yaml"
     benchmark:
