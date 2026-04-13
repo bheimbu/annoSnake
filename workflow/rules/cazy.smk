@@ -14,7 +14,7 @@ rule cazy1:
         db="databases/cazymes/dbCAN-fam-HMMs.txt",
         evalue=config["cazy_evalue"]
     threads:
-        20
+        40
     benchmark:
         OUTDIR/ "benchmarks/{sample}_cazy1.txt"
     shell:

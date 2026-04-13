@@ -4,7 +4,7 @@ rule salmon_quant_cogs_interleaved:
     output:
         touch(OUTDIR/ "quantification/cogs/.quant_completed")
     threads:
-        20
+        40
     params:
         cogs=lambda wildcards, output: Path(output[0]).parent  
     conda:

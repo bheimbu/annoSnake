@@ -6,7 +6,7 @@ rule salmon_quant_contigs_interleaved:
     params:
         contigs=lambda wildcards, output: Path(output[0]).parent
     threads:
-        20
+        40
     conda:
         "envs/salmon.yaml"
     benchmark:

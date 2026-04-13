@@ -11,7 +11,7 @@ rule fetchmg:
     shadow:
         "shallow"
     threads:
-        20
+        40
     conda:
         "envs/fetchmg.yaml"
     benchmark:

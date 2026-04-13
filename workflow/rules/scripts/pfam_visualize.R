@@ -71,7 +71,7 @@ aggregated_data <- aggregated_data %>%
   rename(sample = contig_name)
 
 clr_data_subset <- aggregated_data[-which(names(aggregated_data) == "sample")]
-clr <- decostand(clr_data_subset, method = "clr", pseudocount = 1)
+clr <- decostand(clr_data_subset, method = "clr", pseudocount = .65)
 clr_result <- cbind(sample = aggregated_data$sample, clr)
 
 transposed_clr_result <- t(clr_result) 

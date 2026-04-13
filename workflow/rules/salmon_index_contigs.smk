@@ -24,7 +24,7 @@ rule salmon_index_contigs2:
     output:
         directory(OUTDIR/ "quantification/contigs/{sample}/{sample}.index")
     threads:
-        20
+        40
     conda:
         "envs/salmon.yaml"
     benchmark:

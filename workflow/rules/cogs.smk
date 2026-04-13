@@ -55,7 +55,7 @@ rule blastp1:
         db=lambda wildcards, input: Path(input["gtdb"]).parent,
         evalue=config["blastp_evalue"]
     threads:
-        20
+        40
     conda:
         "envs/environment.yaml"
     benchmark:
