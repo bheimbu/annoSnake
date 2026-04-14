@@ -1,5 +1,17 @@
-localrules: combine_kegg1, combine_kegg2, combine_pfam, combine_cazy, combine_salmon_contigs1, combine_salmon_contigs2, combine_salmon_cogs, combine_metaquast, combine_gtf
-		
+localrules: combine_blastx, combine_kegg1, combine_kegg2, combine_pfam, combine_cazy, combine_salmon_contigs1, combine_salmon_contigs2, combine_salmon_cogs, combine_metaquast, combine_gtf
+
+rule combine_blastx:
+    input:
+        expand(OUTDIR/ "taxonomy/blastx/{sample}/{sample}.blastx.matches.lca.microbes", sample=SAMPLES)
+    output:
+        OUTDIR/ "combine/microbes_blastx.combine"
+    benchmark:
+        OUTDIR/ "benchmarks/combine_blastx.txt"
+    shell:
+        """
+        cat {input} >> {output}
+        """
+
 rule combine_kegg1:
     input:
         OUTDIR/ "annotation/kegg/{sample}/{sample}.kegg.evalue"

@@ -2,9 +2,10 @@ localrules: visualization_cogs, visualization_kegg, visualization_mags1, visuali
 
 rule visualization_cogs:
     input:
-        quant=OUTDIR/ "combine/cogs.sf",
-        gtf=OUTDIR/ "taxonomy/cogs/cogs.gtf",
-        microbes=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes"
+        quant=OUTDIR/ "combine/contigs_combine.sf",
+        gtf=OUTDIR/ "combine/contigs_combine.gtf",
+        microbes_blastp=OUTDIR/ "taxonomy/cogs/cogs.blastp.matches.lca.microbes",
+        microbes_blastx=OUTDIR/ "combine/microbes_blastx.combine"
     output:
         html=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.html",
         pdf=OUTDIR/ "figures/rel_abundance_of_bacteria_and_archaea_in_metagenomes.pdf",
