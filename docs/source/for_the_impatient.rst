@@ -41,7 +41,7 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
   unzip 25772187.zip
   mv 25772187/figshare figshare # in params.yaml specified as inputdir 
   # Step 2: install all environments and databases
-  snakemake --use-conda --conda-frontend conda --conda-create-envs-only
+  snakemake --use-conda --conda-frontend conda --conda-create-envs-only --cores 1
   snakemake --profile profile/ databases/.setup_done  
 
   # Step 3: run the full workflow
