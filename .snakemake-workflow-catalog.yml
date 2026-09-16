@@ -1,0 +1,11 @@
+usage:
+  mandatory-flags:
+    desc: >
+      Requires config/params.yaml (workflow parameters) and config/config.yaml
+      (cluster execution settings). See config/README.md for details.
+    flags: ['--profile config/']
+  software-stack-deployment:
+    conda: true
+    apptainer: false
+    apptainer+conda: false
+    report: false
