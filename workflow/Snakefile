@@ -4,7 +4,7 @@ import yaml
 
 configfile: "config/params.yaml"
 
-with open('rules/scripts/.cogs.yaml', 'r') as file:
+with open(Path(workflow.basedir) / 'rules/scripts/.cogs.yaml', 'r') as file:
     cogs_data = yaml.safe_load(file)
 	
 if isinstance(cogs_data, dict) and "cogs" in cogs_data:
