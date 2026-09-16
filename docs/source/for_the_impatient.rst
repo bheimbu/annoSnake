@@ -43,12 +43,12 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
 
   # Step 2: install all environments and databases
   snakemake --use-conda --conda-frontend conda --conda-create-envs-only --cores 1
-  snakemake --profile profile/ databases/.setup_done -n # to see which databases will be downloaded/installed
-  snakemake --profile profile/ databases/.setup_done  
+  snakemake --profile config/ databases/.setup_done -n # to see which databases will be downloaded/installed
+  snakemake --profile config/ databases/.setup_done  
 
   # Step 3: run the full workflow
-  snakemake --profile profile/ -n # view the DAG of jobs first, then run...
-  snakemake --profile profile/
+  snakemake --profile config/ -n # view the DAG of jobs first, then run...
+  snakemake --profile config/
 
 .. important::
   For more information see :ref:`step_by_step`.
@@ -59,7 +59,7 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
 
     tmux new -s annosnake #starts a new tmux session with the name annosnake
     mamba activate snakemake #always activate the environment first
-    snakemake --profile profile/ #starts annoSnake workflow
+    snakemake --profile config/ #starts annoSnake workflow
 
    You can exit the session by pressing :kbd:`Ctrl+B` followed by :kbd:`D`; and may close your terminal while the workflow is running.
   

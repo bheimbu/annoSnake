@@ -13,7 +13,7 @@ Install Databases
 
   .. code::
 
-    snakemake --profile profile/ databases/.setup_done
+    snakemake --profile config/ databases/.setup_done
 
 In general
 ^^^^^^^^^^

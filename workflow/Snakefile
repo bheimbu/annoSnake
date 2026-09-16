@@ -2,7 +2,7 @@ from pathlib import Path
 import textwrap
 import yaml
 
-configfile: "profile/params.yaml"
+configfile: "config/params.yaml"
 
 with open('rules/scripts/.cogs.yaml', 'r') as file:
     cogs_data = yaml.safe_load(file)

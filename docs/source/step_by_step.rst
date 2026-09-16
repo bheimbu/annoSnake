@@ -39,14 +39,14 @@ annoSnake takes either paired-end or interleaved reads (in gzipped format) as in
   └── ...fastq.gz
 
 .. _params_yaml:
-./profile/params.yaml file
+./config/params.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :file:`./profile/params.yaml` is the main configuration file sitting in the :file:`./profile/` directory. You can specify the name of the :file:`{inputdir}`, :file:`{outdir}`, :file:`{library_type}`, and more.
+The :file:`./config/params.yaml` is the main configuration file sitting in the :file:`./config/` directory. You can specify the name of the :file:`{inputdir}`, :file:`{outdir}`, :file:`{library_type}`, and more.
 
 .. tip::
 
-  See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the :file:`./profile/` directory.
+  See the `Snakemake webpage <https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles>`_ for more information on the :file:`./config/` directory.
 
 .. admonition:: The :ref:`params_yaml`
 
@@ -89,10 +89,10 @@ The :file:`./profile/params.yaml` is the main configuration file sitting in the 
     pfam_evalue: "1e-30"
 
 .. _config_yaml:
-./profile/config.yaml file
+./config/config.yaml file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :file:`./profile/config.yaml` sets up the parameters for SLURM job submission on the HPC; you can change the file as you like. 
+The :file:`./config/config.yaml` sets up the parameters for SLURM job submission on the HPC; you can change the file as you like. 
 
 .. admonition:: The :ref:`config_yaml`
 
@@ -329,11 +329,11 @@ Fresh Install
 
     annoSnake
     ├── docs/
+    ├── config/
+    |       ├── config.yaml 
+    |       └── params.yaml 
     ├── workflow/
     │       ├── input_paired_end # includes example data
-    │       ├── profile
-    |       |     ├── config.yaml 
-    |       |     └── params.yaml 
     │       ├── rules
     |       |     ├── envs/ # conda environment files
     |       |     ├── scripts/ # Rscripts etc. 
