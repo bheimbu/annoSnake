@@ -43,11 +43,11 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
 
   # Step 2: install all environments and databases
   snakemake --use-conda --conda-frontend conda --conda-create-envs-only --cores 1
-  snakemake --profile config/ databases/.setup_done -n # to see which databases will be downloaded/installed
-  snakemake --profile config/ databases/.setup_done  
+  snakemake --profile config/ databases/.setup_done -n #to see which databases will be downloaded/installed
+  snakemake --profile config/ databases/.setup_done #then run…  
 
   # Step 3: run the full workflow
-  snakemake --profile config/ -n # view the DAG of jobs first, then run...
+  snakemake --profile config/ -n #view the DAG of jobs first, then run...
   snakemake --profile config/
 
 .. important::
@@ -75,10 +75,10 @@ Running annoSnake locally
 
    .. code::
 
-     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done -n # first see what kind of databases will be created
-     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done # then run…
-     snakemake --use-conda --conda-frontend conda --cores 4 -n # first see the DAG of jobs; adjust the number of cores to your PC specs
-     snakemake --use-conda --conda-frontend conda --cores 4 # then run…
+     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done -n #first see what kind of databases will be created
+     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done #then run…
+     snakemake --use-conda --conda-frontend conda --cores 4 -n #first see the DAG of jobs; adjust the number of cores to your PC specs
+     snakemake --use-conda --conda-frontend conda --cores 4 #then run…
 
 Running annoSnake with other scheduling systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
