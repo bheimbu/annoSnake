@@ -75,7 +75,10 @@ Running annoSnake locally
 
    .. code::
 
-     snakemake --use-conda --conda-frontend conda --cores 4 # adjust the number of cores to your PC specs
+     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done -n # first see what kind of databases will be created
+     snakemake --use-conda --conda-frontend conda --cores 4 databases/.setup_done # then run…
+     snakemake --use-conda --conda-frontend conda --cores 4 -n # first see the DAG of jobs; adjust the number of cores to your PC specs
+     snakemake --use-conda --conda-frontend conda --cores 4 # then run…
 
 Running annoSnake with other scheduling systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
