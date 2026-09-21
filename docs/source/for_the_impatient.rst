@@ -36,7 +36,7 @@ Running with example data, download from `Figshare <https://figshare.com/s/59c0b
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code::
 
-  cd annoSnake/workflow
+  cd annoSnake
   # Step 1: unzip read folder and move figshare folder to workflow dir
   unzip 25772187.zip
   mv 25772187/figshare figshare # in params.yaml specified as inputdir
