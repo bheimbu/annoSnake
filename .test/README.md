@@ -11,7 +11,7 @@ verifying that annoSnake runs correctly, using a small downsampled dataset
 
 ## Running the test
 
-From the repository root:
+From the repository root (`./annoSnake`):
 
 ```bash
 snakemake --cores 2 --sdm conda --directory .test
