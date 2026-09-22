@@ -20,6 +20,10 @@ COGS = [
     "COG0525", "COG0533", "COG0541", "COG0552",
 ]
 
+# kept as a dict for compatibility with rules/cogs.smk, which expects
+# cogs_data['cogs'] rather than the flat COGS list directly
+cogs_data = {"cogs": COGS}
+
 #print("Loaded COGs:", COGS[:5], "...", len(COGS))
 
 EMAIL=config["email"]
