@@ -1,0 +1,102 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+
+description: Configuration schema for annoSnake workflow parameters (config/params.yaml)
+
+type: object
+
+properties:
+  email:
+    type: string
+    description: Contact email address used for tools requiring one (e.g. NCBI Entrez queries).
+
+  inputdir:
+    type: string
+    description: Path (relative to the repository root) to the directory containing input paired-end or interleaved FASTQ files.
+
+  library_type:
+    type: string
+    description: Whether input reads are provided as separate forward/reverse files ("paired-end") or combined into a single file per sample ("interleaved").
+    enum:
+      - paired-end
+      - interleaved
+    default: paired-end
+
+  outdir:
+    type: string
+    description: Path to the directory where all workflow results will be written.
+
+  min_length:
+    type: integer
+    description: Minimum contig length (in bp) retained from MEGAHIT assembly; shorter contigs are discarded.
+    default: 1500
+    minimum: 0
+
+  mag_assembly:
+    type: boolean
+    description: Whether to perform metagenome-assembled genome (MAG) binning and quality assessment in addition to contig-level annotation.
+    default: true
+
+  completeness:
+    type: number
+    description: Minimum CheckM completeness (percent) for a bin to be retained. Community standards for medium/high-quality MAGs require >=50% (Bowers et al. 2017).
+    default: 30
+    minimum: 0
+    maximum: 100
+
+  contamination:
+    type: number
+    description: Maximum CheckM contamination (percent) for a bin to be retained. Community standards for medium/high-quality MAGs require <=10% (Bowers et al. 2017).
+    default: 10
+    minimum: 0
+    maximum: 100
+
+  PFAM:
+    type: boolean
+    description: Whether to run Pfam protein family annotation.
+    default: true
+
+  COG:
+    type: boolean
+    description: Whether to run Clusters of Orthologous Genes (COG) annotation.
+    default: true
+
+  KEGG:
+    type: boolean
+    description: Whether to run KEGG pathway/ortholog annotation.
+    default: true
+
+  CAZYMES:
+    type: boolean
+    description: Whether to run carbohydrate-active enzyme (CAZy) annotation.
+    default: true
+
+  blastp_evalue:
+    type: string
+    description: E-value cutoff for BLASTP-based protein searches.
+    default: "1e-24"
+
+  blastx_evalue:
+    type: string
+    description: E-value cutoff for BLASTX-based translated nucleotide searches.
+    default: "1e-24"
+
+  cog_evalue:
+    type: string
+    description: E-value cutoff for COG database searches.
+    default: "1e-30"
+
+  cazy_evalue:
+    type: string
+    description: E-value cutoff for CAZy database searches.
+    default: "1e-30"
+
+  pfam_evalue:
+    type: string
+    description: E-value cutoff for Pfam database searches.
+    default: "1e-30"
+
+required:
+  - inputdir
+  - library_type
+  - outdir
+  - mag_assembly
