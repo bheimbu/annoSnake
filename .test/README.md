@@ -1,3 +1,8 @@
+> **Note:** this workflow currently does not support Snakemake's module
+> deployment mechanism (`snakedeploy`). See the main README's
+> "Known limitation" section for details and the recommended direct-clone
+> usage instead.
+
 # Test configuration
 
 This directory provides a minimal, self-contained configuration for quickly
