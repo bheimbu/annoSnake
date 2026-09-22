@@ -6,6 +6,6 @@ To run annoSnake with the worked example data, use following commands. But first
 
 
     $ cd annoSnake/workflow 
-    $ mamba activate snakemake         #make sure you have installed snakemake v7.32.4
-    $ snakemake --profile config -n   #check the DAG of jobs
-    $ snakemake --profile config      #run the worked example workflow
+    $ mamba activate snakemake #make sure you have installed snakemake v7.32.4
+    $ snakemake --profile config -n #check the DAG of jobs
+    $ snakemake --profile config #run the worked example workflow
