@@ -116,8 +116,3 @@ git clone https://github.com/bheimbu/annoSnake.git
 cd annoSnake
 snakemake --profile config/
 ```
-
-Fixing this properly would require refactoring every rule to access
-`config["outdir"]`, `config["inputdir"]`, and the sample list via each
-rule's own `params:`/`input:`/`output:` blocks rather than through
-shared global variables -- tracked as a future improvement.
