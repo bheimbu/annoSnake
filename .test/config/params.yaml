@@ -1,0 +1,46 @@
+# Test configuration for annoSnake -- minimal parameters for a quick smoke test
+# using downsampled (~10k reads) example data. Not intended for real analysis.
+
+email: "test@example.com"
+
+# specify input data (relative to .test/, when run with --directory .test)
+inputdir: "input_paired_end"
+
+# input files are 'paired-end' or 'interleaved'?
+library_type: "paired-end"
+
+# specify output directory
+outdir: "results_test"
+
+# specify minimum length of contigs to output in MEGAHIT
+# lowered from the production default (1500) since downsampled test data
+# will assemble much shorter/fewer contigs
+min_length: 200
+
+# select whether metagenome-assembled genomes (MAGs) shall be assembled or not
+# disabled for the quick test: MAG binning/CheckM needs realistic depth and
+# is not meaningful on 10k downsampled reads
+mag_assembly: False
+
+# completeness/contamination thresholds (unused while mag_assembly: False,
+# kept here so the schema's required-together values stay consistent)
+completeness: 30
+contamination: 10
+
+# select databases to use ('True' or 'False')
+# disabled by default for the test config: full PFAM/COG/KEGG/CAZy databases
+# are large downloads and not needed to verify the pipeline runs end-to-end.
+# Set to True (and run `snakemake --until setup_databases` first) for a full
+# annotation smoke test.
+PFAM: False
+COG: False
+KEGG: False
+CAZYMES: False
+
+# specify cut-off E-values (unused while the above are False, kept for
+# consistency with the production config)
+blastp_evalue: "1e-24"
+blastx_evalue: "1e-24"
+cog_evalue: "1e-30"
+cazy_evalue: "1e-30"
+pfam_evalue: "1e-30"

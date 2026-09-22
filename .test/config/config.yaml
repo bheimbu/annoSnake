@@ -1,0 +1,16 @@
+# Test execution config for annoSnake -- local/single-machine execution.
+# No SLURM/cluster-generic executor here: this is meant to run on a laptop
+# or a GitHub Actions runner via:
+#   snakemake --cores 2 --sdm conda --directory .test
+#
+# For real analyses, use the production config/config.yaml instead, which
+# configures SLURM submission via the cluster-generic executor.
+
+cores: 2
+use-conda: True
+conda-frontend: conda
+rerun-incomplete: True
+keep-going: True
+printshellcmds: False
+show-failed-logs: True
+latency-wait: 30

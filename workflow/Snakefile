@@ -1,10 +1,11 @@
 from pathlib import Path
 import textwrap
 import yaml
+from snakemake.utils import validate
 
 configfile: "config/params.yaml"
 
-validate(config, schema="config/schemas/config.schema.yaml")
+validate(config, schema="schemas/config.schema.yaml")
 
 with open(Path(workflow.basedir) / 'rules/scripts/.cogs.yaml', 'r') as file:
     cogs_data = yaml.safe_load(file)
