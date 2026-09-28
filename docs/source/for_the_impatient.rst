@@ -111,8 +111,8 @@ across a source repository's included files.
 the workflow from the repository root (or from `.test/` for a quick
 smoke test), rather than deploying it as a Snakemake module:
 
-```bash
-git clone https://github.com/bheimbu/annoSnake.git
-cd annoSnake
-snakemake --profile config/
-```
+  .. code::
+     
+     git clone https://github.com/bheimbu/annoSnake.git
+     cd annoSnake
+     snakemake --profile config/
