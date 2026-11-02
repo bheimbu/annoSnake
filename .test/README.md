@@ -7,7 +7,7 @@
 
 This directory provides a minimal, self-contained configuration for quickly
 verifying that annoSnake runs correctly, using a small downsampled dataset
-(8 samples, ~10,000 read pairs each) rather than real-scale data.
+(6 samples, ~10,000 read pairs each) rather than real-scale data.
 
 ## Running the test
 
